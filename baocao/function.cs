@@ -11,7 +11,7 @@ namespace baocao
     {
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
         public static string ConnectionString =
-            "Data Source=DESKTOP-36UK9PH\\LOCALHOST;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
+            "Data Source=DESKTOP-RGQ18EV\\SQLEXPRESS;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
 
         public static void Connect()
         {
@@ -33,8 +33,11 @@ namespace baocao
         {
             try
             {
+                // Kiểm tra và kết nối lại nếu kết nối đã bị đóng
                 if (conn == null || conn.State == ConnectionState.Closed)
-                    Connect(); // Đảm bảo đã mở kết nối  
+                {
+                    Connect();  // Đảm bảo kết nối đã được mở
+                }
 
                 DataTable table = new DataTable();
                 SqlDataAdapter Mydata = new SqlDataAdapter(sql, conn);
@@ -43,10 +46,11 @@ namespace baocao
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message); // Hiển thị thông báo lỗi  
-                return null; // Hoặc xử lý tùy ý  
+                MessageBox.Show("Lỗi SQL: " + ex.Message); // Hiển thị thông báo lỗi nếu có
+                return null;
             }
         }
+
 
 
 
