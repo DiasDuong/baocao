@@ -15,7 +15,7 @@ namespace baocao
         public static void Connect()
         {
             //Thiết lập giá trị cho chuỗi kết nối
-            connString = "Data Source=DESKTOP-36UK9PH;Initial Catalog=Qlcuahangquanao;Integrated Security=True;Encrypt=False";
+            connString = "Data Source=DESKTOP-36UK9PH/LOCALHOST;Initial Catalog=Qlcuahangquanao;Integrated Security=True;Encrypt=False";
             conn = new SqlConnection();         		//Cấp phát đối tượng
             conn.ConnectionString = connString; 		//Kết nối
             conn.Open();                        		//Mở kết nối
