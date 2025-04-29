@@ -10,15 +10,23 @@ namespace baocao
     public class function
     {
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
-        public static string connString;   //Khai báo biến chứa chuỗi kết nối
+        public static string ConnectionString =
+            "Data Source=DESKTOP-36UK9PH\\LOCALHOST;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
 
         public static void Connect()
         {
-            //Thiết lập giá trị cho chuỗi kết nối
-            connString = "Data Source=DESKTOP-36UK9PH/LOCALHOST;Initial Catalog=Qlcuahangquanao;Integrated Security=True;Encrypt=False";
-            conn = new SqlConnection();         		//Cấp phát đối tượng
-            conn.ConnectionString = connString; 		//Kết nối
-            conn.Open();                        		//Mở kết nối
+            try
+            {
+                if (conn == null)
+                    conn = new SqlConnection(ConnectionString);
+
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi kết nối Database: " + ex.Message);
+            }
         }
 
         public static DataTable GetDataToTable(string sql)
