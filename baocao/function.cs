@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace baocao
@@ -11,7 +14,7 @@ namespace baocao
     {
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
         public static string ConnectionString =
-            "Data Source=DESKTOP-RGQ18EV\\SQLEXPRESS;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
+            "Data Source=DESKTOP-4UBA1EH\\SQLEXPRESS02;Initial Catalog=quanlicuahangquanao;Integrated Security=True;Encrypt=True;Encrypt=False";
 
         public static void Connect()
         {
@@ -41,6 +44,14 @@ namespace baocao
 
                 DataTable table = new DataTable();
                 SqlDataAdapter Mydata = new SqlDataAdapter(sql, conn);
+                Mydata.SelectCommand.CommandTimeout = 60;
+
+                // Kiểm tra nếu Connection chưa được gán
+                if (Mydata.SelectCommand.Connection == null)
+                {
+                    Mydata.SelectCommand.Connection = conn;  // Gán kết nối nếu chưa có
+                }
+
                 Mydata.Fill(table);
                 return table;
             }
@@ -54,9 +65,11 @@ namespace baocao
 
 
 
+
         // Kiểm tra ID của bản ghi
         public static bool CheckID(string query)
         {
+            Connect();
             SqlDataAdapter data = new SqlDataAdapter(query, conn);
             DataTable table = new DataTable();
             data.Fill(table);
@@ -71,9 +84,16 @@ namespace baocao
         // Thực thi query SQL
         public static void RunSQL(string query)
         {
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Open(); // Mở kết nối nếu chưa mở
+            }
+
             SqlCommand command = new SqlCommand();
             command.Connection = conn;
             command.CommandText = query;
+            command.CommandTimeout = 60;
+
             try
             {
                 command.ExecuteNonQuery();
@@ -84,6 +104,12 @@ namespace baocao
             }
 
             command.Dispose();
+
+            // Nếu bạn không dùng conn tiếp, nên đóng lại
+            if (conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
         }
 
         // Thực thi query SQL (xóa)
@@ -108,27 +134,45 @@ namespace baocao
         public static string GetFieldValues(string query)
         {
             string key = "";
-            SqlCommand command = new SqlCommand(query, conn);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            using (SqlCommand command = new SqlCommand(query, conn))
             {
-                key = reader.GetValue(0).ToString();
-            }
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
 
-            reader.Close();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read()) // Chỉ lấy dòng đầu tiên
+                    {
+                        key = reader.GetValue(0).ToString();
+                    }
+                }
+            }
             return key;
         }
 
         // Đổ dữ liệu vào ComboBox
         public static void FillCombo(string query, System.Windows.Forms.ComboBox comboBox, string value, string name)
         {
+            Connect();
             SqlDataAdapter data = new SqlDataAdapter(query, conn);
             DataTable table = new DataTable();
             data.Fill(table);
 
+            if (!table.Columns.Contains(value))
+            {
+                MessageBox.Show("Không tìm thấy cột '" + value + "' trong dữ liệu.");
+                return;
+            }
+
+            if (!table.Columns.Contains(name))
+            {
+                MessageBox.Show("Không tìm thấy cột '" + name + "' trong dữ liệu.");
+                return;
+            }
+
             comboBox.DataSource = table;
-            comboBox.ValueMember = value; // Trường giá trị
-            comboBox.DisplayMember = name; // Trường hiển thị
+            comboBox.ValueMember = value;
+            comboBox.DisplayMember = name;
         }
 
         public static void FillCombo1(string query, System.Windows.Forms.ComboBox comboBox, string value, string name)
@@ -349,5 +393,173 @@ namespace baocao
 
             return hour24;
         }
+        public static void Close()
+        {
+            try
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                    conn.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi đóng kết nối: " + ex.Message);
+            }
+        }
+
+        public static DataTable LoadDataToTable(string sql)
+        {
+            Connect(); // Đảm bảo kết nối đã được mở
+            DataTable dt = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+            adapter.SelectCommand.CommandTimeout = 120;
+            try
+            {
+                adapter.Fill(dt); // Lấy dữ liệu vào DataTable
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi truy vấn dữ liệu: " + ex.Message);
+            }
+            Close(); // Đảm bảo đóng kết nối sau khi hoàn tất
+            return dt;
+        }
+
+        public static string getSQLdateFromText(string dateDDMMYYYY)
+        {
+            DateTime dt;
+            if (DateTime.TryParseExact(dateDDMMYYYY, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dt))
+            {
+                return dt.ToString("yyyy-MM-dd"); // đúng chuẩn SQL
+            }
+            else
+            {
+                MessageBox.Show("Ngày sinh không hợp lệ. Định dạng yêu cầu: dd/MM/yyyy");
+                return "1900-01-01"; // giá trị mặc định khi lỗi
+            }
+        }
+
+        public static string ChuyenSoSangChu(string sNumber)
+        {
+            // Làm sạch chuỗi: bỏ dấu phẩy, chấm thập phân, và phần sau dấu chấm
+            if (sNumber.Contains("."))
+                sNumber = sNumber.Substring(0, sNumber.IndexOf("."));
+
+            sNumber = sNumber.Replace(",", "").Trim();
+
+            if (string.IsNullOrEmpty(sNumber) || !sNumber.All(char.IsDigit))
+                throw new FormatException("Chuỗi không phải là một số hợp lệ: " + sNumber);
+
+            int mLen, mDigit;
+            string mTemp = "";
+            string[] mNumText = "không;một;hai;ba;bốn;năm;sáu;bảy;tám;chín".Split(';');
+
+            mLen = sNumber.Length - 1;
+
+            for (int i = 0; i <= mLen; i++)
+            {
+                mDigit = Convert.ToInt32(sNumber.Substring(i, 1));
+                mTemp = mTemp + " " + mNumText[mDigit];
+                if (mLen == i) break;
+
+                switch ((mLen - i) % 9)
+                {
+                    case 0:
+                        mTemp += " tỷ";
+                        break;
+                    case 6:
+                        mTemp += " triệu";
+                        break;
+                    case 3:
+                        mTemp += " nghìn";
+                        break;
+                    default:
+                        switch ((mLen - i) % 3)
+                        {
+                            case 2: mTemp += " trăm"; break;
+                            case 1: mTemp += " mươi"; break;
+                        }
+                        break;
+                }
+            }
+
+            mTemp = mTemp.Replace("không mươi không", "");
+            mTemp = mTemp.Replace("không mươi", "linh");
+            mTemp = mTemp.Replace("mươi không", "mươi");
+            mTemp = mTemp.Replace("một mươi", "mười");
+            mTemp = mTemp.Replace("mươi bốn", "mươi tư");
+            mTemp = mTemp.Replace("linh bốn", "linh tư");
+            mTemp = mTemp.Replace("mươi năm", "mươi lăm");
+            mTemp = mTemp.Replace("mươi một", "mươi mốt");
+            mTemp = mTemp.Replace("mười năm", "mười lăm");
+
+            mTemp = mTemp.Trim();
+            mTemp = mTemp.Substring(0, 1).ToUpper() + mTemp.Substring(1) + " đồng";
+
+            return mTemp;
+        }
+
+
+        public static bool IsKeyExists(string sql)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+              
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.CommandTimeout = 30;
+                    conn.Open(); // Mở kết nối
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    bool exists = reader.HasRows;
+                    reader.Close(); // Đóng reader
+                    return exists;
+                }
+            } // using sẽ
+        }
+        public static string GetFieldValue(string sql)
+        {
+            SqlCommand cmd = new SqlCommand(sql, conn);
+
+            // Kiểm tra xem kết nối có đang mở không trước khi mở lại
+            if (conn.State != System.Data.ConnectionState.Open)
+            {
+                conn.Open();  // Mở kết nối
+            }
+
+            // Thực thi câu lệnh SQL và lấy giá trị đầu tiên của bản ghi đầu tiên
+            object result = cmd.ExecuteScalar();
+
+            // Đảm bảo đóng kết nối sau khi thực hiện
+            if (conn.State == System.Data.ConnectionState.Open)
+            {
+                conn.Close();  // Đóng kết nối
+            }
+
+            // Nếu không có giá trị, trả về chuỗi rỗng
+            return result != null ? result.ToString() : string.Empty;
+        }
+        public static bool CheckKey(string sql)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                bool exists = reader.HasRows;
+                reader.Close();
+                return exists;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi kiểm tra: " + ex.Message, "Lỗi");
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+     
+
+
     }
 }
