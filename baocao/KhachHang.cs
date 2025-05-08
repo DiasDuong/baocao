@@ -30,6 +30,9 @@ namespace baocao
             {
                 MessageBox.Show(ex.Message);
             }
+            cboTimkiem.Items.Add("Mã khách hàng");
+            cboTimkiem.Items.Add("Tên khách hàng ");
+            cboTimkiem.SelectedIndex = 0;
         }
         private void loadDataToGridView()
         {
@@ -264,6 +267,55 @@ namespace baocao
                 this.Close();
             }
         }
+
+        private void btnTimkiem_Click(object sender, EventArgs e)
+        {
+            if (cboTimkiem.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn kiểu tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string searchType = cboTimkiem.SelectedItem.ToString();
+            string searchText = txtTimkiem.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchText))
+            {
+                MessageBox.Show("Vui lòng nhập từ khóa tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string query = "";
+            if (searchType == "Mã khách hàng")
+            {
+                query = "SELECT * FROM KhachHang WHERE MaKhach = @SearchText";
+            }
+            else if (searchType == "Tên khách hàng ")
+            {
+                query = "SELECT * FROM KhachHang WHERE TenKhach LIKE @SearchText";
+                searchText = "%" + searchText + "%";
+            }
+
+            try
+            {
+                string sqlQuery = query.Replace("@SearchText", "'" + searchText + "'");
+                DataTable dt = function.GetDataToTable(sqlQuery);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    dataGridViewKhachhang.DataSource = dt;
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tìm kiếm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
     }
 }
 
