@@ -23,6 +23,7 @@ namespace baocao
             try
             {
                 loadDataToGridView();
+                txtMakhachhang.ReadOnly = true;
 
             }
 
@@ -70,10 +71,37 @@ namespace baocao
             txtTenkhachhang.Text = dataGridViewKhachhang.CurrentRow.Cells[1].Value.ToString(); // TenNV
             txtDiachi.Text = dataGridViewKhachhang.CurrentRow.Cells[2].Value.ToString();
             mskDienthoai.Text = dataGridViewKhachhang.CurrentRow.Cells[3].Value.ToString();   // DienThoai
+            txtMakhachhang.ReadOnly = true;
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
+            if (txtMakhachhang.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Bạn phải nhập mã nhân viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtMakhachhang.Focus();
+                return;
+            }
+            if (txtTenkhachhang.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Bạn phải nhập tên nhân viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTenkhachhang.Focus();
+                return;
+            }
+            if (txtDiachi.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Bạn phải nhập địa chỉ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDiachi.Focus();
+                return;
+            }
+            if (mskDienthoai.Text == "(   )     -")
+            {
+                MessageBox.Show("Bạn phải nhập điện thoại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                mskDienthoai.Focus();
+                return;
+            }
+      
+
             string sql = "INSERT INTO KhachHang(MaKhach, TenKhach, DiaChi, DienThoai) " +
             "VALUES ('" + txtMakhachhang.Text + "', N'" + txtTenkhachhang.Text + "', N'" + txtDiachi.Text + "', '" + mskDienthoai.Text + "')";
 
@@ -145,7 +173,7 @@ namespace baocao
                 return;
             }
 
-           
+
             var kq = MessageBox.Show(
                 $"Bạn có chắc chắn muốn xóa khách hàng '{txtTenkhachhang.Text}'?",
                 "Xác nhận",
@@ -164,7 +192,7 @@ namespace baocao
 
                 try
                 {
-                    
+
                     function.Connect();
                     int rows = cmd.ExecuteNonQuery(); // Thực thi lệnh xóa
 
@@ -210,7 +238,7 @@ namespace baocao
             string ten = txtTenkhachhang.Text.Trim();
             string dienthoai = mskDienthoai.Text.Trim();
             string diachi = txtDiachi.Text.Trim();
-           
+
 
 
             if (ten == "")
@@ -316,6 +344,6 @@ namespace baocao
             }
         }
     }
-    }
 }
+
 

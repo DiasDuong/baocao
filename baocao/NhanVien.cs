@@ -16,6 +16,7 @@ namespace baocao
         public NhanVien()
         {
             InitializeComponent();
+            txtMaNhanvien.ReadOnly = true;
         }
 
         private void NhanVien_Load(object sender, EventArgs e)
@@ -97,6 +98,7 @@ namespace baocao
             mskdienthoai.Text = dataGridView.CurrentRow.Cells[4].Value.ToString();
             txtDiachi.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
             comboMaCV.SelectedValue = dataGridView.CurrentRow.Cells[6].Value.ToString();
+            txtMaNhanvien.ReadOnly = true;
         }
 
         private void btnThem_Click(object sender, EventArgs e)

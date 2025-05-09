@@ -127,7 +127,7 @@
             // 
             this.btnTimkiem.Location = new System.Drawing.Point(132, 415);
             this.btnTimkiem.Name = "btnTimkiem";
-            this.btnTimkiem.Size = new System.Drawing.Size(112, 23);
+            this.btnTimkiem.Size = new System.Drawing.Size(112, 33);
             this.btnTimkiem.TabIndex = 14;
             this.btnTimkiem.Text = "Tìm kiếm";
             this.btnTimkiem.UseVisualStyleBackColor = true;
@@ -135,9 +135,9 @@
             // 
             // btnTimlai
             // 
-            this.btnTimlai.Location = new System.Drawing.Point(338, 415);
+            this.btnTimlai.Location = new System.Drawing.Point(345, 415);
             this.btnTimlai.Name = "btnTimlai";
-            this.btnTimlai.Size = new System.Drawing.Size(94, 23);
+            this.btnTimlai.Size = new System.Drawing.Size(94, 33);
             this.btnTimlai.TabIndex = 15;
             this.btnTimlai.Text = "Tìm lại";
             this.btnTimlai.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@
             // 
             this.btnDong.Location = new System.Drawing.Point(555, 415);
             this.btnDong.Name = "btnDong";
-            this.btnDong.Size = new System.Drawing.Size(75, 23);
+            this.btnDong.Size = new System.Drawing.Size(75, 33);
             this.btnDong.TabIndex = 16;
             this.btnDong.Text = "Đóng";
             this.btnDong.UseVisualStyleBackColor = true;
@@ -199,7 +199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 460);
             this.Controls.Add(this.txtNam);
             this.Controls.Add(this.txtThang);
             this.Controls.Add(this.txtMaNV);

@@ -225,7 +225,7 @@
             // 
             this.btnTimkiem.Location = new System.Drawing.Point(647, 509);
             this.btnTimkiem.Name = "btnTimkiem";
-            this.btnTimkiem.Size = new System.Drawing.Size(75, 23);
+            this.btnTimkiem.Size = new System.Drawing.Size(99, 24);
             this.btnTimkiem.TabIndex = 19;
             this.btnTimkiem.Text = "Tìm kiếm";
             this.btnTimkiem.UseVisualStyleBackColor = true;
