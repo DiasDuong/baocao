@@ -22,49 +22,38 @@ namespace baocao
         {
 
         }
-        public static class DatabaseHelper
-        {
-            private static string connectionString = @"Data Source=DESKTOP-6PT6RNN;Initial Catalog=quanaonet;Integrated Security=True;Encrypt=False";
-
-            public static SqlConnection GetConnection()
-            {
-                SqlConnection conn = new SqlConnection(connectionString);
-                conn.Open();
-                return conn;
-            }
-        }
         private void btndn_Click(object sender, EventArgs e)
         {
-            string username = txttendn.Text.Trim();
-            string password = txtmk.Text.Trim();
+            // Gọi kết nối CSDL
+            function.Connect();
 
-            if (username == "" || password == "")
+            // Kiểm tra ô nhập
+            if (txttendn.Text.Trim() == "" || txtmk.Text.Trim() == "")
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            // Câu truy vấn kiểm tra tài khoản
+            string sql = "SELECT COUNT(*) FROM TaiKhoan WHERE TaiKhoan = N'" + txttendn.Text + "' AND Pass = N'" + txtmk.Text + "'";
+            int result = Convert.ToInt32(function.GetFieldValues(sql));
+
+            if (result > 0)
             {
-                string query = "SELECT COUNT(*) FROM TaiKhoan WHERE TaiKhoan = @tk AND Pass = @pw"; 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@tk", username);
-                    cmd.Parameters.AddWithValue("@pw", password);
+                MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    int count = (int)cmd.ExecuteScalar();
-                    if (count > 0)
-                    {
-                        MessageBox.Show("Đăng nhập thành công!");
-                        // Chuyển sang form chính
-                    }
-                    else
-                    {
-                        MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai!");
-                    }
-                }
+                // Mở form chính (ví dụ: trang chủ hoặc menu chính)
+               // this.Hide();
+                //TrangChu home = new TrangChu(); // Giả sử bạn có form tên là TrangChu
+                //home.ShowDialog();
+                //this.Close();
             }
-
+            else
+            {
+                MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txttendn.Clear();
+                txtmk.Focus();
+            }
         }
 
         private void linkLabel1_Click(object sender, EventArgs e)
