@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace baocao
@@ -24,6 +25,14 @@ namespace baocao
 
         private void btndangky_Click(object sender, EventArgs e)
         {
+            // ✅ Kiểm tra định dạng email
+            string email = txtmail.Text.Trim();
+            if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show("Email không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtmail.Focus();
+                return;
+            }
             // Kiểm tra tính hợp lệ của dữ liệu
             if (txtmail.Text == "")
             {
@@ -88,12 +97,17 @@ namespace baocao
 
         private void linkdangnhap_Click(object sender, EventArgs e)
         {
-            // Mở form đăng nhập
-            //dangnhap loginForm = new dangnhap(); // Tên form đăng nhập
-            //loginForm.Show(); // Hoặc dùng ShowDialog() nếu muốn form đăng nhập là modal
+           
+            dangnhap loginForm = new dangnhap(); 
+            loginForm.Show(); 
 
             // Đóng form đăng ký
-           // this.Close();
+           this.Close();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

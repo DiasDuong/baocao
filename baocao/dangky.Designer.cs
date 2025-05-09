@@ -45,10 +45,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(275, 24);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(244, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 46);
+            this.label1.Size = new System.Drawing.Size(149, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "Đăng ký";
             // 
@@ -56,9 +56,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(229, 87);
+            this.label2.Location = new System.Drawing.Point(204, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 29);
+            this.label2.Size = new System.Drawing.Size(66, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Email:";
             // 
@@ -66,9 +66,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(128, 135);
+            this.label3.Location = new System.Drawing.Point(114, 108);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(181, 29);
+            this.label3.Size = new System.Drawing.Size(151, 25);
             this.label3.TabIndex = 2;
             this.label3.Text = "Tên đăng nhập:";
             // 
@@ -76,9 +76,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(194, 190);
+            this.label4.Location = new System.Drawing.Point(172, 152);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(115, 29);
+            this.label4.Size = new System.Drawing.Size(99, 25);
             this.label4.TabIndex = 3;
             this.label4.Text = "Mật khẩu:";
             // 
@@ -86,19 +86,20 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(99, 229);
+            this.label5.Location = new System.Drawing.Point(91, 192);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(210, 29);
+            this.label5.Size = new System.Drawing.Size(174, 25);
             this.label5.TabIndex = 4;
             this.label5.Text = "Nhập lại mật khẩu:";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(139, 285);
+            this.label6.Location = new System.Drawing.Point(124, 228);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(577, 29);
+            this.label6.Size = new System.Drawing.Size(479, 25);
             this.label6.TabIndex = 5;
             this.label6.Text = "Nếu đã có tài khoản, hãy                      tại đây                 ";
             // 
@@ -106,9 +107,10 @@
             // 
             this.btndangky.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btndangky.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndangky.Location = new System.Drawing.Point(283, 347);
+            this.btndangky.Location = new System.Drawing.Point(252, 278);
+            this.btndangky.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btndangky.Name = "btndangky";
-            this.btndangky.Size = new System.Drawing.Size(165, 46);
+            this.btndangky.Size = new System.Drawing.Size(147, 37);
             this.btndangky.TabIndex = 6;
             this.btndangky.Text = "Đăng ký";
             this.btndangky.UseVisualStyleBackColor = false;
@@ -118,9 +120,9 @@
             // 
             this.linkdangnhap.AutoSize = true;
             this.linkdangnhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkdangnhap.Location = new System.Drawing.Point(409, 288);
+            this.linkdangnhap.Location = new System.Drawing.Point(364, 230);
             this.linkdangnhap.Name = "linkdangnhap";
-            this.linkdangnhap.Size = new System.Drawing.Size(118, 26);
+            this.linkdangnhap.Size = new System.Drawing.Size(103, 24);
             this.linkdangnhap.TabIndex = 7;
             this.linkdangnhap.TabStop = true;
             this.linkdangnhap.Text = "Đăng nhập";
@@ -128,37 +130,41 @@
             // 
             // txtmail
             // 
-            this.txtmail.Location = new System.Drawing.Point(386, 87);
+            this.txtmail.Location = new System.Drawing.Point(343, 70);
+            this.txtmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtmail.Name = "txtmail";
-            this.txtmail.Size = new System.Drawing.Size(221, 26);
+            this.txtmail.Size = new System.Drawing.Size(197, 22);
             this.txtmail.TabIndex = 8;
             // 
             // txttendn
             // 
-            this.txttendn.Location = new System.Drawing.Point(386, 139);
+            this.txttendn.Location = new System.Drawing.Point(343, 111);
+            this.txttendn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txttendn.Name = "txttendn";
-            this.txttendn.Size = new System.Drawing.Size(221, 26);
+            this.txttendn.Size = new System.Drawing.Size(197, 22);
             this.txttendn.TabIndex = 9;
             // 
             // txtmk
             // 
-            this.txtmk.Location = new System.Drawing.Point(386, 190);
+            this.txtmk.Location = new System.Drawing.Point(343, 152);
+            this.txtmk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtmk.Name = "txtmk";
-            this.txtmk.Size = new System.Drawing.Size(221, 26);
+            this.txtmk.Size = new System.Drawing.Size(197, 22);
             this.txtmk.TabIndex = 10;
             // 
             // txtnhaplaimk
             // 
-            this.txtnhaplaimk.Location = new System.Drawing.Point(386, 229);
+            this.txtnhaplaimk.Location = new System.Drawing.Point(343, 183);
+            this.txtnhaplaimk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnhaplaimk.Name = "txtnhaplaimk";
-            this.txtnhaplaimk.Size = new System.Drawing.Size(221, 26);
+            this.txtnhaplaimk.Size = new System.Drawing.Size(197, 22);
             this.txtnhaplaimk.TabIndex = 11;
             // 
             // dangky
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(711, 360);
             this.Controls.Add(this.txtnhaplaimk);
             this.Controls.Add(this.txtmk);
             this.Controls.Add(this.txttendn);
@@ -171,6 +177,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "dangky";
             this.Text = "dangky";
             this.Load += new System.EventHandler(this.dangky_Load);
