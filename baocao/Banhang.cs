@@ -143,7 +143,7 @@ namespace baocao
             int startDataRow = 13; // bắt đầu từ dòng 13 trong Excel, tương ứng row = 0 trong bảng C#  
 
             // Đặt chữ "Tổng cộng" tại cột G, dòng sau cùng (rowCount + 13)  
-            exSheet.Cells[rowCount + startDataRow, 6].Value2 = "Tổng cộng"; 
+            exSheet.Cells[rowCount + startDataRow, 6].Value2 = "Tổng cộng";
 
             // Tính tổng cột H trong bảng tblCTHDB và ghi vào cột H, cùng dòng với "Tổng cộng"  
             double totalThanhTien = 0;
