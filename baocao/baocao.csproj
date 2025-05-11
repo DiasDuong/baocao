@@ -98,6 +98,12 @@
     <Compile Include="TimkiemHDN.Designer.cs">
       <DependentUpon>TimkiemHDN.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tksanpham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tksanpham.Designer.cs">
+      <DependentUpon>Tksanpham.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Banhang.resx">
       <DependentUpon>Banhang.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +136,9 @@
     </Compile>
     <EmbeddedResource Include="TimkiemHDN.resx">
       <DependentUpon>TimkiemHDN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tksanpham.resx">
+      <DependentUpon>Tksanpham.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
