@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -28,6 +29,15 @@ namespace baocao
             if (txtmail.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập địa chỉ email!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtmail.Focus();
+                return;
+            }
+
+            // ✅ Kiểm tra định dạng email
+            string email = txtmail.Text.Trim();
+            if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show("Email không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtmail.Focus();
                 return;
             }
@@ -60,9 +70,10 @@ namespace baocao
                 txtnhaplaimk.Focus();
                 return;
             }
+
             function.Connect();
 
-            // Kiểm tra xem tên đăng nhập đã tồn tại chưa
+            // Kiểm tra tên đăng nhập đã tồn tại
             string sqlCheckExist = "SELECT COUNT(*) FROM TaiKhoan WHERE TaiKhoan = N'" + txttendn.Text + "'";
             int count = Convert.ToInt32(function.GetFieldValues(sqlCheckExist));
             if (count > 0)
@@ -73,7 +84,7 @@ namespace baocao
                 return;
             }
 
-            // Thêm thông tin tài khoản vào database
+            // Thêm tài khoản vào database
             string sqlInsert = "INSERT INTO TaiKhoan (Email, TaiKhoan, Pass) VALUES " +
                                "(N'" + txtmail.Text + "', N'" + txttendn.Text + "', N'" + txtmk.Text + "')";
             function.RunSQL(sqlInsert);
@@ -89,8 +100,8 @@ namespace baocao
         private void linkdangnhap_Click(object sender, EventArgs e)
         {
             // Mở form đăng nhập
-            //dangnhap loginForm = new dangnhap(); // Tên form đăng nhập
-            //loginForm.Show(); // Hoặc dùng ShowDialog() nếu muốn form đăng nhập là modal
+            dangnhap loginForm = new dangnhap(); // Tên form đăng nhập
+            loginForm.Show(); // Hoặc dùng ShowDialog() nếu muốn form đăng nhập là modal
 
             // Đóng form đăng ký
            // this.Close();
