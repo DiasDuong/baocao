@@ -14,7 +14,7 @@ namespace baocao
     {
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
         public static string ConnectionString =
-            "Data Source=DESKTOP-6PT6RNN;Initial Catalog=quanaonet;Integrated Security=True;Encrypt=False";
+            "Data Source=DESKTOP-S0TIEV7;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
 
         public static void Connect()
         {
@@ -133,21 +133,26 @@ namespace baocao
         // Lấy dữ liệu từ một query SQL
         public static string GetFieldValues(string query)
         {
-            string key = "";
-            using (SqlCommand command = new SqlCommand(query, conn))
-            {
-                if (conn.State != ConnectionState.Open)
-                    conn.Open();
+            string ma = "";
 
-                using (SqlDataReader reader = command.ExecuteReader())
+            using (SqlCommand cmd = new SqlCommand(query, function.conn))
+            {
+                if (function.conn.State != ConnectionState.Open)
+                    function.conn.Open();
+                
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    if (reader.Read()) // Chỉ lấy dòng đầu tiên
+                    while (reader.Read())
                     {
-                        key = reader.GetValue(0).ToString();
+                        // Cứ mỗi lần đọc dòng, gán lại => lấy dòng cuối cùng sau cùng
+                        ma = reader.GetValue(0).ToString();
                     }
                 }
             }
-            return key;
+
+            return ma;
+
         }
 
         // Đổ dữ liệu vào ComboBox
@@ -558,7 +563,18 @@ namespace baocao
                 conn.Close();
             }
         }
-     
+        public static void FillCombo2(string sql, System.Windows.Forms.ComboBox cbo, string ma, string ten)
+        {
+            Connect();
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            cbo.DataSource = dt;
+            cbo.ValueMember = ma;
+            cbo.DisplayMember = ten;
+        }
+        
+
 
 
     }
