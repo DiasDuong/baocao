@@ -89,11 +89,11 @@ namespace baocao
         private void linkdangnhap_Click(object sender, EventArgs e)
         {
             // Mở form đăng nhập
-            //dangnhap loginForm = new dangnhap(); // Tên form đăng nhập
-            //loginForm.Show(); // Hoặc dùng ShowDialog() nếu muốn form đăng nhập là modal
+            dangnhap loginForm = new dangnhap(); // Tên form đăng nhập
+            loginForm.Show(); // Hoặc dùng ShowDialog() nếu muốn form đăng nhập là modal
 
             // Đóng form đăng ký
-           // this.Close();
+           //this.Close();
         }
     }
 }
