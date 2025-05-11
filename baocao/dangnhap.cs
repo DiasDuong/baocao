@@ -42,11 +42,7 @@ namespace baocao
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Mở form chính (ví dụ: trang chủ hoặc menu chính)
-                //this.Hide();
-                //TrangChu home = new TrangChu(); // Giả sử bạn có form tên là TrangChu
-                //home.ShowDialog();
-                //this.Close();
+                
             }
             else
             {
