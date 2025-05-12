@@ -116,6 +116,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimKiemHDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimKiemHDB.Designer.cs">
+      <DependentUpon>TimKiemHDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimkiemHDN.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TimKiemHDB.resx">
+      <DependentUpon>TimKiemHDB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TimkiemHDN.resx">
       <DependentUpon>TimkiemHDN.cs</DependentUpon>
     </EmbeddedResource>

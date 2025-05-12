@@ -541,7 +541,7 @@
         private System.Windows.Forms.TextBox txtTenkhach;
         private System.Windows.Forms.TextBox txtTennhanvien;
         private System.Windows.Forms.TextBox txtNgayban;
-        private System.Windows.Forms.TextBox txtMaHDBan;
+        public System.Windows.Forms.TextBox txtMaHDBan;
         private System.Windows.Forms.ComboBox cboMahang;
         private System.Windows.Forms.TextBox txtThanhtien;
         private System.Windows.Forms.TextBox txtGiamgia;
