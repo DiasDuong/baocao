@@ -56,7 +56,7 @@ namespace baocao
             if (txtMaNV.Text != "")
                 sql = sql + " AND Manhanvien Like N'%" + txtMaNV.Text + "%'";
             if (txtMaNCC.Text != "")
-                sql = sql + " AND Makhach Like N'%" + txtMaNCC.Text + "%'";
+                sql = sql + " AND Manhacungcap Like N'%" + txtMaNCC.Text + "%'";
             if (txtTongtien.Text != "")
                 sql = sql + " AND Tongtien <=" + txtTongtien.Text;
             HoaDonNhap = function.GetDataToTable(sql);
@@ -75,7 +75,7 @@ namespace baocao
             dataGridViewTimkiemHDN.Columns[0].HeaderText = "Số HDN";
             dataGridViewTimkiemHDN.Columns[1].HeaderText = "Mã nhân viên";
             dataGridViewTimkiemHDN.Columns[2].HeaderText = "Ngày bán";
-            dataGridViewTimkiemHDN.Columns[3].HeaderText = "Mã khách";
+            dataGridViewTimkiemHDN.Columns[3].HeaderText = "Mã nhà cung cấp";
             dataGridViewTimkiemHDN.Columns[4].HeaderText = "Tổng tiền";
 
             dataGridViewTimkiemHDN.Columns[0].Width = 150;
