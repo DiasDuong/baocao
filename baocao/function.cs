@@ -14,7 +14,7 @@ namespace baocao
     {
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
         public static string ConnectionString =
-            "Data Source=DESKTOP-S0TIEV7;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
+"Data Source=DESKTOP-36UK9PH\\LOCALHOST;Initial Catalog=qlcuahangquanao;Integrated Security=True;TrustServerCertificate=True";
 
         public static void Connect()
         {
