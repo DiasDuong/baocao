@@ -111,6 +111,7 @@ namespace baocao
             ResetValues();
             txtMaNhanvien.Enabled = true;
             txtMaNhanvien.Focus();
+            txtMaNhanvien.ReadOnly = false;
       
 
 
@@ -165,15 +166,37 @@ namespace baocao
                 "VALUES (N'" + txtMaNhanvien.Text.Trim() + "', N'" + txtTennhanvien.Text.Trim() + "', N'" +
                 (radionam.Checked ? "Nam" : "Nữ") + "', '" + function.getSQLdateFromText(mskngaysinh.Text) + "', '" +
                 mskdienthoai.Text.Trim() + "', N'" + txtDiachi.Text.Trim() + "', '" + comboMaCV.SelectedValue.ToString() + "')";
-            function.RunSQL(sql);
-            loadDataToGridView();
-            ResetValues();
-            btnXoa.Enabled = true;
-            btnThem.Enabled = true;
-            btnSua.Enabled = true;
-            btnBoqua.Enabled = false;
-            btnLuu.Enabled = false;
-            txtMaNhanvien.Enabled = false;
+           try
+{
+    if (function.conn.State == ConnectionState.Closed)
+    {
+        function.conn.Open();
+    }
+
+    SqlCommand cmd = new SqlCommand(sql, function.conn);
+    cmd.ExecuteNonQuery();
+}
+catch (Exception ex)
+{
+    MessageBox.Show("Lỗi khi lưu dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    return;
+}
+finally
+{
+    if (function.conn.State == ConnectionState.Open)
+    {
+        function.conn.Close();
+    }
+}
+
+loadDataToGridView();
+ResetValues();
+btnXoa.Enabled = true;
+btnThem.Enabled = true;
+btnSua.Enabled = true;
+btnBoqua.Enabled = false;
+btnLuu.Enabled = false;
+txtMaNhanvien.Enabled = false;
 
         }
 
