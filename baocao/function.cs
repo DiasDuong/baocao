@@ -14,7 +14,7 @@ namespace baocao
     {
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
         public static string ConnectionString =
-"Data Source=DESKTOP-4UBA1EH\\SQLEXPRESS02;Initial Catalog=quanlicuahangquanao;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+"Data Source=DESKTOP-S0TIEV7;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
 
         public static void Connect()
         {
@@ -34,37 +34,23 @@ namespace baocao
 
         public static DataTable GetDataToTable(string sql)
         {
+            DataTable table = new DataTable();
             try
             {
-                // Kiểm tra và kết nối lại nếu kết nối đã bị đóng
-                if (conn == null || conn.State == ConnectionState.Closed)
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
                 {
-                    Connect();  // Đảm bảo kết nối đã được mở
+                    tempConn.Open();
+                    SqlDataAdapter mydata = new SqlDataAdapter(sql, tempConn);
+                    mydata.SelectCommand.CommandTimeout = 60;
+                    mydata.Fill(table);
                 }
-
-                DataTable table = new DataTable();
-                SqlDataAdapter Mydata = new SqlDataAdapter(sql, conn);
-                Mydata.SelectCommand.CommandTimeout = 60;
-
-                // Kiểm tra nếu Connection chưa được gán
-                if (Mydata.SelectCommand.Connection == null)
-                {
-                    Mydata.SelectCommand.Connection = conn;  // Gán kết nối nếu chưa có
-                }
-
-                Mydata.Fill(table);
-                return table;
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Lỗi SQL: " + ex.Message); // Hiển thị thông báo lỗi nếu có
-                return null;
+                MessageBox.Show("Lỗi lấy dữ liệu: " + ex.Message);
             }
+            return table;
         }
-
-
-
-
 
         // Kiểm tra ID của bản ghi
         public static bool CheckID(string query)
@@ -82,77 +68,64 @@ namespace baocao
         }
 
         // Thực thi query SQL
-        public static void RunSQL(string query)
+        public static void RunSQL(string sql)
         {
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open(); // Mở kết nối nếu chưa mở
-            }
-
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn;
-            command.CommandText = query;
-            command.CommandTimeout = 60;
-
             try
             {
-                command.ExecuteNonQuery();
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, tempConn);
+                    cmd.ExecuteNonQuery();
+                }
             }
-            catch (System.Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show($"Đã xảy ra lỗi: {e}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            command.Dispose();
-
-            // Nếu bạn không dùng conn tiếp, nên đóng lại
-            if (conn.State == ConnectionState.Open)
-            {
-                conn.Close();
+                MessageBox.Show("Lỗi thực thi SQL: " + ex.Message);
             }
         }
 
         // Thực thi query SQL (xóa)
-        public static void RunDeleteSQL(string query)
+        public static void RunDeleteSQL(string sql)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn;
-            command.CommandText = query;
             try
             {
-                command.ExecuteNonQuery();
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, tempConn);
+                    cmd.ExecuteNonQuery();
+                }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Dữ liệu đang được sử dụng, không thể xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi xóa dữ liệu: " + ex.Message);
             }
-
-            command.Dispose();
         }
 
         // Lấy dữ liệu từ một query SQL
-        public static string GetFieldValues(string query)
+        public static string GetFieldValues(string sql)
         {
-            string ma = "";
-
-            using (SqlCommand cmd = new SqlCommand(query, function.conn))
+            string result = "";
+            try
             {
-                if (function.conn.State != ConnectionState.Open)
-                    function.conn.Open();
-                
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
                 {
+                    tempConn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, tempConn);
+                    SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        // Cứ mỗi lần đọc dòng, gán lại => lấy dòng cuối cùng sau cùng
-                        ma = reader.GetValue(0).ToString();
+                        result = reader.GetValue(0).ToString();
                     }
+                    reader.Close();
                 }
             }
-
-            return ma;
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi truy vấn: " + ex.Message);
+            }
+            return result;
         }
 
         // Đổ dữ liệu vào ComboBox
