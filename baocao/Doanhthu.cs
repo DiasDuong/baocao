@@ -96,20 +96,7 @@ namespace baocao
                 MessageBox.Show("Có lỗi xảy ra trong quá trình xuất file: " + ex.Message);
             }
         }
-        private void btnThoat_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-        "Bạn có chắc muốn thoát không?",
-        "Xác nhận thoát",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                this.Close(); // Đóng form hiện tại  
-                              // Hoặc Application.Exit(); để thoát toàn ứng dụng  
-            }
-        }
+   
 
         private void Validate_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -253,6 +240,21 @@ namespace baocao
 
             }
 
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+     "Bạn có chắc muốn thoát không?",
+     "Xác nhận thoát",
+     MessageBoxButtons.YesNo,
+     MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close(); // Đóng form hiện tại  
+                              // Hoặc Application.Exit(); để thoát toàn ứng dụng  
+            }
         }
     }
 
