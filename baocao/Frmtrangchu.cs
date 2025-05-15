@@ -16,6 +16,7 @@ namespace baocao
         public Frmtrangchu()
         {
             InitializeComponent();
+
         }
 
         private void Frmtrangchu_Load(object sender, EventArgs e)
@@ -86,5 +87,5 @@ namespace baocao
             }
         }
     }
-    }
+ }
 
