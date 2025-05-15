@@ -20,120 +20,393 @@ namespace baocao
             InitializeComponent(); 
         }
 
+        private string FormatDate(string date)
+        {
+            try
+            {
+                // Chuyển đổi từ dd/MM/yyyy sang yyyy-MM-dd (định dạng SQL Server)
+                DateTime dt = DateTime.ParseExact(date.Trim(), "M/d/yyyy", null);
+                return dt.ToString("yyyy-MM-dd");
+            }
+            catch
+            {
+                MessageBox.Show("Ngày không hợp lệ. Vui lòng nhập theo định dạng MM/dd/yyyy", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+        }
+
+        private bool KiemTraMatHangTonTai(string maHoaDon, string maQuanAo)
+        {
+            try
+            {
+                string sql = "SELECT SoLuong FROM ChiTietHDBan WHERE SoHDB=@SoHDB AND MaQuanAo=@MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", maQuanAo);
+                        object result = cmd.ExecuteScalar();
+                        return (result != null && result != DBNull.Value);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kiểm tra mặt hàng: " + ex.Message);
+                return false;
+            }
+        }
+
+        private void CapNhatSoLuongTonTai(string maHoaDon, string maQuanAo, decimal soLuongThem)
+        {
+            try
+            {
+                // Lấy số lượng hiện tại trong chi tiết hóa đơn
+                decimal soLuongHienTai = 0;
+                string sql = "SELECT SoLuong FROM ChiTietHDBan WHERE SoHDB=@SoHDB AND MaQuanAo=@MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", maQuanAo);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            soLuongHienTai = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+
+                // Lấy số lượng trong kho
+                decimal soLuongTrongKho = 0;
+                sql = "SELECT SoLuong FROM SanPham WHERE MaQuanAo=@MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaQuanAo", maQuanAo);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            soLuongTrongKho = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+
+                // Kiểm tra nếu đủ số lượng để thêm
+                if (soLuongThem > soLuongTrongKho)
+                {
+                    MessageBox.Show($"Số lượng mặt hàng này chỉ còn {soLuongTrongKho}", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Cập nhật số lượng trong chi tiết hóa đơn
+                decimal soLuongMoi = soLuongHienTai + soLuongThem;
+                decimal thanhTien = soLuongThem * Convert.ToDecimal(txtDongiaban.Text);
+                decimal giamGia = Convert.ToDecimal(txtGiamgia.Text);
+                thanhTien = thanhTien - (thanhTien * giamGia / 100);
+
+                sql = "UPDATE ChiTietHDBan SET SoLuong=@SoLuong, ThanhTien=ThanhTien+@ThanhTien WHERE SoHDB=@SoHDB AND MaQuanAo=@MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoLuong", soLuongMoi);
+                        cmd.Parameters.AddWithValue("@ThanhTien", thanhTien);
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", maQuanAo);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Cập nhật số lượng trong kho
+                sql = "UPDATE SanPham SET SoLuong=SoLuong-@SoLuong WHERE MaQuanAo=@MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoLuong", soLuongThem);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", maQuanAo);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Cập nhật tổng tiền trong hóa đơn
+                sql = "UPDATE HoaDonBan SET TongTien=TongTien+@ThanhTien WHERE SoHDB=@SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@ThanhTien", thanhTien);
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Cập nhật hiển thị
+                Load_DataGridViewChitiet();
+                
+                // Lấy và hiển thị tổng tiền mới
+                sql = "SELECT TongTien FROM HoaDonBan WHERE SoHDB=@SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            decimal tongTien = Convert.ToDecimal(result);
+                            txtTongtien.Text = tongTien.ToString();
+                            lblBangchu.Text = "Bằng chữ: " + function.ChuyenSoSangChu(tongTien.ToString());
+                        }
+                    }
+                }
+
+                ResetValuesHang();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi cập nhật số lượng: " + ex.Message);
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            string sql;
-            double sl, SLcon, tong, Tongmoi;
-            sql = "SELECT SoHDB FROM HoaDonBan WHERE SoHDB=N'" + txtMaHDBan.Text + "'";
-            if (!function.CheckKey(sql))
+            try
             {
-                // Mã hóa đơn chưa có, tiến hành lưu các thông tin chung
-                // Mã HDBan được sinh tự động do đó không có trường hợp trùng khóa
-                if (txtNgayban.Text.Length == 0)
+                // Kiểm tra và định dạng ngày
+                string ngayBan = FormatDate(txtNgayban.Text);
+                if (ngayBan == null)
                 {
-                    MessageBox.Show("Bạn phải nhập ngày bán", "Thông báo",
-MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtNgayban.Focus();
                     return;
                 }
-                if (cboManhanvien.Text.Length == 0)
-                {
-                    MessageBox.Show("Bạn phải nhập nhân viên", "Thông báo",
-MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboManhanvien.Focus();
-                    return;
-                }
-                if (cboMakhach.Text.Length == 0)
-                {
-                    MessageBox.Show("Bạn phải nhập khách hàng", "Thông báo",
-MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboMakhach.Focus();
-                    return;
-                }
-                sql = "INSERT INTO HoaDonBan(SoHDB, NgayBan, MaNV, MaKhach, ThanhTien) VALUES (N'" + txtMaHDBan.Text.Trim() + "','" +
-                        function.ConvertDateTime(txtNgayban.Text.Trim()) + "',N'" + cboManhanvien.SelectedValue + "',N'" +
-                        cboMakhach.SelectedValue + "'," + txtTongtien.Text + ")";
-                function.RunSQL(sql);
-            }
-            // Lưu thông tin của các mặt hàng
-            if (cboMahang.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Bạn phải nhập mã hàng", "Thông báo", MessageBoxButtons.OK,
-MessageBoxIcon.Warning);
-                cboMahang.Focus();
-                return;
-            }
-            if ((txtSoluong.Text.Trim().Length == 0) || (txtSoluong.Text == "0"))
-            {
-                MessageBox.Show("Bạn phải nhập số lượng", "Thông báo", MessageBoxButtons.OK,
-MessageBoxIcon.Warning);
-                txtSoluong.Text = "";
-                txtSoluong.Focus();
-                return;
-            }
-            if (txtGiamgia.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Bạn phải nhập giảm giá", "Thông báo", MessageBoxButtons.OK,
-MessageBoxIcon.Warning);
-                txtGiamgia.Focus();
-                return;
-            }
-            sql = "SELECT MaQuanAo FROM ChiTietHDBan WHERE MaQuanAo=N'" +
-cboMahang.SelectedValue + "' AND SoHDB = N'" + txtMaHDBan.Text.Trim() + "'";
-            if (function.CheckKey(sql))
-            {
-                MessageBox.Show("Mã hàng này đã có, bạn phải nhập mã khác", "Thông báo",
-MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ResetValuesHang();
-                cboMahang.Focus();
-                return;
-            }
-            // Kiểm tra xem số lượng hàng trong kho còn đủ để cung cấp không?
-            sl = Convert.ToDouble(function.GetFieldValues("SELECT Soluong FROM SanPham WHERE MaQuanAo = N'" + cboMahang.SelectedValue + "'"));
-            if (Convert.ToDouble(txtSoluong.Text) > sl)
-            {
-                MessageBox.Show("Số lượng mặt hàng này chỉ còn " + sl, "Thông báo",
-MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtSoluong.Text = "";
-                txtSoluong.Focus();
-                return;
-            }
-            sql = "INSERT INTO ChiTietHDBan(SoHDB,MaQuanAo,SoLuong,GiamGia, ThanhTien) VALUES(N'" + txtMaHDBan.Text.Trim() + "',N'" + cboMahang.SelectedValue +
-"'," + txtSoluong.Text + "," + txtGiamgia.Text + "," + txtThanhtien.Text + ")";
-            function.RunSQL(sql);
-            Load_DataGridViewChitiet();
-            // Cập nhật lại số lượng của mặt hàng vào bảng tblHang
-            SLcon = sl - Convert.ToDouble(txtSoluong.Text);
-            sql = "UPDATE tblHang SET Soluong =" + SLcon + " WHERE MaQuanAo= N'" +
-cboMahang.SelectedValue + "'";
-            function.RunSQL(sql);
-            // Cập nhật lại tổng tiền cho hóa đơn bán
-            tong = Convert.ToDouble(function.GetFieldValues("SELECT TongTien FROM HoaDonBan WHERE SoHDB = N'" + txtMaHDBan.Text + "'"));
-            Tongmoi = tong + Convert.ToDouble(txtThanhtien.Text);
-            sql = "UPDATE HoaDonBan SET TongTien =" + Tongmoi + " WHERE SoHDB = N'" +
-txtMaHDBan.Text + "'";
-            function.RunSQL(sql);
-            txtTongtien.Text = Tongmoi.ToString();
-            lblBangchu.Text = "Bằng chữ: " + function.ChuyenSoSangChu(Tongmoi.ToString());
-            ResetValuesHang();
-            btnXoa.Enabled = true;
-            btnThemmoi.Enabled = true;
-            btnInhoadon.Enabled = true;
 
+                // Kiểm tra các trường bắt buộc
+                if (string.IsNullOrWhiteSpace(cboMahang.Text))
+                {
+                    MessageBox.Show("Bạn phải chọn mặt hàng", "Thông báo", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboMahang.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtSoluong.Text) || txtSoluong.Text == "0")
+                {
+                    MessageBox.Show("Bạn phải nhập số lượng", "Thông báo", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtSoluong.Text = "";
+                    txtSoluong.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtGiamgia.Text))
+                {
+                    txtGiamgia.Text = "0";
+                }
+
+                string maHoaDon = txtMaHDBan.Text.Trim();
+                string maQuanAo = cboMahang.SelectedValue?.ToString();
+                decimal soLuongMua = Convert.ToDecimal(txtSoluong.Text);
+
+                // Kiểm tra hóa đơn đã tồn tại chưa
+                bool hoaDonTonTai = false;
+                string sql = "SELECT COUNT(*) FROM HoaDonBan WHERE SoHDB = @SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        int count = (int)cmd.ExecuteScalar();
+                        hoaDonTonTai = (count > 0);
+                    }
+                }
+
+                // Nếu hóa đơn chưa tồn tại, tạo mới hóa đơn
+                if (!hoaDonTonTai)
+                {
+                    // Kiểm tra các trường bắt buộc cho hóa đơn mới
+                    if (string.IsNullOrWhiteSpace(txtNgayban.Text))
+                    {
+                        MessageBox.Show("Bạn phải nhập ngày bán", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtNgayban.Focus();
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(cboManhanvien.Text))
+                    {
+                        MessageBox.Show("Bạn phải nhập nhân viên", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        cboManhanvien.Focus();
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(cboMakhach.Text))
+                    {
+                        MessageBox.Show("Bạn phải nhập khách hàng", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        cboMakhach.Focus();
+                        return;
+                    }
+
+                    // Tạo hóa đơn mới
+                    sql = "INSERT INTO HoaDonBan(SoHDB, NgayBan, MaNV, MaKhach, TongTien) VALUES (@SoHDB, @NgayBan, @MaNV, @MaKhach, 0)";
+                    using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                    {
+                        tempConn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                        {
+                            cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                            cmd.Parameters.AddWithValue("@NgayBan", ngayBan);
+                            cmd.Parameters.AddWithValue("@MaNV", cboManhanvien.SelectedValue?.ToString());
+                            cmd.Parameters.AddWithValue("@MaKhach", cboMakhach.SelectedValue?.ToString());
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                // Kiểm tra mặt hàng đã tồn tại trong hóa đơn chưa
+                if (KiemTraMatHangTonTai(maHoaDon, maQuanAo))
+                {
+                    if (MessageBox.Show("Mặt hàng này đã có trong hóa đơn. Bạn có muốn cập nhật số lượng không?",
+                        "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        CapNhatSoLuongTonTai(maHoaDon, maQuanAo, soLuongMua);
+                    }
+                    return;
+                }
+
+                // Kiểm tra số lượng tồn kho
+                decimal soLuongTonKho = 0;
+                sql = "SELECT SoLuong FROM SanPham WHERE MaQuanAo = @MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaQuanAo", maQuanAo);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            soLuongTonKho = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+
+                if (soLuongMua > soLuongTonKho)
+                {
+                    MessageBox.Show($"Số lượng mặt hàng này chỉ còn {soLuongTonKho}", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSoluong.Text = "";
+                    txtSoluong.Focus();
+                    return;
+                }
+
+                // Thêm chi tiết hóa đơn
+                decimal thanhTien = soLuongMua * Convert.ToDecimal(txtDongiaban.Text);
+                decimal giamGia = Convert.ToDecimal(txtGiamgia.Text);
+                thanhTien = thanhTien - (thanhTien * giamGia / 100);
+
+                sql = "INSERT INTO ChiTietHDBan(SoHDB, MaQuanAo, SoLuong, GiamGia, ThanhTien) VALUES (@SoHDB, @MaQuanAo, @SoLuong, @GiamGia, @ThanhTien)";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", maQuanAo);
+                        cmd.Parameters.AddWithValue("@SoLuong", soLuongMua);
+                        cmd.Parameters.AddWithValue("@GiamGia", giamGia);
+                        cmd.Parameters.AddWithValue("@ThanhTien", thanhTien);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Cập nhật số lượng tồn kho
+                sql = "UPDATE SanPham SET SoLuong = SoLuong - @SoLuong WHERE MaQuanAo = @MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoLuong", soLuongMua);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", maQuanAo);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Cập nhật tổng tiền hóa đơn
+                sql = "UPDATE HoaDonBan SET TongTien = TongTien + @ThanhTien WHERE SoHDB = @SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@ThanhTien", thanhTien);
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Cập nhật hiển thị
+                Load_DataGridViewChitiet();
+                
+                // Lấy và hiển thị tổng tiền mới
+                sql = "SELECT TongTien FROM HoaDonBan WHERE SoHDB = @SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", maHoaDon);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            decimal tongTien = Convert.ToDecimal(result);
+                            txtTongtien.Text = tongTien.ToString();
+                            lblBangchu.Text = "Bằng chữ: " + function.ChuyenSoSangChu(tongTien.ToString());
+                        }
+                    }
+                }
+
+                // Reset các controls
+                ResetValuesHang();
+                btnXoa.Enabled = true;
+                btnThemmoi.Enabled = true;
+                btnInhoadon.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu hóa đơn: " + ex.Message, "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             // Khởi động chương trình Excel
             COMExcel.Application exApp = new COMExcel.Application();
-            COMExcel.Workbook exBook; //Trong 1 chương trình Excel có nhiều Workbook
-            COMExcel.Worksheet exSheet; //Trong 1 Workbook có nhiều Worksheet
+            COMExcel.Workbook exBook;
+            COMExcel.Worksheet exSheet;
             COMExcel.Range exRange;
             string sql;
             int hang = 0, cot = 0;
             DataTable tblThongtinHD, tblThongtinHang;
             exBook = exApp.Workbooks.Add(COMExcel.XlWBATemplate.xlWBATWorksheet);
             exSheet = exBook.Worksheets[1];
+            
             // Định dạng chung
             exRange = exSheet.Cells[1, 1];
             exRange.Range["A1:B3"].Font.Size = 10;
@@ -158,9 +431,28 @@ txtMaHDBan.Text + "'";
             exRange.Range["C2:E2"].MergeCells = true;
             exRange.Range["C2:E2"].HorizontalAlignment = COMExcel.XlHAlign.xlHAlignCenter;
             exRange.Range["C2:E2"].Value = "HÓA ĐƠN BÁN";
+
             // Biểu diễn thông tin chung của hóa đơn bán
-            sql = "SELECT a.SoHDB, a.NgayBan, a.TongTien, b.TenKhach, b.DiaChi, b.DienThoai, c.TenNV FROM HoaDonBan AS a, KhachHang AS b, NhanVien AS c WHERE a.SoHDB = N'" + txtMaHDBan.Text + "' AND a.MaKhach = b.MaKhach AND a.MaNV =c.MaNV";
-            tblThongtinHD = function.GetDataToTable(sql);
+            sql = @"SELECT a.SoHDB, a.NgayBan, a.TongTien, b.TenKhach, b.DiaChi, b.DienThoai, c.TenNV 
+                    FROM HoaDonBan AS a 
+                    INNER JOIN KhachHang AS b ON a.MaKhach = b.MaKhach 
+                    INNER JOIN NhanVien AS c ON a.MaNV = c.MaNV 
+                    WHERE a.SoHDB = @SoHDB";
+
+            using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+            {
+                tempConn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                {
+                    cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        tblThongtinHD = new DataTable();
+                        da.Fill(tblThongtinHD);
+                    }
+                }
+            }
+
             exRange.Range["B6:C9"].Font.Size = 12;
             exRange.Range["B6:C9"].Font.Name = "Times new roman";
             exRange.Range["B6:B6"].Value = "Mã hóa đơn:";
@@ -175,10 +467,27 @@ txtMaHDBan.Text + "'";
             exRange.Range["B9:B9"].Value = "Điện thoại:";
             exRange.Range["C9:E9"].MergeCells = true;
             exRange.Range["C9:E9"].Value = tblThongtinHD.Rows[0][5].ToString();
-            //Lấy thông tin các mặt hàng
-            sql = "SELECT a.MaQuanAo, b.TenQuanAO, a.SoLuong, b.DonGiaBan, a.GiamGia, a.ThanhTien FROM ChitietHDBan AS a, SanPham AS b WHERE a.SoHDB = N'" + txtMaHDBan.Text + "' AND a.MaQuanAo = b.MaQuanAo";
 
-            tblThongtinHang = function.GetDataToTable(sql);
+            //Lấy thông tin các mặt hàng
+            sql = @"SELECT b.MaQuanAo, b.TenQuanAo, a.SoLuong, b.DonGiaBan, a.GiamGia, a.ThanhTien 
+                    FROM ChiTietHDBan AS a 
+                    INNER JOIN SanPham AS b ON a.MaQuanAo = b.MaQuanAo 
+                    WHERE a.SoHDB = @SoHDB";
+
+            using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+            {
+                tempConn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                {
+                    cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        tblThongtinHang = new DataTable();
+                        da.Fill(tblThongtinHang);
+                    }
+                }
+            }
+
             //Tạo dòng tiêu đề bảng
             exRange.Range["A11:F11"].Font.Bold = true;
             exRange.Range["A11:F11"].HorizontalAlignment = COMExcel.XlHAlign.xlHAlignCenter;
@@ -189,46 +498,64 @@ txtMaHDBan.Text + "'";
             exRange.Range["D11:D11"].Value = "Đơn giá";
             exRange.Range["E11:E11"].Value = "Giảm giá";
             exRange.Range["F11:F11"].Value = "Thành tiền";
-            for (hang = 0; hang <= tblThongtinHang.Rows.Count - 1; hang++)
+
+            for (hang = 0; hang < tblThongtinHang.Rows.Count; hang++)
             {
-                //Điền số thứ tự vào cột 1 từ dòng 12
-                exSheet.Cells[1][hang + 12] = hang + 1;
-                for (cot = 0; cot <= tblThongtinHang.Columns.Count - 1; cot++)
-                    //Điền thông tin hàng từ cột thứ 2, dòng 12
-                    exSheet.Cells[cot + 2][hang + 12] = tblThongtinHang.Rows[hang][cot].ToString();
+                // Điền số thứ tự
+                exSheet.Cells[hang + 12, 1] = hang + 1;
+                
+                // Điền tên hàng
+                exSheet.Cells[hang + 12, 2] = tblThongtinHang.Rows[hang][1].ToString();
+                
+                // Điền số lượng
+                exSheet.Cells[hang + 12, 3] = tblThongtinHang.Rows[hang][2].ToString();
+                
+                // Điền đơn giá
+                exSheet.Cells[hang + 12, 4] = tblThongtinHang.Rows[hang][3].ToString();
+                
+                // Điền giảm giá
+                exSheet.Cells[hang + 12, 5] = tblThongtinHang.Rows[hang][4].ToString();
+                
+                // Điền thành tiền
+                exSheet.Cells[hang + 12, 6] = tblThongtinHang.Rows[hang][5].ToString();
             }
-            exRange = exSheet.Cells[cot][hang + 14];
-            exRange.Font.Bold = true;
-            exRange.Value2 = "Tổng tiền:";
-            exRange = exSheet.Cells[cot + 1][hang + 14];
-            exRange.Font.Bold = true;
-            exRange.Value2 = tblThongtinHD.Rows[0][2].ToString();
-            exRange = exSheet.Cells[1][hang + 15]; //Ô A1 
+
+            // Định dạng tổng tiền
+            exRange = exSheet.Cells[hang + 14, 1];
             exRange.Range["A1:F1"].MergeCells = true;
             exRange.Range["A1:F1"].Font.Bold = true;
             exRange.Range["A1:F1"].Font.Italic = true;
             exRange.Range["A1:F1"].HorizontalAlignment = COMExcel.XlHAlign.xlHAlignRight;
-            exRange.Range["A1:F1"].Value = "Bằng chữ: " + function.ChuyenSoSangChu
- (tblThongtinHD.Rows[0][2].ToString());
-            exRange = exSheet.Cells[4][hang + 17]; //Ô A1 
+            exRange.Range["A1:F1"].Value = "Tổng tiền: " + tblThongtinHD.Rows[0][2].ToString();
+
+            exRange = exSheet.Cells[hang + 15, 1];
+            exRange.Range["A1:F1"].MergeCells = true;
+            exRange.Range["A1:F1"].Font.Bold = true;
+            exRange.Range["A1:F1"].Font.Italic = true;
+            exRange.Range["A1:F1"].HorizontalAlignment = COMExcel.XlHAlign.xlHAlignRight;
+            exRange.Range["A1:F1"].Value = "Bằng chữ: " + function.ChuyenSoSangChu(tblThongtinHD.Rows[0][2].ToString());
+
+            // Định dạng phần cuối
+            exRange = exSheet.Cells[hang + 17, 4];
             exRange.Range["A1:C1"].MergeCells = true;
             exRange.Range["A1:C1"].Font.Italic = true;
             exRange.Range["A1:C1"].HorizontalAlignment = COMExcel.XlHAlign.xlHAlignCenter;
             DateTime d = Convert.ToDateTime(tblThongtinHD.Rows[0][1]);
             exRange.Range["A1:C1"].Value = "Hà Nội, ngày " + d.Day + " tháng " + d.Month + " năm " + d.Year;
+
             exRange.Range["A2:C2"].MergeCells = true;
             exRange.Range["A2:C2"].Font.Italic = true;
             exRange.Range["A2:C2"].HorizontalAlignment = COMExcel.XlHAlign.xlHAlignCenter;
             exRange.Range["A2:C2"].Value = "Nhân viên bán hàng";
+
             exRange.Range["A6:C6"].MergeCells = true;
             exRange.Range["A6:C6"].Font.Italic = true;
             exRange.Range["A6:C6"].HorizontalAlignment = COMExcel.XlHAlign.xlHAlignCenter;
             exRange.Range["A6:C6"].Value = tblThongtinHD.Rows[0][6];
-            exSheet.Name = "Hóa đơn nhập";
+
+            exSheet.Name = "Hóa đơn bán";
             exApp.Visible = true;
         }
-
-        
 
         private void Frmquanlyhoadonban_Load(object sender, EventArgs e)
         {
@@ -265,37 +592,120 @@ txtMaHDBan.Text + "'";
         }
         private void Load_DataGridViewChitiet()
         {
-            string sql;
-            sql = "SELECT a.MaQuanAo, b.TenQuanAO, a.SoLuong, b.DonGiaBan, a.GiamGia, a.ThanhTien FROM ChitietHDBan AS a,  AS b WHERE a.MaHDBan = N'" + txtMaHDBan.Text + "' AND a.MaQuanAo=b.MaQuanAo";
-            ChiTietHDBan = function.GetDataToTable(sql);
-            DataGridViewChitiet.DataSource = ChiTietHDBan;
-            DataGridViewChitiet.Columns[0].HeaderText = "Mã quần áo";
-            DataGridViewChitiet.Columns[1].HeaderText = "Tên quần áo";
-            DataGridViewChitiet.Columns[2].HeaderText = "Số lượng";
-            DataGridViewChitiet.Columns[3].HeaderText = "Đơn giá";
-            DataGridViewChitiet.Columns[4].HeaderText = "Giảm giá %";
-            DataGridViewChitiet.Columns[5].HeaderText = "Thành tiền";
-            DataGridViewChitiet.Columns[0].Width = 80;
-            DataGridViewChitiet.Columns[1].Width = 100;
-            DataGridViewChitiet.Columns[2].Width = 80;
-            DataGridViewChitiet.Columns[3].Width = 90;
-            DataGridViewChitiet.Columns[4].Width = 90;
-            DataGridViewChitiet.Columns[5].Width = 90;
-            DataGridViewChitiet.AllowUserToAddRows = false;
-            DataGridViewChitiet.EditMode = DataGridViewEditMode.EditProgrammatically;
+            try
+            {
+                string sql = @"SELECT a.MaQuanAo, b.TenQuanAO, a.SoLuong, b.DonGiaBan, a.GiamGia, a.ThanhTien 
+                              FROM ChiTietHDBan AS a 
+                              INNER JOIN SanPham AS b ON a.MaQuanAo = b.MaQuanAo 
+                              WHERE a.SoHDB = @SoHDB";
+
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            ChiTietHDBan = new DataTable();
+                            da.Fill(ChiTietHDBan);
+                        }
+                    }
+                }
+
+                DataGridViewChitiet.DataSource = ChiTietHDBan;
+                DataGridViewChitiet.Columns[0].HeaderText = "Mã quần áo";
+                DataGridViewChitiet.Columns[1].HeaderText = "Tên quần áo";
+                DataGridViewChitiet.Columns[2].HeaderText = "Số lượng";
+                DataGridViewChitiet.Columns[3].HeaderText = "Đơn giá";
+                DataGridViewChitiet.Columns[4].HeaderText = "Giảm giá %";
+                DataGridViewChitiet.Columns[5].HeaderText = "Thành tiền";
+                DataGridViewChitiet.Columns[0].Width = 80;
+                DataGridViewChitiet.Columns[1].Width = 130;
+                DataGridViewChitiet.Columns[2].Width = 80;
+                DataGridViewChitiet.Columns[3].Width = 90;
+                DataGridViewChitiet.Columns[4].Width = 90;
+                DataGridViewChitiet.Columns[5].Width = 90;
+                DataGridViewChitiet.AllowUserToAddRows = false;
+                DataGridViewChitiet.EditMode = DataGridViewEditMode.EditProgrammatically;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void Load_ThongtinHD()
         {
             string str;
-            str = "SELECT NgayBan FROM ChiTietHDBan WHERE MaHDBan = N'" + txtMaHDBan.Text + "'";
-            txtNgayban.Text = function.ConvertDateTime(function.GetFieldValues(str));
-            str = "SELECT MaNV FROM ChiTietHDBan WHERE MaHDBan = N'" + txtMaHDBan.Text + "'";
-            cboManhanvien.Text = function.GetFieldValues(str);
-            str = "SELECT MaKhach FROM ChiTietHDBan WHERE MaHDBan = N'" + txtMaHDBan.Text + "'";
-            cboMakhach.Text = function.GetFieldValues(str);
-            str = "SELECT ThanhTien FROM ChiTietHDBan WHERE MaHDBan = N'" + txtMaHDBan.Text + "'";
-            txtTongtien.Text = function.GetFieldValues(str);
-            lblBangchu.Text = "Bằng chữ: " + function.ChuyenSoSangChu(txtTongtien.Text);
+            try
+            {
+                str = "SELECT NgayBan FROM HoaDonBan WHERE SoHDB = @SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(str, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            txtNgayban.Text = function.ConvertDateTime(result.ToString());
+                        }
+                    }
+                }
+
+                str = "SELECT MaNV FROM HoaDonBan WHERE SoHDB = @SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(str, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            cboManhanvien.SelectedValue = result.ToString();
+                        }
+                    }
+                }
+
+                str = "SELECT MaKhach FROM HoaDonBan WHERE SoHDB = @SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(str, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            cboMakhach.SelectedValue = result.ToString();
+                        }
+                    }
+                }
+
+                str = "SELECT TongTien FROM HoaDonBan WHERE SoHDB = @SoHDB";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(str, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            txtTongtien.Text = result.ToString();
+                            lblBangchu.Text = "Bằng chữ: " + function.ChuyenSoSangChu(result.ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi load thông tin hóa đơn: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnThemmoi_Click(object sender, EventArgs e)
@@ -305,9 +715,8 @@ txtMaHDBan.Text + "'";
             btnInhoadon.Enabled = false;
             btnThemmoi.Enabled = false;
             ResetValues();
-            txtMaHDBan.Text = function.CreateKey("HDB");
+            txtMaHDBan.Text = function.TaoMaHoaDonMoi();
             Load_DataGridViewChitiet();
-
         }
         private void ResetValues()
         {
@@ -357,19 +766,76 @@ Cells["ThanhTien"].Value.ToString());
         }
         private void DelHang(string Mahoadon, string Mahang)
         {
-            Double s, sl, SLcon;
-            string sql;
-            sql = "SELECT SoLuong FROM ChiTietHDBan WHERE SoHDB = N'" + Mahoadon + "' AND MaQuanAo = N'" + Mahang + "'";
-            s = Convert.ToDouble(function.GetFieldValues(sql));
-            sql = "DELETE ChiTietHDBan WHERE SoHDB=N'" + Mahoadon + "' AND MaQuanAo  = N'"
-+ Mahang + "'";
-            function.RunDeleteSQL(sql);
-            // Cập nhật lại số lượng cho các mặt hàng
-            sql = "SELECT SoLuong FROM SanPham WHERE MaQuanAo = N'" + Mahang + "'";
-            sl = Convert.ToDouble(function.GetFieldValues(sql));
-            SLcon = sl + s;
-            sql = "UPDATE SanPham SET SoLuong =" + SLcon + " WHERE MaQuanAo= N'" + Mahang + "'";
-            function.RunSQL(sql);
+            try
+            {
+                decimal soLuongTrongHD = 0;
+                decimal soLuongHienTai = 0;
+
+                // Lấy số lượng trong hóa đơn
+                string sql = "SELECT SoLuong FROM ChiTietHDBan WHERE SoHDB = @SoHDB AND MaQuanAo = @MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", Mahoadon);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", Mahang);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            soLuongTrongHD = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+
+                // Lấy số lượng hiện tại của sản phẩm
+                sql = "SELECT SoLuong FROM SanPham WHERE MaQuanAo = @MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@MaQuanAo", Mahang);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            soLuongHienTai = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+
+                // Xóa chi tiết hóa đơn
+                sql = "DELETE ChiTietHDBan WHERE SoHDB = @SoHDB AND MaQuanAo = @MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoHDB", Mahoadon);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", Mahang);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                // Cập nhật lại số lượng sản phẩm
+                decimal soLuongMoi = soLuongHienTai + soLuongTrongHD;
+                sql = "UPDATE SanPham SET SoLuong = @SoLuong WHERE MaQuanAo = @MaQuanAo";
+                using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@SoLuong", soLuongMoi);
+                        cmd.Parameters.AddWithValue("@MaQuanAo", Mahang);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xóa mặt hàng: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void DelUpdateTongtien(string Mahoadon, double Thanhtien)
@@ -389,34 +855,62 @@ Mahoadon + "'";
         private void btnXoa_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo",
-MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string[] Mahang = new string[20];
-                string sql;
-                int n = 0;
-                int i;
-                sql = "SELECT MaQuanAo FROM ChiTietHDBan WHERE SoHDB = N'" +
-txtMaHDBan.Text + "'";
-                SqlCommand cmd = new SqlCommand(sql, function.conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                try
                 {
-                    Mahang[n] = reader.GetString(0).ToString();
-                    n = n + 1;
-                }
-                reader.Close();
-                //Xóa danh sách các mặt hàng của hóa đơn
-                for (i = 0; i <= n - 1; i++)
-                    DelHang(txtMaHDBan.Text, Mahang[i]);
-                //Xóa hóa đơn
-                sql = "DELETE HoaDonBan WHERE SoHDB=N'" + txtMaHDBan.Text + "'";
-                function.RunDeleteSQL(sql);
-                ResetValues();
-                Load_DataGridViewChitiet();
-                btnXoa.Enabled = false;
-                btnInhoadon.Enabled = false;
-            }
+                    string[] Mahang = new string[20];
+                    string sql;
+                    int n = 0;
 
+                    // Lấy danh sách mã hàng cần xóa
+                    sql = "SELECT MaQuanAo FROM ChiTietHDBan WHERE SoHDB = @SoHDB";
+                    using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                    {
+                        tempConn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                        {
+                            cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    Mahang[n] = reader.GetString(0);
+                                    n++;
+                                }
+                            }
+                        }
+                    }
+
+                    // Xóa từng mặt hàng trong hóa đơn
+                    for (int i = 0; i < n; i++)
+                    {
+                        DelHang(txtMaHDBan.Text, Mahang[i]);
+                    }
+
+                    // Xóa hóa đơn
+                    sql = "DELETE HoaDonBan WHERE SoHDB = @SoHDB";
+                    using (SqlConnection tempConn = new SqlConnection(function.ConnectionString))
+                    {
+                        tempConn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                        {
+                            cmd.Parameters.AddWithValue("@SoHDB", txtMaHDBan.Text);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    ResetValues();
+                    Load_DataGridViewChitiet();
+                    btnXoa.Enabled = false;
+                    btnInhoadon.Enabled = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi xóa hóa đơn: " + ex.Message, "Lỗi", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void cboManhanvien_SelectedIndexChanged(object sender, EventArgs e)
@@ -532,10 +1026,8 @@ MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
         private void cboMaHDBan_DropDown(object sender, EventArgs e)
         {
-            function.FillCombo2("SELECT MaHDBan FROM tblHDBan", cboMaHDBan, "MaHDBan",
-"MaHDBan");
+            function.FillCombo2("SELECT SoHDB FROM HoaDonBan", cboMaHDBan, "SoHDB", "SoHDB");
             cboMaHDBan.SelectedIndex = -1;
-
         }
 
         private void Frmquanlyhoadonban_FormClosing(object sender, FormClosingEventArgs e)

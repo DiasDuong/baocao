@@ -259,16 +259,16 @@
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Location = new System.Drawing.Point(49, 245);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(698, 332);
+            this.groupBox2.Size = new System.Drawing.Size(698, 371);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin các mặt hàng";
             // 
             // btnDong
             // 
-            this.btnDong.Location = new System.Drawing.Point(592, 280);
+            this.btnDong.Location = new System.Drawing.Point(592, 310);
             this.btnDong.Name = "btnDong";
-            this.btnDong.Size = new System.Drawing.Size(75, 36);
+            this.btnDong.Size = new System.Drawing.Size(75, 35);
             this.btnDong.TabIndex = 31;
             this.btnDong.Text = "Đóng";
             this.btnDong.UseVisualStyleBackColor = true;
@@ -276,9 +276,9 @@
             // 
             // btnInhoadon
             // 
-            this.btnInhoadon.Location = new System.Drawing.Point(488, 280);
+            this.btnInhoadon.Location = new System.Drawing.Point(488, 310);
             this.btnInhoadon.Name = "btnInhoadon";
-            this.btnInhoadon.Size = new System.Drawing.Size(93, 36);
+            this.btnInhoadon.Size = new System.Drawing.Size(93, 35);
             this.btnInhoadon.TabIndex = 30;
             this.btnInhoadon.Text = "In hóa đơn";
             this.btnInhoadon.UseVisualStyleBackColor = true;
@@ -286,9 +286,9 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(367, 280);
+            this.btnXoa.Location = new System.Drawing.Point(367, 310);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(115, 36);
+            this.btnXoa.Size = new System.Drawing.Size(115, 35);
             this.btnXoa.TabIndex = 29;
             this.btnXoa.Text = "Hủy hóa đơn";
             this.btnXoa.UseVisualStyleBackColor = true;
@@ -296,9 +296,9 @@
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new System.Drawing.Point(285, 280);
+            this.btnLuu.Location = new System.Drawing.Point(285, 310);
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(75, 36);
+            this.btnLuu.Size = new System.Drawing.Size(75, 35);
             this.btnLuu.TabIndex = 28;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseMnemonic = false;
@@ -307,9 +307,9 @@
             // 
             // btnThemmoi
             // 
-            this.btnThemmoi.Location = new System.Drawing.Point(153, 280);
+            this.btnThemmoi.Location = new System.Drawing.Point(139, 310);
             this.btnThemmoi.Name = "btnThemmoi";
-            this.btnThemmoi.Size = new System.Drawing.Size(126, 36);
+            this.btnThemmoi.Size = new System.Drawing.Size(140, 35);
             this.btnThemmoi.TabIndex = 27;
             this.btnThemmoi.Text = "Thêm hóa đơn";
             this.btnThemmoi.UseVisualStyleBackColor = true;
@@ -317,7 +317,7 @@
             // 
             // txtTongtien
             // 
-            this.txtTongtien.Location = new System.Drawing.Point(481, 228);
+            this.txtTongtien.Location = new System.Drawing.Point(520, 262);
             this.txtTongtien.Name = "txtTongtien";
             this.txtTongtien.Size = new System.Drawing.Size(100, 26);
             this.txtTongtien.TabIndex = 26;
@@ -325,7 +325,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(407, 228);
+            this.label17.Location = new System.Drawing.Point(439, 268);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(75, 20);
             this.label17.TabIndex = 25;
@@ -334,7 +334,7 @@
             // lblBangchu
             // 
             this.lblBangchu.AutoSize = true;
-            this.lblBangchu.Location = new System.Drawing.Point(34, 245);
+            this.lblBangchu.Location = new System.Drawing.Point(22, 231);
             this.lblBangchu.Name = "lblBangchu";
             this.lblBangchu.Size = new System.Drawing.Size(77, 20);
             this.lblBangchu.TabIndex = 24;
@@ -465,7 +465,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(198, 598);
+            this.label18.Location = new System.Drawing.Point(198, 638);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(93, 20);
             this.label18.TabIndex = 3;
@@ -474,7 +474,7 @@
             // cboMaHDBan
             // 
             this.cboMaHDBan.FormattingEnabled = true;
-            this.cboMaHDBan.Location = new System.Drawing.Point(316, 595);
+            this.cboMaHDBan.Location = new System.Drawing.Point(316, 635);
             this.cboMaHDBan.Name = "cboMaHDBan";
             this.cboMaHDBan.Size = new System.Drawing.Size(165, 28);
             this.cboMaHDBan.TabIndex = 4;
@@ -482,7 +482,7 @@
             // 
             // btnTimkiem
             // 
-            this.btnTimkiem.Location = new System.Drawing.Point(515, 591);
+            this.btnTimkiem.Location = new System.Drawing.Point(515, 631);
             this.btnTimkiem.Name = "btnTimkiem";
             this.btnTimkiem.Size = new System.Drawing.Size(95, 35);
             this.btnTimkiem.TabIndex = 32;
@@ -494,7 +494,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 662);
+            this.ClientSize = new System.Drawing.Size(800, 691);
             this.Controls.Add(this.btnTimkiem);
             this.Controls.Add(this.cboMaHDBan);
             this.Controls.Add(this.label18);
