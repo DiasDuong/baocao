@@ -31,7 +31,13 @@ namespace baocao
                 throw new Exception("Lỗi kết nối Database: " + ex.Message);
             }
         }
-
+        public static void Disconnect()
+        {
+            if (conn != null && conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+        }
         public static DataTable GetDataToTable(string sql)
         {
             try
