@@ -16,9 +16,6 @@ namespace baocao
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new dangnhap());
-            //Application.Run(new quenmatkhau());
-            //Application.Run(new doimatkhau());
         }
     }
 }
