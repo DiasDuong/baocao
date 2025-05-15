@@ -55,16 +55,26 @@ namespace baocao
         // Kiểm tra ID của bản ghi
         public static bool CheckID(string query)
         {
-            Connect();
-            SqlDataAdapter data = new SqlDataAdapter(query, conn);
-            DataTable table = new DataTable();
-            data.Fill(table);
-            if (table.Rows.Count > 0)
+            bool result = false;
+            try
             {
-                return true;
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlDataAdapter data = new SqlDataAdapter(query, tempConn);
+                    DataTable table = new DataTable();
+                    data.Fill(table);
+                    if (table.Rows.Count > 0)
+                    {
+                        result = true;
+                    }
+                }
             }
-
-            return false;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kiểm tra ID: " + ex.Message);
+            }
+            return result;
         }
 
         // Thực thi query SQL
@@ -131,37 +141,58 @@ namespace baocao
         // Đổ dữ liệu vào ComboBox
         public static void FillCombo(string query, System.Windows.Forms.ComboBox comboBox, string value, string name)
         {
-            Connect();
-            SqlDataAdapter data = new SqlDataAdapter(query, conn);
-            DataTable table = new DataTable();
-            data.Fill(table);
-
-            if (!table.Columns.Contains(value))
+            try
             {
-                MessageBox.Show("Không tìm thấy cột '" + value + "' trong dữ liệu.");
-                return;
-            }
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlDataAdapter data = new SqlDataAdapter(query, tempConn);
+                    DataTable table = new DataTable();
+                    data.Fill(table);
 
-            if (!table.Columns.Contains(name))
+                    if (!table.Columns.Contains(value))
+                    {
+                        MessageBox.Show("Không tìm thấy cột '" + value + "' trong dữ liệu.");
+                        return;
+                    }
+
+                    if (!table.Columns.Contains(name))
+                    {
+                        MessageBox.Show("Không tìm thấy cột '" + name + "' trong dữ liệu.");
+                        return;
+                    }
+
+                    comboBox.DataSource = table;
+                    comboBox.ValueMember = value;
+                    comboBox.DisplayMember = name;
+                }
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Không tìm thấy cột '" + name + "' trong dữ liệu.");
-                return;
+                MessageBox.Show("Lỗi đổ dữ liệu vào ComboBox: " + ex.Message);
             }
-
-            comboBox.DataSource = table;
-            comboBox.ValueMember = value;
-            comboBox.DisplayMember = name;
         }
 
         public static void FillCombo1(string query, System.Windows.Forms.ComboBox comboBox, string value, string name)
         {
-            SqlDataAdapter data = new SqlDataAdapter(query, conn);
-            DataTable table = new DataTable();
-            data.Fill(table);
+            try
+            {
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlDataAdapter data = new SqlDataAdapter(query, tempConn);
+                    DataTable table = new DataTable();
+                    data.Fill(table);
 
-            comboBox.DataSource = table;
-            comboBox.ValueMember = value; // Trường giá trị
-            comboBox.DisplayMember = value; // Trường hiển thị
+                    comboBox.DataSource = table;
+                    comboBox.ValueMember = value;
+                    comboBox.DisplayMember = value;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi đổ dữ liệu vào ComboBox: " + ex.Message);
+            }
         }
         // Đổ dữ liệu vào combo box với định dạng mã + tên
         /*public static void FillCombo1(string query, ComboBox comboBox, string value, string displayExpression)
@@ -517,38 +548,75 @@ namespace baocao
         }
         public static bool CheckKey(string sql)
         {
+            bool exists = false;
             try
             {
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                bool exists = reader.HasRows;
-                reader.Close();
-                return exists;
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            exists = reader.HasRows;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi kiểm tra: " + ex.Message, "Lỗi");
-                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
+            return exists;
         }
         public static void FillCombo2(string sql, System.Windows.Forms.ComboBox cbo, string ma, string ten)
         {
-            Connect();
-            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            cbo.DataSource = dt;
-            cbo.ValueMember = ma;
-            cbo.DisplayMember = ten;
+            try
+            {
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlDataAdapter da = new SqlDataAdapter(sql, tempConn))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        cbo.DataSource = dt;
+                        cbo.ValueMember = ma;
+                        cbo.DisplayMember = ten;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi đổ dữ liệu vào ComboBox: " + ex.Message);
+            }
         }
         
-
-
-
+        public static string TaoMaHoaDonMoi()
+        {
+            try
+            {
+                string sql = "SELECT TOP 1 SoHDB FROM HoaDonBan ORDER BY SoHDB DESC";
+                string maHoaDonCuoi = GetFieldValues(sql);
+                
+                if (string.IsNullOrEmpty(maHoaDonCuoi))
+                {
+                    // Nếu chưa có hóa đơn nào
+                    return "HDB0000001";
+                }
+                
+                // Lấy phần số từ mã hóa đơn
+                string phanSo = maHoaDonCuoi.Substring(3);
+                int soThuTu = int.Parse(phanSo) + 1;
+                
+                // Format lại mã hóa đơn mới với độ dài cố định 7 chữ số
+                return $"HDB{soThuTu:D7}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tạo mã hóa đơn: " + ex.Message);
+                return "HDB0000001";
+            }
+        }
     }
 }
