@@ -37,17 +37,20 @@
             this.txttendn = new System.Windows.Forms.TextBox();
             this.txtmk = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkdoimk = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btndn
             // 
+            this.btndn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btndn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndn.Location = new System.Drawing.Point(289, 333);
+            this.btndn.Location = new System.Drawing.Point(289, 315);
             this.btndn.Name = "btndn";
             this.btndn.Size = new System.Drawing.Size(138, 47);
             this.btndn.TabIndex = 0;
             this.btndn.Text = "Đăng nhập";
-            this.btndn.UseVisualStyleBackColor = true;
+            this.btndn.UseVisualStyleBackColor = false;
             this.btndn.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
@@ -126,11 +129,37 @@
             this.linkLabel1.Text = "Đăng ký ";
             this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
             // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel2.Location = new System.Drawing.Point(398, 394);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(146, 25);
+            this.linkLabel2.TabIndex = 9;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Quên mật khẩu";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // linkdoimk
+            // 
+            this.linkdoimk.AutoSize = true;
+            this.linkdoimk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkdoimk.Location = new System.Drawing.Point(227, 394);
+            this.linkdoimk.Name = "linkdoimk";
+            this.linkdoimk.Size = new System.Drawing.Size(126, 25);
+            this.linkdoimk.TabIndex = 10;
+            this.linkdoimk.TabStop = true;
+            this.linkdoimk.Text = "Đổi mật khẩu";
+            this.linkdoimk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkdoimk_LinkClicked);
+            // 
             // dangnhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.linkdoimk);
+            this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtmk);
             this.Controls.Add(this.txttendn);
@@ -158,5 +187,7 @@
         private System.Windows.Forms.TextBox txttendn;
         private System.Windows.Forms.TextBox txtmk;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkdoimk;
     }
 }

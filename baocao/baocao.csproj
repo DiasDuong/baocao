@@ -71,6 +71,13 @@
     <Compile Include="Doanhthu.Designer.cs">
       <DependentUpon>Doanhthu.cs</DependentUpon>
     </Compile>
+<<<<<<< huyenn
+    <Compile Include="doimatkhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="doimatkhau.Designer.cs">
+      <DependentUpon>doimatkhau.cs</DependentUpon>
+=======
     <Compile Include="Frmquanlyhoadonban.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +95,7 @@
     </Compile>
     <Compile Include="Frmtrangchu.Designer.cs">
       <DependentUpon>Frmtrangchu.cs</DependentUpon>
+>>>>>>> master
     </Compile>
     <Compile Include="function.cs" />
     <Compile Include="Hieusuat.cs">
@@ -116,11 +124,19 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< huyenn
+    <Compile Include="quenmatkhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="quenmatkhau.Designer.cs">
+      <DependentUpon>quenmatkhau.cs</DependentUpon>
+=======
     <Compile Include="TimKiemHDB.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TimKiemHDB.Designer.cs">
       <DependentUpon>TimKiemHDB.cs</DependentUpon>
+>>>>>>> master
     </Compile>
     <Compile Include="TimkiemHDN.cs">
       <SubType>Form</SubType>
@@ -146,6 +162,10 @@
     <EmbeddedResource Include="Doanhthu.resx">
       <DependentUpon>Doanhthu.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< huyenn
+    <EmbeddedResource Include="doimatkhau.resx">
+      <DependentUpon>doimatkhau.cs</DependentUpon>
+=======
     <EmbeddedResource Include="Frmquanlyhoadonban.resx">
       <DependentUpon>Frmquanlyhoadonban.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +174,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frmtrangchu.resx">
       <DependentUpon>Frmtrangchu.cs</DependentUpon>
+>>>>>>> master
     </EmbeddedResource>
     <EmbeddedResource Include="Hieusuat.resx">
       <DependentUpon>Hieusuat.cs</DependentUpon>
@@ -176,8 +197,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+<<<<<<< huyenn
+    <EmbeddedResource Include="quenmatkhau.resx">
+      <DependentUpon>quenmatkhau.cs</DependentUpon>
+=======
     <EmbeddedResource Include="TimKiemHDB.resx">
       <DependentUpon>TimKiemHDB.cs</DependentUpon>
+>>>>>>> master
     </EmbeddedResource>
     <EmbeddedResource Include="TimkiemHDN.resx">
       <DependentUpon>TimkiemHDN.cs</DependentUpon>
