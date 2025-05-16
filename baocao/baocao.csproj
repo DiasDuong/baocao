@@ -71,11 +71,31 @@
     <Compile Include="Doanhthu.Designer.cs">
       <DependentUpon>Doanhthu.cs</DependentUpon>
     </Compile>
+<<<<<<< huyenn
     <Compile Include="doimatkhau.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="doimatkhau.Designer.cs">
       <DependentUpon>doimatkhau.cs</DependentUpon>
+=======
+    <Compile Include="Frmquanlyhoadonban.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frmquanlyhoadonban.Designer.cs">
+      <DependentUpon>Frmquanlyhoadonban.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSanPham.Designer.cs">
+      <DependentUpon>FrmSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frmtrangchu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frmtrangchu.Designer.cs">
+      <DependentUpon>Frmtrangchu.cs</DependentUpon>
+>>>>>>> master
     </Compile>
     <Compile Include="function.cs" />
     <Compile Include="Hieusuat.cs">
@@ -104,17 +124,31 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< huyenn
     <Compile Include="quenmatkhau.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="quenmatkhau.Designer.cs">
       <DependentUpon>quenmatkhau.cs</DependentUpon>
+=======
+    <Compile Include="TimKiemHDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimKiemHDB.Designer.cs">
+      <DependentUpon>TimKiemHDB.cs</DependentUpon>
+>>>>>>> master
     </Compile>
     <Compile Include="TimkiemHDN.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TimkiemHDN.Designer.cs">
       <DependentUpon>TimkiemHDN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tksanpham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tksanpham.Designer.cs">
+      <DependentUpon>Tksanpham.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Banhang.resx">
       <DependentUpon>Banhang.cs</DependentUpon>
@@ -128,8 +162,19 @@
     <EmbeddedResource Include="Doanhthu.resx">
       <DependentUpon>Doanhthu.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< huyenn
     <EmbeddedResource Include="doimatkhau.resx">
       <DependentUpon>doimatkhau.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Frmquanlyhoadonban.resx">
+      <DependentUpon>Frmquanlyhoadonban.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSanPham.resx">
+      <DependentUpon>FrmSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frmtrangchu.resx">
+      <DependentUpon>Frmtrangchu.cs</DependentUpon>
+>>>>>>> master
     </EmbeddedResource>
     <EmbeddedResource Include="Hieusuat.resx">
       <DependentUpon>Hieusuat.cs</DependentUpon>
@@ -152,11 +197,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+<<<<<<< huyenn
     <EmbeddedResource Include="quenmatkhau.resx">
       <DependentUpon>quenmatkhau.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="TimKiemHDB.resx">
+      <DependentUpon>TimKiemHDB.cs</DependentUpon>
+>>>>>>> master
     </EmbeddedResource>
     <EmbeddedResource Include="TimkiemHDN.resx">
       <DependentUpon>TimkiemHDN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tksanpham.resx">
+      <DependentUpon>Tksanpham.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -173,6 +226,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -182,10 +244,37 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Access">
+      <Guid>{4AFFC9A0-5F99-101B-AF4E-00AA003F0F07}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Access.Dao">
+      <Guid>{4AC9E1DA-5BAD-4AC7-86E3-24F4CDCECA28}</Guid>
+      <VersionMajor>12</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>

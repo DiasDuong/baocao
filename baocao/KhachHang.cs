@@ -105,12 +105,34 @@ namespace baocao
             string sql = "INSERT INTO KhachHang(MaKhach, TenKhach, DiaChi, DienThoai) " +
             "VALUES ('" + txtMakhachhang.Text + "', N'" + txtTenkhachhang.Text + "', N'" + txtDiachi.Text + "', '" + mskDienthoai.Text + "')";
 
-            SqlCommand sqlCommand = new SqlCommand(sql, function.conn);
-            sqlCommand.ExecuteNonQuery();
-            loadDataToGridView();
-            btnSua.Enabled = true;
-            btnXoa.Enabled = true;
-            btnLuu.Enabled = false;
+            try
+{
+    // Sửa ở đây: mở kết nối nếu đang đóng
+    if (function.conn.State == ConnectionState.Closed)
+    {
+        function.conn.Open();
+    }
+
+    SqlCommand sqlCommand = new SqlCommand(sql, function.conn);
+    sqlCommand.ExecuteNonQuery();
+
+    loadDataToGridView();
+    btnSua.Enabled = true;
+    btnXoa.Enabled = true;
+    btnLuu.Enabled = false;
+}
+catch (Exception ex)
+{
+    MessageBox.Show("Lỗi khi lưu dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+}
+finally
+{
+    // Tuỳ chọn: đóng kết nối nếu bạn không cần giữ kết nối lâu dài
+    if (function.conn.State == ConnectionState.Open)
+    {
+        function.conn.Close();
+    }
+}
         }
         private bool CheckData()
         {
@@ -154,6 +176,7 @@ namespace baocao
             ResetValues();
             txtMakhachhang.Enabled = true;
             txtMakhachhang.Focus();
+            txtMakhachhang.ReadOnly = false;
         }
         private void ResetValues()
         {
