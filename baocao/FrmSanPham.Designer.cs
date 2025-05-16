@@ -293,24 +293,25 @@
             // 
             // txtDongianhap
             // 
-            this.txtDongianhap.Location = new System.Drawing.Point(618, 257);
+            this.txtDongianhap.Location = new System.Drawing.Point(610, 257);
             this.txtDongianhap.Name = "txtDongianhap";
             this.txtDongianhap.Size = new System.Drawing.Size(100, 26);
-            this.txtDongianhap.TabIndex = 26;
+            this.txtDongianhap.TabIndex = 27;
+            this.txtDongianhap.TextChanged += new System.EventHandler(this.txtDongianhap_TextChanged);
             // 
             // txtDongiaban
             // 
-            this.txtDongiaban.Location = new System.Drawing.Point(619, 293);
+            this.txtDongiaban.Location = new System.Drawing.Point(610, 288);
             this.txtDongiaban.Name = "txtDongiaban";
             this.txtDongiaban.Size = new System.Drawing.Size(100, 26);
-            this.txtDongiaban.TabIndex = 27;
-            this.txtDongiaban.TextChanged += new System.EventHandler(this.txtDongiaban_TextChanged);
+            this.txtDongiaban.TabIndex = 28;
             // 
             // picAnh
             // 
             this.picAnh.Location = new System.Drawing.Point(743, 158);
             this.picAnh.Name = "picAnh";
             this.picAnh.Size = new System.Drawing.Size(148, 138);
+            this.picAnh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picAnh.TabIndex = 28;
             this.picAnh.TabStop = false;
             // 
@@ -323,7 +324,8 @@
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(843, 150);
             this.dataGridView1.TabIndex = 29;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // btnThem
             // 

@@ -14,6 +14,7 @@ namespace baocao
     {
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
         public static string ConnectionString =
+
 "Data Source=DESKTOP-6PT6RNN;Initial Catalog=quanaonet;Integrated Security=True;Encrypt=False";
 
         public static void Connect()
@@ -40,161 +41,165 @@ namespace baocao
         }
         public static DataTable GetDataToTable(string sql)
         {
+            DataTable table = new DataTable();
             try
             {
-                // Kiểm tra và kết nối lại nếu kết nối đã bị đóng
-                if (conn == null || conn.State == ConnectionState.Closed)
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
                 {
-                    Connect();  // Đảm bảo kết nối đã được mở
+                    tempConn.Open();
+                    SqlDataAdapter mydata = new SqlDataAdapter(sql, tempConn);
+                    mydata.SelectCommand.CommandTimeout = 60;
+                    mydata.Fill(table);
                 }
-
-                DataTable table = new DataTable();
-                SqlDataAdapter Mydata = new SqlDataAdapter(sql, conn);
-                Mydata.SelectCommand.CommandTimeout = 60;
-
-                // Kiểm tra nếu Connection chưa được gán
-                if (Mydata.SelectCommand.Connection == null)
-                {
-                    Mydata.SelectCommand.Connection = conn;  // Gán kết nối nếu chưa có
-                }
-
-                Mydata.Fill(table);
-                return table;
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Lỗi SQL: " + ex.Message); // Hiển thị thông báo lỗi nếu có
-                return null;
+                MessageBox.Show("Lỗi lấy dữ liệu: " + ex.Message);
             }
+            return table;
         }
-
-
-
-
 
         // Kiểm tra ID của bản ghi
         public static bool CheckID(string query)
         {
-            Connect();
-            SqlDataAdapter data = new SqlDataAdapter(query, conn);
-            DataTable table = new DataTable();
-            data.Fill(table);
-            if (table.Rows.Count > 0)
+            bool result = false;
+            try
             {
-                return true;
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlDataAdapter data = new SqlDataAdapter(query, tempConn);
+                    DataTable table = new DataTable();
+                    data.Fill(table);
+                    if (table.Rows.Count > 0)
+                    {
+                        result = true;
+                    }
+                }
             }
-
-            return false;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kiểm tra ID: " + ex.Message);
+            }
+            return result;
         }
 
         // Thực thi query SQL
-        public static void RunSQL(string query)
+        public static void RunSQL(string sql)
         {
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open(); // Mở kết nối nếu chưa mở
-            }
-
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn;
-            command.CommandText = query;
-            command.CommandTimeout = 60;
-
             try
             {
-                command.ExecuteNonQuery();
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, tempConn);
+                    cmd.ExecuteNonQuery();
+                }
             }
-            catch (System.Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show($"Đã xảy ra lỗi: {e}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            command.Dispose();
-
-            // Nếu bạn không dùng conn tiếp, nên đóng lại
-            if (conn.State == ConnectionState.Open)
-            {
-                conn.Close();
+                MessageBox.Show("Lỗi thực thi SQL: " + ex.Message);
             }
         }
 
         // Thực thi query SQL (xóa)
-        public static void RunDeleteSQL(string query)
+        public static void RunDeleteSQL(string sql)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conn;
-            command.CommandText = query;
             try
             {
-                command.ExecuteNonQuery();
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, tempConn);
+                    cmd.ExecuteNonQuery();
+                }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Dữ liệu đang được sử dụng, không thể xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi xóa dữ liệu: " + ex.Message);
             }
-
-            command.Dispose();
         }
 
         // Lấy dữ liệu từ một query SQL
-        public static string GetFieldValues(string query)
+        public static string GetFieldValues(string sql)
         {
-            string ma = "";
-
-            using (SqlCommand cmd = new SqlCommand(query, function.conn))
+            string result = "";
+            try
             {
-                if (function.conn.State != ConnectionState.Open)
-                    function.conn.Open();
-                
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
                 {
+                    tempConn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, tempConn);
+                    SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        // Cứ mỗi lần đọc dòng, gán lại => lấy dòng cuối cùng sau cùng
-                        ma = reader.GetValue(0).ToString();
+                        result = reader.GetValue(0).ToString();
                     }
+                    reader.Close();
                 }
             }
-
-            return ma;
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi truy vấn: " + ex.Message);
+            }
+            return result;
         }
 
         // Đổ dữ liệu vào ComboBox
         public static void FillCombo(string query, System.Windows.Forms.ComboBox comboBox, string value, string name)
         {
-            Connect();
-            SqlDataAdapter data = new SqlDataAdapter(query, conn);
-            DataTable table = new DataTable();
-            data.Fill(table);
-
-            if (!table.Columns.Contains(value))
+            try
             {
-                MessageBox.Show("Không tìm thấy cột '" + value + "' trong dữ liệu.");
-                return;
-            }
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlDataAdapter data = new SqlDataAdapter(query, tempConn);
+                    DataTable table = new DataTable();
+                    data.Fill(table);
 
-            if (!table.Columns.Contains(name))
+                    if (!table.Columns.Contains(value))
+                    {
+                        MessageBox.Show("Không tìm thấy cột '" + value + "' trong dữ liệu.");
+                        return;
+                    }
+
+                    if (!table.Columns.Contains(name))
+                    {
+                        MessageBox.Show("Không tìm thấy cột '" + name + "' trong dữ liệu.");
+                        return;
+                    }
+
+                    comboBox.DataSource = table;
+                    comboBox.ValueMember = value;
+                    comboBox.DisplayMember = name;
+                }
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Không tìm thấy cột '" + name + "' trong dữ liệu.");
-                return;
+                MessageBox.Show("Lỗi đổ dữ liệu vào ComboBox: " + ex.Message);
             }
-
-            comboBox.DataSource = table;
-            comboBox.ValueMember = value;
-            comboBox.DisplayMember = name;
         }
 
         public static void FillCombo1(string query, System.Windows.Forms.ComboBox comboBox, string value, string name)
         {
-            SqlDataAdapter data = new SqlDataAdapter(query, conn);
-            DataTable table = new DataTable();
-            data.Fill(table);
+            try
+            {
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    SqlDataAdapter data = new SqlDataAdapter(query, tempConn);
+                    DataTable table = new DataTable();
+                    data.Fill(table);
 
-            comboBox.DataSource = table;
-            comboBox.ValueMember = value; // Trường giá trị
-            comboBox.DisplayMember = value; // Trường hiển thị
+                    comboBox.DataSource = table;
+                    comboBox.ValueMember = value;
+                    comboBox.DisplayMember = value;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi đổ dữ liệu vào ComboBox: " + ex.Message);
+            }
         }
         // Đổ dữ liệu vào combo box với định dạng mã + tên
         /*public static void FillCombo1(string query, ComboBox comboBox, string value, string displayExpression)
@@ -550,38 +555,75 @@ namespace baocao
         }
         public static bool CheckKey(string sql)
         {
+            bool exists = false;
             try
             {
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                bool exists = reader.HasRows;
-                reader.Close();
-                return exists;
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, tempConn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            exists = reader.HasRows;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi kiểm tra: " + ex.Message, "Lỗi");
-                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
+            return exists;
         }
         public static void FillCombo2(string sql, System.Windows.Forms.ComboBox cbo, string ma, string ten)
         {
-            Connect();
-            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            cbo.DataSource = dt;
-            cbo.ValueMember = ma;
-            cbo.DisplayMember = ten;
+            try
+            {
+                using (SqlConnection tempConn = new SqlConnection(ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlDataAdapter da = new SqlDataAdapter(sql, tempConn))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        cbo.DataSource = dt;
+                        cbo.ValueMember = ma;
+                        cbo.DisplayMember = ten;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi đổ dữ liệu vào ComboBox: " + ex.Message);
+            }
         }
         
-
-
-
+        public static string TaoMaHoaDonMoi()
+        {
+            try
+            {
+                string sql = "SELECT TOP 1 SoHDB FROM HoaDonBan ORDER BY SoHDB DESC";
+                string maHoaDonCuoi = GetFieldValues(sql);
+                
+                if (string.IsNullOrEmpty(maHoaDonCuoi))
+                {
+                    // Nếu chưa có hóa đơn nào
+                    return "HDB0000001";
+                }
+                
+                // Lấy phần số từ mã hóa đơn
+                string phanSo = maHoaDonCuoi.Substring(3);
+                int soThuTu = int.Parse(phanSo) + 1;
+                
+                // Format lại mã hóa đơn mới với độ dài cố định 7 chữ số
+                return $"HDB{soThuTu:D7}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tạo mã hóa đơn: " + ex.Message);
+                return "HDB0000001";
+            }
+        }
     }
 }
