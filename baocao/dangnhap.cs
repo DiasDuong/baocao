@@ -36,11 +36,15 @@ namespace baocao
             if (result > 0)
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Mở form đổi mật khẩu
+                //doimatkhau formDMK = new doimatkhau(txttendn.Text.Trim());
+                //formDMK.ShowDialog();
 
+                // Ẩn form đăng nhập và mở form Trang chủ
                 this.Hide();
-                KhachHang kh = new KhachHang();
-                kh.ShowDialog();
-                this.Close();
+                Frmtrangchu trangchu = new Frmtrangchu();
+                trangchu.FormClosed += (s, args) => this.Close(); // Khi form trang chủ đóng thì thoát luôn app
+                trangchu.Show();
             }
             else
             {
@@ -55,5 +59,27 @@ namespace baocao
             dangky dangKyForm = new dangky();
             dangKyForm.Show();
         }
+
+        private void dangnhap_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkquenmk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            quenmatkhau quenmatkhau = new quenmatkhau();
+            quenmatkhau.Show(); // Hiển thị dưới dạng hộp thoại
+        }
+        private void linkQuenMatKhau_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            doimatkhau doiMK = new doimatkhau();
+            doiMK.ShowDialog();
+        }
     }
 }
+

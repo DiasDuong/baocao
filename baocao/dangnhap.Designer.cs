@@ -37,17 +37,20 @@
             this.txttendn = new System.Windows.Forms.TextBox();
             this.txtmk = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkquenmk = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btndn
             // 
+            this.btndn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btndn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btndn.Location = new System.Drawing.Point(289, 333);
             this.btndn.Name = "btndn";
             this.btndn.Size = new System.Drawing.Size(138, 47);
             this.btndn.TabIndex = 0;
             this.btndn.Text = "Đăng nhập";
-            this.btndn.UseVisualStyleBackColor = true;
+            this.btndn.UseVisualStyleBackColor = false;
             this.btndn.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
@@ -74,7 +77,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(175, 137);
+            this.label3.Location = new System.Drawing.Point(175, 136);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(156, 25);
             this.label3.TabIndex = 3;
@@ -126,11 +129,37 @@
             this.linkLabel1.Text = "Đăng ký ";
             this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
             // 
+            // linkquenmk
+            // 
+            this.linkquenmk.AutoSize = true;
+            this.linkquenmk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkquenmk.Location = new System.Drawing.Point(380, 397);
+            this.linkquenmk.Name = "linkquenmk";
+            this.linkquenmk.Size = new System.Drawing.Size(146, 25);
+            this.linkquenmk.TabIndex = 9;
+            this.linkquenmk.TabStop = true;
+            this.linkquenmk.Text = "Quên mật khẩu";
+            this.linkquenmk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkquenmk_LinkClicked);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel2.Location = new System.Drawing.Point(185, 397);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(131, 25);
+            this.linkLabel2.TabIndex = 10;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Đổi mật khẩu ";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
             // dangnhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.linkquenmk);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.txtmk);
             this.Controls.Add(this.txttendn);
@@ -142,6 +171,7 @@
             this.Controls.Add(this.btndn);
             this.Name = "dangnhap";
             this.Text = "dangnhap";
+            this.Load += new System.EventHandler(this.dangnhap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +188,7 @@
         private System.Windows.Forms.TextBox txttendn;
         private System.Windows.Forms.TextBox txtmk;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkquenmk;
+        private System.Windows.Forms.LinkLabel linkLabel2;
     }
 }

@@ -16,7 +16,12 @@ namespace baocao
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frmquanlyhoadonban());
+
+            //Application.Run(new quenmatkhau());
+            //Application.Run(new dangky());
+            Application.Run(new dangnhap());
+            //Application.Run(new doimatkhau("admin"));
+
         }
     }
 }
