@@ -17,7 +17,7 @@ namespace baocao
         DataTable ChiTietHDBan;
         public Frmquanlyhoadonban()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         private string FormatDate(string date)
