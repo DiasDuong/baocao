@@ -720,7 +720,7 @@ namespace baocao
         }
         private void ResetValues()
         {
-            txtMaHDBan.Text = "";
+            txtMaHDBan.Text = " ";
             txtNgayban.Text = DateTime.Now.ToShortDateString();
             cboManhanvien.Text = "";
             cboMakhach.Text = "";
