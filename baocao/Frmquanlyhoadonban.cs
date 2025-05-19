@@ -574,11 +574,11 @@ namespace baocao
             txtTongtien.ReadOnly = true;
             txtGiamgia.Text = "0";
             txtTongtien.Text = "0";
-            function.FillCombo2("SELECT MaKhach, TenKhach FROM KhachHang", cboMakhach, "MaKhach", "TenKhach");
-            cboMakhach.SelectedIndex = -1;
-            function.FillCombo2("SELECT MaNV, TenNV FROM NhanVien", cboManhanvien, "MaNV", "TenNV");
+            function.FillCombo2("SELECT MaNV, MaNV FROM NhanVien", cboManhanvien, "MaNV", "MaNV");
             cboManhanvien.SelectedIndex = -1;
-            function.FillCombo2("SELECT MaQuanAo, TenQuanAO FROM SanPham", cboMahang, "MaQuanAo", "TenQuanAo");
+            function.FillCombo2("SELECT MaKhach, MaKhach FROM KhachHang", cboMakhach, "MaKhach", "MaKhach");
+            cboMakhach.SelectedIndex = -1;
+            function.FillCombo2("SELECT MaQuanAo, MaQuanAo FROM SanPham", cboMahang, "MaQuanAo", "MaQuanAo");
             cboMahang.SelectedIndex = -1;
             //Hiển thị thông tin của một hóa đơn được gọi từ form tìm kiếm
             if (txtMaHDBan.Text != "")
@@ -588,13 +588,12 @@ namespace baocao
                 btnInhoadon.Enabled = true;
             }
             Load_DataGridViewChitiet();
-
         }
         private void Load_DataGridViewChitiet()
         {
             try
             {
-                string sql = @"SELECT a.MaQuanAo, b.TenQuanAO, a.SoLuong, b.DonGiaBan, a.GiamGia, a.ThanhTien 
+                string sql = @"SELECT a.MaQuanAo, a.MaQuanAo AS TenQuanAo, a.SoLuong, b.DonGiaBan, a.GiamGia, a.ThanhTien 
                               FROM ChiTietHDBan AS a 
                               INNER JOIN SanPham AS b ON a.MaQuanAo = b.MaQuanAo 
                               WHERE a.SoHDB = @SoHDB";
@@ -615,7 +614,7 @@ namespace baocao
 
                 DataGridViewChitiet.DataSource = ChiTietHDBan;
                 DataGridViewChitiet.Columns[0].HeaderText = "Mã quần áo";
-                DataGridViewChitiet.Columns[1].HeaderText = "Tên quần áo";
+                DataGridViewChitiet.Columns[1].HeaderText = "Mã quần áo";
                 DataGridViewChitiet.Columns[2].HeaderText = "Số lượng";
                 DataGridViewChitiet.Columns[3].HeaderText = "Đơn giá";
                 DataGridViewChitiet.Columns[4].HeaderText = "Giảm giá %";
@@ -720,7 +719,7 @@ namespace baocao
         }
         private void ResetValues()
         {
-            txtMaHDBan.Text = "";
+            txtMaHDBan.Text = " ";
             txtNgayban.Text = DateTime.Now.ToShortDateString();
             cboManhanvien.Text = "";
             cboMakhach.Text = "";

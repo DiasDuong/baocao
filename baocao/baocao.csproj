@@ -71,11 +71,13 @@
     <Compile Include="Doanhthu.Designer.cs">
       <DependentUpon>Doanhthu.cs</DependentUpon>
     </Compile>
+
     <Compile Include="doimatkhau.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="doimatkhau.Designer.cs">
       <DependentUpon>doimatkhau.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Frmquanlyhoadonban.cs">
       <SubType>Form</SubType>
@@ -144,6 +146,9 @@
     </Compile>
     <EmbeddedResource Include="Banhang.resx">
       <DependentUpon>Banhang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frmmainmodern2.resx">
+      <DependentUpon>Frmmainmodern2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dangky.resx">
       <DependentUpon>dangky.cs</DependentUpon>

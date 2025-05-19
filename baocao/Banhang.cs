@@ -111,16 +111,16 @@ namespace baocao
             for (int row = 0; row < tblCTHDB.Rows.Count; row++)
             {
                 ((COMExcel.Range)exSheet.Cells[row + 13, 1]).Value2 = row + 1; // STT
-                for (int col = 0; col < tblCTHDB.Columns.Count; col++)
+                for (int i = 0; i < tblCTHDB.Columns.Count; i++)
                 {
-                    if (tblCTHDB.Columns[col].ColumnName == "NgayBan")
+                    if (tblCTHDB.Columns[i].ColumnName == "NgayBan")
                     {
                         DateTime ngayNhap = Convert.ToDateTime(tblCTHDB.Rows[row]["NgayBan"]);
-                        ((COMExcel.Range)exSheet.Cells[row + 13, col + 2]).Value2 = ngayNhap.ToShortDateString();
+                        ((COMExcel.Range)exSheet.Cells[row + 13, i + 2]).Value2 = ngayNhap.ToShortDateString();
                     }
                     else
                     {
-                        ((COMExcel.Range)exSheet.Cells[row + 13, col + 2]).Value2 = tblCTHDB.Rows[row][col].ToString();
+                        ((COMExcel.Range)exSheet.Cells[row + 13, i + 2]).Value2 = tblCTHDB.Rows[row][i].ToString();
                     }
                 }
             }
