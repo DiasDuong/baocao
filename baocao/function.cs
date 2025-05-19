@@ -14,7 +14,8 @@ namespace baocao
     {
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
         public static string ConnectionString =
-"Data Source=DESKTOP-S0TIEV7;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
+
+"Data Source=DESKTOP-6PT6RNN;Initial Catalog=quanaonet;Integrated Security=True;Encrypt=False";
 
         public static void Connect()
         {
@@ -31,7 +32,13 @@ namespace baocao
                 throw new Exception("Lỗi kết nối Database: " + ex.Message);
             }
         }
-
+        public static void Disconnect()
+        {
+            if (conn != null && conn.State == ConnectionState.Open)
+            {
+                conn.Close();
+            }
+        }
         public static DataTable GetDataToTable(string sql)
         {
             DataTable table = new DataTable();
