@@ -23,7 +23,7 @@ namespace baocao
         {
             try
             {
-                mskngaysinh.Mask = "00/00/0000"; 
+                mskngaysinh.Mask = "00/00/0000";
                 mskngaysinh.ValidatingType = typeof(DateTime);
                 loadDataToGridView();
                 LoadCongViecToComboBox();

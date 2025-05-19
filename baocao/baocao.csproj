@@ -71,6 +71,12 @@
     <Compile Include="Doanhthu.Designer.cs">
       <DependentUpon>Doanhthu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frmmainmodern2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frmmainmodern2.Designer.cs">
+      <DependentUpon>Frmmainmodern2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frmquanlyhoadonban.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </Compile>
     <EmbeddedResource Include="Banhang.resx">
       <DependentUpon>Banhang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frmmainmodern2.resx">
+      <DependentUpon>Frmmainmodern2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dangky.resx">
       <DependentUpon>dangky.cs</DependentUpon>

@@ -16,7 +16,7 @@ namespace baocao
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frmtrangchu());
+            Application.Run(new Frmmainmodern2());
         }
     }
 }
