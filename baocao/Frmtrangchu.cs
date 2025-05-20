@@ -89,8 +89,7 @@ namespace baocao
 
         private void tìmKiếmHóaĐơnBánToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TimKiemHDB a = new TimKiemHDB();
-            a.Show();
+           
         }
 
         private void tìmKiếmSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
