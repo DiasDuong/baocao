@@ -73,8 +73,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(376, 9);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
+            this.label1.Location = new System.Drawing.Point(413, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(168, 45);
             this.label1.TabIndex = 0;
@@ -83,7 +85,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(107, 90);
+            this.label2.Location = new System.Drawing.Point(144, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 20);
             this.label2.TabIndex = 1;
@@ -92,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(102, 125);
+            this.label3.Location = new System.Drawing.Point(139, 125);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 20);
             this.label3.TabIndex = 2;
@@ -101,7 +103,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(161, 192);
+            this.label4.Location = new System.Drawing.Point(198, 192);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 20);
             this.label4.TabIndex = 3;
@@ -110,7 +112,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(152, 160);
+            this.label5.Location = new System.Drawing.Point(189, 160);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 20);
             this.label5.TabIndex = 4;
@@ -119,7 +121,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(120, 226);
+            this.label6.Location = new System.Drawing.Point(157, 226);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(71, 20);
             this.label6.TabIndex = 5;
@@ -128,7 +130,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(151, 260);
+            this.label7.Location = new System.Drawing.Point(188, 260);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(40, 20);
             this.label7.TabIndex = 6;
@@ -137,7 +139,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(122, 294);
+            this.label8.Location = new System.Drawing.Point(159, 294);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(78, 20);
             this.label8.TabIndex = 7;
@@ -146,7 +148,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(562, 86);
+            this.label9.Location = new System.Drawing.Point(599, 86);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(40, 20);
             this.label9.TabIndex = 8;
@@ -155,7 +157,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(502, 118);
+            this.label10.Location = new System.Drawing.Point(539, 118);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 20);
             this.label10.TabIndex = 9;
@@ -164,7 +166,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(532, 155);
+            this.label11.Location = new System.Drawing.Point(569, 155);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(72, 20);
             this.label11.TabIndex = 10;
@@ -173,7 +175,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(562, 189);
+            this.label12.Location = new System.Drawing.Point(599, 189);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(42, 20);
             this.label12.TabIndex = 11;
@@ -182,7 +184,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(500, 260);
+            this.label13.Location = new System.Drawing.Point(537, 260);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(104, 20);
             this.label13.TabIndex = 12;
@@ -191,7 +193,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(509, 291);
+            this.label14.Location = new System.Drawing.Point(546, 291);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(95, 20);
             this.label14.TabIndex = 13;
@@ -199,14 +201,14 @@
             // 
             // txtMahang
             // 
-            this.txtMahang.Location = new System.Drawing.Point(221, 90);
+            this.txtMahang.Location = new System.Drawing.Point(258, 90);
             this.txtMahang.Name = "txtMahang";
             this.txtMahang.Size = new System.Drawing.Size(100, 26);
             this.txtMahang.TabIndex = 14;
             // 
             // txtTenhang
             // 
-            this.txtTenhang.Location = new System.Drawing.Point(221, 122);
+            this.txtTenhang.Location = new System.Drawing.Point(258, 122);
             this.txtTenhang.Name = "txtTenhang";
             this.txtTenhang.Size = new System.Drawing.Size(100, 26);
             this.txtTenhang.TabIndex = 15;
@@ -214,7 +216,7 @@
             // cboMaloai
             // 
             this.cboMaloai.FormattingEnabled = true;
-            this.cboMaloai.Location = new System.Drawing.Point(221, 155);
+            this.cboMaloai.Location = new System.Drawing.Point(258, 155);
             this.cboMaloai.Name = "cboMaloai";
             this.cboMaloai.Size = new System.Drawing.Size(121, 28);
             this.cboMaloai.TabIndex = 16;
@@ -222,7 +224,7 @@
             // cboMaco
             // 
             this.cboMaco.FormattingEnabled = true;
-            this.cboMaco.Location = new System.Drawing.Point(221, 189);
+            this.cboMaco.Location = new System.Drawing.Point(258, 189);
             this.cboMaco.Name = "cboMaco";
             this.cboMaco.Size = new System.Drawing.Size(121, 28);
             this.cboMaco.TabIndex = 17;
@@ -230,7 +232,7 @@
             // cboMachatlieu
             // 
             this.cboMachatlieu.FormattingEnabled = true;
-            this.cboMachatlieu.Location = new System.Drawing.Point(221, 223);
+            this.cboMachatlieu.Location = new System.Drawing.Point(258, 223);
             this.cboMachatlieu.Name = "cboMachatlieu";
             this.cboMachatlieu.Size = new System.Drawing.Size(121, 28);
             this.cboMachatlieu.TabIndex = 18;
@@ -238,7 +240,7 @@
             // cboMamau
             // 
             this.cboMamau.FormattingEnabled = true;
-            this.cboMamau.Location = new System.Drawing.Point(221, 257);
+            this.cboMamau.Location = new System.Drawing.Point(258, 257);
             this.cboMamau.Name = "cboMamau";
             this.cboMamau.Size = new System.Drawing.Size(121, 28);
             this.cboMamau.TabIndex = 19;
@@ -246,7 +248,7 @@
             // cboMadoituong
             // 
             this.cboMadoituong.FormattingEnabled = true;
-            this.cboMadoituong.Location = new System.Drawing.Point(221, 291);
+            this.cboMadoituong.Location = new System.Drawing.Point(258, 291);
             this.cboMadoituong.Name = "cboMadoituong";
             this.cboMadoituong.Size = new System.Drawing.Size(121, 28);
             this.cboMadoituong.TabIndex = 20;
@@ -254,7 +256,7 @@
             // cboMamua
             // 
             this.cboMamua.FormattingEnabled = true;
-            this.cboMamua.Location = new System.Drawing.Point(618, 81);
+            this.cboMamua.Location = new System.Drawing.Point(655, 81);
             this.cboMamua.Name = "cboMamua";
             this.cboMamua.Size = new System.Drawing.Size(121, 28);
             this.cboMamua.TabIndex = 21;
@@ -262,28 +264,28 @@
             // cboMaNSX
             // 
             this.cboMaNSX.FormattingEnabled = true;
-            this.cboMaNSX.Location = new System.Drawing.Point(618, 115);
+            this.cboMaNSX.Location = new System.Drawing.Point(655, 115);
             this.cboMaNSX.Name = "cboMaNSX";
             this.cboMaNSX.Size = new System.Drawing.Size(121, 28);
             this.cboMaNSX.TabIndex = 22;
             // 
             // txtSoluong
             // 
-            this.txtSoluong.Location = new System.Drawing.Point(618, 149);
+            this.txtSoluong.Location = new System.Drawing.Point(655, 149);
             this.txtSoluong.Name = "txtSoluong";
             this.txtSoluong.Size = new System.Drawing.Size(100, 26);
             this.txtSoluong.TabIndex = 23;
             // 
             // txtAnh
             // 
-            this.txtAnh.Location = new System.Drawing.Point(618, 186);
+            this.txtAnh.Location = new System.Drawing.Point(655, 186);
             this.txtAnh.Name = "txtAnh";
             this.txtAnh.Size = new System.Drawing.Size(100, 26);
             this.txtAnh.TabIndex = 24;
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(619, 218);
+            this.btnOpen.Location = new System.Drawing.Point(656, 218);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(79, 33);
             this.btnOpen.TabIndex = 25;
@@ -293,7 +295,7 @@
             // 
             // txtDongianhap
             // 
-            this.txtDongianhap.Location = new System.Drawing.Point(619, 256);
+            this.txtDongianhap.Location = new System.Drawing.Point(656, 256);
             this.txtDongianhap.Name = "txtDongianhap";
             this.txtDongianhap.Size = new System.Drawing.Size(100, 26);
             this.txtDongianhap.TabIndex = 27;
@@ -301,14 +303,14 @@
             // 
             // txtDongiaban
             // 
-            this.txtDongiaban.Location = new System.Drawing.Point(619, 288);
+            this.txtDongiaban.Location = new System.Drawing.Point(656, 288);
             this.txtDongiaban.Name = "txtDongiaban";
             this.txtDongiaban.Size = new System.Drawing.Size(100, 26);
             this.txtDongiaban.TabIndex = 28;
             // 
             // picAnh
             // 
-            this.picAnh.Location = new System.Drawing.Point(743, 158);
+            this.picAnh.Location = new System.Drawing.Point(780, 158);
             this.picAnh.Name = "picAnh";
             this.picAnh.Size = new System.Drawing.Size(148, 138);
             this.picAnh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -318,7 +320,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(48, 339);
+            this.dataGridView1.Location = new System.Drawing.Point(85, 339);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
@@ -329,7 +331,7 @@
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(55, 516);
+            this.btnThem.Location = new System.Drawing.Point(95, 519);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(75, 29);
             this.btnThem.TabIndex = 30;
@@ -339,7 +341,7 @@
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(156, 516);
+            this.btnSua.Location = new System.Drawing.Point(196, 519);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(75, 29);
             this.btnSua.TabIndex = 31;
@@ -349,7 +351,7 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(263, 516);
+            this.btnXoa.Location = new System.Drawing.Point(303, 519);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(75, 29);
             this.btnXoa.TabIndex = 32;
@@ -359,7 +361,7 @@
             // 
             // btnTimkiem
             // 
-            this.btnTimkiem.Location = new System.Drawing.Point(365, 516);
+            this.btnTimkiem.Location = new System.Drawing.Point(405, 519);
             this.btnTimkiem.Name = "btnTimkiem";
             this.btnTimkiem.Size = new System.Drawing.Size(89, 29);
             this.btnTimkiem.TabIndex = 33;
@@ -369,7 +371,7 @@
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new System.Drawing.Point(481, 516);
+            this.btnLuu.Location = new System.Drawing.Point(521, 519);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(75, 29);
             this.btnLuu.TabIndex = 34;
@@ -379,7 +381,7 @@
             // 
             // btnBoqua
             // 
-            this.btnBoqua.Location = new System.Drawing.Point(579, 516);
+            this.btnBoqua.Location = new System.Drawing.Point(619, 519);
             this.btnBoqua.Name = "btnBoqua";
             this.btnBoqua.Size = new System.Drawing.Size(75, 29);
             this.btnBoqua.TabIndex = 35;
@@ -389,7 +391,7 @@
             // 
             // btnHienthi
             // 
-            this.btnHienthi.Location = new System.Drawing.Point(685, 516);
+            this.btnHienthi.Location = new System.Drawing.Point(725, 519);
             this.btnHienthi.Name = "btnHienthi";
             this.btnHienthi.Size = new System.Drawing.Size(101, 29);
             this.btnHienthi.TabIndex = 36;
@@ -399,7 +401,7 @@
             // 
             // btnDong
             // 
-            this.btnDong.Location = new System.Drawing.Point(808, 516);
+            this.btnDong.Location = new System.Drawing.Point(848, 519);
             this.btnDong.Name = "btnDong";
             this.btnDong.Size = new System.Drawing.Size(75, 29);
             this.btnDong.TabIndex = 37;
@@ -411,7 +413,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(941, 580);
+            this.ClientSize = new System.Drawing.Size(999, 585);
             this.Controls.Add(this.btnDong);
             this.Controls.Add(this.btnHienthi);
             this.Controls.Add(this.btnBoqua);
