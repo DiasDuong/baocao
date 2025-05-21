@@ -91,7 +91,12 @@ namespace baocao
 
         private void btnthoat_Click(object sender, EventArgs e)
         {
-            
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thoát?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                this.Close(); // hoặc Application.Exit();
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
