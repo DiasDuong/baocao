@@ -255,6 +255,10 @@ namespace baocao
             dataGridView1.DataSource = function.GetDataToTable(sqlSanLuong);
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
 
