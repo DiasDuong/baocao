@@ -39,52 +39,69 @@ namespace baocao
         {
             string sql;
             if ((txtSoHDN.Text == "") && (txtThang.Text == "") && (txtNam.Text == "") &&
-               (txtMaNV.Text == "") && (txtMaNCC.Text == "") &&
-               (txtTongtien.Text == ""))
+                (txtMaNV.Text == "") && (txtMaNCC.Text == "") &&
+                (txtTongtien.Text == ""))
             {
-                MessageBox.Show("Hãy nhập một điều kiện tìm kiếm!!!", "Yeu cau ...",
-    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Hãy nhập một điều kiện tìm kiếm!!!", "Yêu cầu ...",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             sql = "SELECT * FROM HoaDonNhap WHERE 1=1";
             if (txtSoHDN.Text != "")
-                sql = sql + " AND SoHDN Like N'%" + txtSoHDN.Text + "%'";
+                sql += " AND SoHDN = N'" + txtSoHDN.Text + "'";
             if (txtThang.Text != "")
-                sql = sql + " AND MONTH(Ngayban) =" + txtThang.Text;
+                sql += " AND MONTH(Ngayban) =" + txtThang.Text;
             if (txtNam.Text != "")
-                sql = sql + " AND YEAR(Ngayban) =" + txtNam.Text;
+                sql += " AND YEAR(Ngayban) =" + txtNam.Text;
             if (txtMaNV.Text != "")
-                sql = sql + " AND Manhanvien Like N'%" + txtMaNV.Text + "%'";
+                sql += " AND Manhanvien Like N'%" + txtMaNV.Text + "%'";
             if (txtMaNCC.Text != "")
-                sql = sql + " AND Manhacungcap Like N'%" + txtMaNCC.Text + "%'";
+                sql += " AND Manhacungcap Like N'%" + txtMaNCC.Text + "%'";
             if (txtTongtien.Text != "")
-                sql = sql + " AND Tongtien <=" + txtTongtien.Text;
+                sql += " AND Tongtien <=" + txtTongtien.Text;
+
             HoaDonNhap = function.GetDataToTable(sql);
-            if (HoaDonNhap != null && HoaDonNhap.Rows.Count == 0)
+
+            if (HoaDonNhap == null || HoaDonNhap.Rows.Count == 0)
             {
                 MessageBox.Show("Không tìm thấy hóa đơn nào thỏa mãn điều kiện tìm kiếm.");
+                dataGridViewTimkiemHDN.DataSource = null;
             }
             else
             {
-                dataGridViewTimkiemHDN.DataSource = HoaDonNhap;
+                Load_dataGridViewTimkiemHDN();
             }
 
         }
         private void Load_dataGridViewTimkiemHDN()
         {
-            dataGridViewTimkiemHDN.Columns[0].HeaderText = "Số HDN";
-            dataGridViewTimkiemHDN.Columns[1].HeaderText = "Mã nhân viên";
-            dataGridViewTimkiemHDN.Columns[2].HeaderText = "Ngày bán";
-            dataGridViewTimkiemHDN.Columns[3].HeaderText = "Mã nhà cung cấp";
-            dataGridViewTimkiemHDN.Columns[4].HeaderText = "Tổng tiền";
+            dataGridViewTimkiemHDN.DataSource = null;
+            dataGridViewTimkiemHDN.Columns.Clear();
 
-            dataGridViewTimkiemHDN.Columns[0].Width = 150;
-            dataGridViewTimkiemHDN.Columns[1].Width = 100;
-            dataGridViewTimkiemHDN.Columns[2].Width = 80;
-            dataGridViewTimkiemHDN.Columns[3].Width = 80;
-            dataGridViewTimkiemHDN.Columns[4].Width = 80;
+            dataGridViewTimkiemHDN.DataSource = HoaDonNhap;
+
+            // Đặt tiêu đề cột và ẩn các cột dư
+            string[] headers = { "Số HDN", "Mã nhân viên", "Ngày nhập", "Mã nhà cung cấp", "Tổng tiền" };
+            for (int i = 0; i < dataGridViewTimkiemHDN.Columns.Count; i++)
+            {
+                if (i < headers.Length)
+                {
+                    dataGridViewTimkiemHDN.Columns[i].HeaderText = headers[i];
+                    dataGridViewTimkiemHDN.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }
+                else
+                {
+                    // Ẩn các cột dư
+                    dataGridViewTimkiemHDN.Columns[i].Visible = false;
+                }
+            }
+
+            // Căn chỉnh
+            dataGridViewTimkiemHDN.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewTimkiemHDN.AllowUserToAddRows = false;
             dataGridViewTimkiemHDN.EditMode = DataGridViewEditMode.EditProgrammatically;
+        
         }
 
         private void dataGridViewTimkiemHDN_CellContentClick(object sender, DataGridViewCellEventArgs e)

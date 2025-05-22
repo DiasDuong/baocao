@@ -15,7 +15,7 @@ namespace baocao
         public static SqlConnection conn;  //Khai báo đối tượng kết nối
         public static string ConnectionString =
 
-"Data Source=DESKTOP-S0TIEV7;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
+"Data Source=DESKTOP-4UBA1EH\\SQLEXPRESS02;Initial Catalog=quanlicuahangquanao;Integrated Security=True;Encrypt=True;Encrypt=False";
 
         public static void Connect()
         {
@@ -625,5 +625,38 @@ namespace baocao
                 return "HDB0000001";
             }
         }
+        public static string MaHoaDonNhapMoi()
+        {
+            string prefix = "HDN";
+            string sql = "SELECT TOP 1 SoHDN FROM HoaDonNhap ORDER BY CAST(SUBSTRING(SoHDN, 4, LEN(SoHDN)) AS INT) DESC";
+            string maHDMoi = "";
+            using (SqlConnection conn = new SqlConnection(function.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        string maHDcu = result.ToString();
+                        // Lấy số cuối cùng, giả sử mã dạng HDB0001, HDB0002...
+                        int so = 1;
+                        string soStr = maHDcu.Substring(prefix.Length);
+                        if (int.TryParse(soStr, out so))
+                        {
+                            so++;
+                        }
+                        maHDMoi = prefix + so.ToString("D4");
+                    }
+                    else
+                    {
+                        maHDMoi = prefix + "0001";
+                    }
+                }
+            }
+            return maHDMoi;
+        }
+      
+        
     }
 }
