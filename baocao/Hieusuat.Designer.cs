@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.gpbThoigian = new System.Windows.Forms.GroupBox();
             this.dtpKT = new System.Windows.Forms.DateTimePicker();
@@ -68,7 +68,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(38, 368);
+            this.label1.Location = new System.Drawing.Point(12, 295);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(231, 16);
             this.label1.TabIndex = 0;
@@ -91,7 +91,7 @@
             this.gpbThoigian.Controls.Add(this.label3);
             this.gpbThoigian.Location = new System.Drawing.Point(41, 55);
             this.gpbThoigian.Name = "gpbThoigian";
-            this.gpbThoigian.Size = new System.Drawing.Size(888, 108);
+            this.gpbThoigian.Size = new System.Drawing.Size(835, 108);
             this.gpbThoigian.TabIndex = 1;
             this.gpbThoigian.TabStop = false;
             this.gpbThoigian.Text = "Chọn thời gian";
@@ -214,27 +214,27 @@
             // dgridXephang
             // 
             this.dgridXephang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgridXephang.Location = new System.Drawing.Point(12, 387);
+            this.dgridXephang.Location = new System.Drawing.Point(15, 190);
             this.dgridXephang.Name = "dgridXephang";
             this.dgridXephang.RowHeadersWidth = 51;
             this.dgridXephang.RowTemplate.Height = 24;
-            this.dgridXephang.Size = new System.Drawing.Size(632, 121);
+            this.dgridXephang.Size = new System.Drawing.Size(492, 89);
             this.dgridXephang.TabIndex = 4;
             // 
             // dgridBaocao
             // 
             this.dgridBaocao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgridBaocao.Location = new System.Drawing.Point(12, 187);
+            this.dgridBaocao.Location = new System.Drawing.Point(15, 314);
             this.dgridBaocao.Name = "dgridBaocao";
             this.dgridBaocao.RowHeadersWidth = 51;
             this.dgridBaocao.RowTemplate.Height = 24;
-            this.dgridBaocao.Size = new System.Drawing.Size(632, 121);
+            this.dgridBaocao.Size = new System.Drawing.Size(495, 92);
             this.dgridBaocao.TabIndex = 5;
             // 
             // btnLammoi
             // 
             this.btnLammoi.BackColor = System.Drawing.Color.Silver;
-            this.btnLammoi.Location = new System.Drawing.Point(12, 546);
+            this.btnLammoi.Location = new System.Drawing.Point(26, 420);
             this.btnLammoi.Name = "btnLammoi";
             this.btnLammoi.Size = new System.Drawing.Size(131, 36);
             this.btnLammoi.TabIndex = 6;
@@ -245,7 +245,7 @@
             // btnXuatexcel
             // 
             this.btnXuatexcel.BackColor = System.Drawing.Color.Silver;
-            this.btnXuatexcel.Location = new System.Drawing.Point(198, 546);
+            this.btnXuatexcel.Location = new System.Drawing.Point(222, 420);
             this.btnXuatexcel.Name = "btnXuatexcel";
             this.btnXuatexcel.Size = new System.Drawing.Size(131, 36);
             this.btnXuatexcel.TabIndex = 7;
@@ -256,7 +256,7 @@
             // btnDong
             // 
             this.btnDong.BackColor = System.Drawing.Color.Silver;
-            this.btnDong.Location = new System.Drawing.Point(406, 546);
+            this.btnDong.Location = new System.Drawing.Point(395, 420);
             this.btnDong.Name = "btnDong";
             this.btnDong.Size = new System.Drawing.Size(131, 36);
             this.btnDong.TabIndex = 8;
@@ -266,33 +266,33 @@
             // 
             // chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
-            this.chart.Location = new System.Drawing.Point(671, 169);
+            chartArea3.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart.Legends.Add(legend3);
+            this.chart.Location = new System.Drawing.Point(513, 190);
             this.chart.Name = "chart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart.Series.Add(series1);
-            this.chart.Size = new System.Drawing.Size(258, 170);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart.Series.Add(series3);
+            this.chart.Size = new System.Drawing.Size(370, 100);
             this.chart.TabIndex = 9;
             this.chart.Text = "Tổng số đơn hàng đã bán";
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(671, 368);
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
+            this.chart1.Location = new System.Drawing.Point(513, 309);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(258, 155);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart1.Series.Add(series4);
+            this.chart1.Size = new System.Drawing.Size(360, 105);
             this.chart1.TabIndex = 10;
             this.chart1.Text = "Tổng số doanh thu";
             // 
@@ -302,7 +302,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
-            this.label4.Location = new System.Drawing.Point(311, 20);
+            this.label4.Location = new System.Drawing.Point(255, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(317, 32);
             this.label4.TabIndex = 11;
@@ -312,7 +312,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 594);
+            this.ClientSize = new System.Drawing.Size(888, 468);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.chart);
