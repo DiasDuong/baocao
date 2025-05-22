@@ -159,7 +159,7 @@ namespace baocao
 
         private void btnXem_Click_1(object sender, EventArgs e)
         {
-            string connString = "Data Source=DESKTOP-IK88KCU;Initial Catalog=Qlcuahangquanao;Integrated Security=True;Encrypt=False";
+            string connString = "Data Source=DESKTOP-36UK9PH\\LOCALHOST;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
             string sql = "";
 
             if (rdoNgay.Checked)
@@ -255,6 +255,11 @@ namespace baocao
                 this.Close(); // Đóng form hiện tại  
                               // Hoặc Application.Exit(); để thoát toàn ứng dụng  
             }
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 
