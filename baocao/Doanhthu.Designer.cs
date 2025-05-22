@@ -56,7 +56,7 @@
             this.groupBox1.Controls.Add(this.mskNgay);
             this.groupBox1.Controls.Add(this.rdoKhoang);
             this.groupBox1.Controls.Add(this.rdoNgay);
-            this.groupBox1.Location = new System.Drawing.Point(371, 92);
+            this.groupBox1.Location = new System.Drawing.Point(76, 64);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(599, 122);
             this.groupBox1.TabIndex = 0;
@@ -135,17 +135,17 @@
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(12, 257);
+            this.dataGridView.Location = new System.Drawing.Point(12, 201);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
-            this.dataGridView.Size = new System.Drawing.Size(948, 130);
+            this.dataGridView.Size = new System.Drawing.Size(858, 130);
             this.dataGridView.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 422);
+            this.label2.Location = new System.Drawing.Point(29, 348);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(114, 16);
             this.label2.TabIndex = 2;
@@ -153,7 +153,7 @@
             // 
             // txtdoanhthu
             // 
-            this.txtdoanhthu.Location = new System.Drawing.Point(184, 416);
+            this.txtdoanhthu.Location = new System.Drawing.Point(207, 348);
             this.txtdoanhthu.Name = "txtdoanhthu";
             this.txtdoanhthu.Size = new System.Drawing.Size(121, 22);
             this.txtdoanhthu.TabIndex = 3;
@@ -161,9 +161,9 @@
             // btnXem
             // 
             this.btnXem.BackColor = System.Drawing.Color.Silver;
-            this.btnXem.Location = new System.Drawing.Point(36, 506);
+            this.btnXem.Location = new System.Drawing.Point(23, 386);
             this.btnXem.Name = "btnXem";
-            this.btnXem.Size = new System.Drawing.Size(161, 49);
+            this.btnXem.Size = new System.Drawing.Size(150, 36);
             this.btnXem.TabIndex = 4;
             this.btnXem.Text = "Hiển thị";
             this.btnXem.UseVisualStyleBackColor = false;
@@ -173,9 +173,9 @@
             // 
             this.btnThoat.BackColor = System.Drawing.Color.Silver;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(552, 506);
+            this.btnThoat.Location = new System.Drawing.Point(515, 386);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(151, 49);
+            this.btnThoat.Size = new System.Drawing.Size(150, 36);
             this.btnThoat.TabIndex = 5;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = false;
@@ -186,9 +186,9 @@
             this.btnIn.BackColor = System.Drawing.Color.Silver;
             this.btnIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnIn.Location = new System.Drawing.Point(285, 506);
+            this.btnIn.Location = new System.Drawing.Point(273, 386);
             this.btnIn.Name = "btnIn";
-            this.btnIn.Size = new System.Drawing.Size(166, 49);
+            this.btnIn.Size = new System.Drawing.Size(150, 36);
             this.btnIn.TabIndex = 6;
             this.btnIn.Text = "In báo cáo";
             this.btnIn.UseVisualStyleBackColor = false;
@@ -200,7 +200,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
-            this.label4.Location = new System.Drawing.Point(320, 40);
+            this.label4.Location = new System.Drawing.Point(267, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(331, 32);
             this.label4.TabIndex = 7;
@@ -210,7 +210,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 594);
+            this.ClientSize = new System.Drawing.Size(888, 468);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnIn);
             this.Controls.Add(this.btnThoat);
