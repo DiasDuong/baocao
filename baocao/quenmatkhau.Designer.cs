@@ -39,10 +39,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(241, 62);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(359, 132);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(271, 39);
+            this.label1.Size = new System.Drawing.Size(228, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Quên mật khẩu ";
             // 
@@ -50,7 +51,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(125, 132);
+            this.label2.Location = new System.Drawing.Point(275, 224);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(156, 25);
             this.label2.TabIndex = 1;
@@ -60,7 +61,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(210, 195);
+            this.label3.Location = new System.Drawing.Point(360, 300);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 25);
             this.label3.TabIndex = 2;
@@ -68,9 +69,9 @@
             // 
             // btnlaymk
             // 
-            this.btnlaymk.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnlaymk.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnlaymk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnlaymk.Location = new System.Drawing.Point(303, 270);
+            this.btnlaymk.Location = new System.Drawing.Point(375, 403);
             this.btnlaymk.Name = "btnlaymk";
             this.btnlaymk.Size = new System.Drawing.Size(192, 48);
             this.btnlaymk.TabIndex = 3;
@@ -80,14 +81,14 @@
             // 
             // txttendn
             // 
-            this.txttendn.Location = new System.Drawing.Point(329, 132);
+            this.txttendn.Location = new System.Drawing.Point(499, 228);
             this.txttendn.Name = "txttendn";
             this.txttendn.Size = new System.Drawing.Size(237, 22);
             this.txttendn.TabIndex = 4;
             // 
             // txtemail
             // 
-            this.txtemail.Location = new System.Drawing.Point(329, 198);
+            this.txtemail.Location = new System.Drawing.Point(499, 304);
             this.txtemail.Name = "txtemail";
             this.txtemail.Size = new System.Drawing.Size(237, 22);
             this.txtemail.TabIndex = 5;
@@ -96,7 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1003, 594);
             this.Controls.Add(this.txtemail);
             this.Controls.Add(this.txttendn);
             this.Controls.Add(this.btnlaymk);

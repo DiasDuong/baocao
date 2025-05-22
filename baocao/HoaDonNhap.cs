@@ -101,7 +101,6 @@ namespace baocao
 
         private void Load_DataGridViewHDN()
         {
-
             try
             {
                 string sql = "SELECT a.MaQuanAo, b.TenQuanAo, a.SoLuong, a.GiamGia, b.DonGiaNhap, a.ThanhTien " +
@@ -110,15 +109,21 @@ namespace baocao
 
                 tblCTHDN = function.GetDataToTable(sql);
 
-                if (tblCTHDN.Rows.Count == 0)
+                // Nếu không có dữ liệu, tạo DataTable rỗng với các cột cần thiết
+                if (tblCTHDN == null || tblCTHDN.Rows.Count == 0)
                 {
-                    MessageBox.Show("Không có dữ liệu chi tiết hóa đơn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    tblCTHDN = new DataTable();
+                    tblCTHDN.Columns.Add("MaQuanAo", typeof(string));
+                    tblCTHDN.Columns.Add("TenQuanAo", typeof(string));
+                    tblCTHDN.Columns.Add("SoLuong", typeof(int));
+                    tblCTHDN.Columns.Add("GiamGia", typeof(double));
+                    tblCTHDN.Columns.Add("DonGiaNhap", typeof(double));
+                    tblCTHDN.Columns.Add("ThanhTien", typeof(double));
                 }
 
                 dataGridViewHDN.DataSource = tblCTHDN;
 
-                // Gán tiêu đề cho các cột
+                // Đặt tên cột hiển thị
                 dataGridViewHDN.Columns["MaQuanAo"].HeaderText = "Mã quần áo";
                 dataGridViewHDN.Columns["TenQuanAo"].HeaderText = "Tên quần áo";
                 dataGridViewHDN.Columns["SoLuong"].HeaderText = "Số lượng";
@@ -126,23 +131,18 @@ namespace baocao
                 dataGridViewHDN.Columns["DonGiaNhap"].HeaderText = "Đơn giá nhập";
                 dataGridViewHDN.Columns["ThanhTien"].HeaderText = "Thành tiền";
 
-                // Cập nhật chiều rộng cột
-                dataGridViewHDN.Columns["MaQuanAo"].Width = 80;
-                dataGridViewHDN.Columns["TenQuanAo"].Width = 100;
-                dataGridViewHDN.Columns["SoLuong"].Width = 80;
-                dataGridViewHDN.Columns["GiamGia"].Width = 90;
-                dataGridViewHDN.Columns["DonGiaNhap"].Width = 90;
-                dataGridViewHDN.Columns["ThanhTien"].Width = 90;
 
-                // Tắt tính năng thêm dòng mới và chỉnh sửa
                 dataGridViewHDN.AllowUserToAddRows = false;
                 dataGridViewHDN.EditMode = DataGridViewEditMode.EditProgrammatically;
+                dataGridViewHDN.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+      
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Có lỗi xảy ra khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+        
         }
         private void Load_ThongtinHD()
         {
@@ -175,7 +175,7 @@ namespace baocao
             btnIn.Enabled = false;
             btnThem.Enabled = false;
             ResetValues();
-            txtSoHD.Clear();
+            txtSoHD.Text = function.MaHoaDonNhapMoi();
             Load_DataGridViewHDN();
 
         }
@@ -329,6 +329,8 @@ MessageBoxIcon.Warning);
             txtThanhtien.Text = "0";
         }
 
+
+
         private void dataGridViewHDN_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string MaQuanAo;
@@ -467,33 +469,16 @@ SoHDN + "'";
         private void txtSoluong_TextChanged(object sender, EventArgs e)
         {
             CalculateThanhTien();
-            double sl, dg, gg, tt;
-            if (txtSoluong.Text == "")
-                txtThanhtien.Text = "";
-            else
-            {
-                sl = Convert.ToDouble(txtSoluong.Text);
-                dg = Convert.ToDouble(txtDongianhap.Text);
-                gg = Convert.ToDouble(txtGiamgia.Text);
-                tt = sl * dg * (100 - gg) / 100;
-                txtThanhtien.Text = tt.ToString("N0");
-            }
         }
         private void txtGiamgia_TextChanged(object sender, EventArgs e)
         {
             CalculateThanhTien();
-            double sl, dg, gg, tt;
-            if (txtGiamgia.Text == "")
-                txtThanhtien.Text = "";
-            else
-            {
-                sl = Convert.ToDouble(txtSoluong.Text);
-                dg = Convert.ToDouble(txtDongianhap.Text);
-                gg = Convert.ToDouble(txtGiamgia.Text);
-                tt = sl * dg * (100 - gg) / 100;
-                txtThanhtien.Text = tt.ToString("N0");
-            }
-            
+
+        }
+        private void txtDongianhap_TextChanged(object sender, EventArgs e)
+        {
+            CalculateThanhTien();
+
         }
 
         private void ThemSanPhamVaoDataGridView()
@@ -587,17 +572,27 @@ SoHDN + "'";
         private void CalculateThanhTien()
         {
             double sl, dg, gg, tt;
+            if (string.IsNullOrWhiteSpace(txtSoluong.Text) ||
+                string.IsNullOrWhiteSpace(txtDongianhap.Text) ||
+                string.IsNullOrWhiteSpace(txtGiamgia.Text))
+            {
+                txtThanhtien.Text = "";
+                return;
+            }
 
             if (double.TryParse(txtSoluong.Text, out sl) &&
                 double.TryParse(txtDongianhap.Text, out dg) &&
                 double.TryParse(txtGiamgia.Text, out gg))
             {
+                if (gg < 0) gg = 0;
+                if (gg > 100) gg = 100;
+
                 tt = sl * dg * (100 - gg) / 100;
                 txtThanhtien.Text = tt.ToString("N0");
             }
             else
             {
-                txtThanhtien.Text = "0";
+                txtThanhtien.Text = "";
             }
         }
 
@@ -844,7 +839,7 @@ MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 if (function.conn.State == ConnectionState.Closed)
                 {
-                    function.conn.Open(); // ✅ Mở kết nối nếu đang đóng
+                    function.conn.Open();
                 }
 
                 using (SqlCommand cmd = new SqlCommand(sql, function.conn))
@@ -859,6 +854,8 @@ MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
+                // Luôn gọi hàm tính thành tiền sau khi cập nhật đơn giá
+                CalculateThanhTien();
             }
         }
 
@@ -977,9 +974,25 @@ MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void txtDongianhap_TextChanged(object sender, EventArgs e)
+        
+
+        private void dataGridViewHDN_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            CalculateThanhTien();
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HoaDonNhap_Layout(object sender, LayoutEventArgs e)
+        {
 
         }
     }

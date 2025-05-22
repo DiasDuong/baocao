@@ -51,16 +51,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
             this.label1.Location = new System.Drawing.Point(306, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(205, 20);
+            this.label1.Size = new System.Drawing.Size(436, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "TÌM KIẾM HÓA ĐƠN NHẬP";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(72, 76);
+            this.label2.Location = new System.Drawing.Point(113, 82);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 20);
             this.label2.TabIndex = 1;
@@ -69,7 +71,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(225, 130);
+            this.label3.Location = new System.Drawing.Point(268, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 20);
             this.label3.TabIndex = 2;
@@ -78,7 +80,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(455, 148);
+            this.label4.Location = new System.Drawing.Point(573, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 20);
             this.label4.TabIndex = 3;
@@ -87,7 +89,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(455, 96);
+            this.label5.Location = new System.Drawing.Point(573, 93);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(131, 20);
             this.label5.TabIndex = 4;
@@ -96,7 +98,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(72, 185);
+            this.label6.Location = new System.Drawing.Point(113, 188);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(103, 20);
             this.label6.TabIndex = 5;
@@ -105,7 +107,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(72, 130);
+            this.label7.Location = new System.Drawing.Point(113, 130);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(54, 20);
             this.label7.TabIndex = 6;
@@ -114,20 +116,20 @@
             // dataGridViewTimkiemHDN
             // 
             this.dataGridViewTimkiemHDN.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTimkiemHDN.Location = new System.Drawing.Point(76, 228);
+            this.dataGridViewTimkiemHDN.Location = new System.Drawing.Point(117, 257);
             this.dataGridViewTimkiemHDN.Name = "dataGridViewTimkiemHDN";
             this.dataGridViewTimkiemHDN.RowHeadersWidth = 62;
             this.dataGridViewTimkiemHDN.RowTemplate.Height = 28;
-            this.dataGridViewTimkiemHDN.Size = new System.Drawing.Size(653, 150);
+            this.dataGridViewTimkiemHDN.Size = new System.Drawing.Size(748, 150);
             this.dataGridViewTimkiemHDN.TabIndex = 13;
             this.dataGridViewTimkiemHDN.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTimkiemHDN_CellContentClick);
             this.dataGridViewTimkiemHDN.DoubleClick += new System.EventHandler(this.dataGridViewTimkiemHDN_DoubleClick);
             // 
             // btnTimkiem
             // 
-            this.btnTimkiem.Location = new System.Drawing.Point(132, 415);
+            this.btnTimkiem.Location = new System.Drawing.Point(117, 458);
             this.btnTimkiem.Name = "btnTimkiem";
-            this.btnTimkiem.Size = new System.Drawing.Size(112, 33);
+            this.btnTimkiem.Size = new System.Drawing.Size(112, 42);
             this.btnTimkiem.TabIndex = 14;
             this.btnTimkiem.Text = "Tìm kiếm";
             this.btnTimkiem.UseVisualStyleBackColor = true;
@@ -135,9 +137,9 @@
             // 
             // btnTimlai
             // 
-            this.btnTimlai.Location = new System.Drawing.Point(345, 415);
+            this.btnTimlai.Location = new System.Drawing.Point(441, 460);
             this.btnTimlai.Name = "btnTimlai";
-            this.btnTimlai.Size = new System.Drawing.Size(94, 33);
+            this.btnTimlai.Size = new System.Drawing.Size(103, 42);
             this.btnTimlai.TabIndex = 15;
             this.btnTimlai.Text = "Tìm lại";
             this.btnTimlai.UseVisualStyleBackColor = true;
@@ -145,9 +147,9 @@
             // 
             // btnDong
             // 
-            this.btnDong.Location = new System.Drawing.Point(555, 415);
+            this.btnDong.Location = new System.Drawing.Point(770, 460);
             this.btnDong.Name = "btnDong";
-            this.btnDong.Size = new System.Drawing.Size(75, 33);
+            this.btnDong.Size = new System.Drawing.Size(95, 38);
             this.btnDong.TabIndex = 16;
             this.btnDong.Text = "Đóng";
             this.btnDong.UseVisualStyleBackColor = true;
@@ -155,42 +157,42 @@
             // 
             // txtSoHDN
             // 
-            this.txtSoHDN.Location = new System.Drawing.Point(217, 76);
+            this.txtSoHDN.Location = new System.Drawing.Point(266, 82);
             this.txtSoHDN.Name = "txtSoHDN";
             this.txtSoHDN.Size = new System.Drawing.Size(161, 26);
             this.txtSoHDN.TabIndex = 17;
             // 
             // txtMaNCC
             // 
-            this.txtMaNCC.Location = new System.Drawing.Point(608, 90);
+            this.txtMaNCC.Location = new System.Drawing.Point(722, 93);
             this.txtMaNCC.Name = "txtMaNCC";
             this.txtMaNCC.Size = new System.Drawing.Size(143, 26);
             this.txtMaNCC.TabIndex = 18;
             // 
             // txtTongtien
             // 
-            this.txtTongtien.Location = new System.Drawing.Point(608, 142);
+            this.txtTongtien.Location = new System.Drawing.Point(722, 142);
             this.txtTongtien.Name = "txtTongtien";
             this.txtTongtien.Size = new System.Drawing.Size(143, 26);
             this.txtTongtien.TabIndex = 19;
             // 
             // txtMaNV
             // 
-            this.txtMaNV.Location = new System.Drawing.Point(217, 182);
+            this.txtMaNV.Location = new System.Drawing.Point(272, 185);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.Size = new System.Drawing.Size(155, 26);
             this.txtMaNV.TabIndex = 20;
             // 
             // txtThang
             // 
-            this.txtThang.Location = new System.Drawing.Point(132, 127);
+            this.txtThang.Location = new System.Drawing.Point(185, 127);
             this.txtThang.Name = "txtThang";
             this.txtThang.Size = new System.Drawing.Size(66, 26);
             this.txtThang.TabIndex = 21;
             // 
             // txtNam
             // 
-            this.txtNam.Location = new System.Drawing.Point(289, 127);
+            this.txtNam.Location = new System.Drawing.Point(338, 127);
             this.txtNam.Name = "txtNam";
             this.txtNam.Size = new System.Drawing.Size(89, 26);
             this.txtNam.TabIndex = 22;
@@ -199,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 460);
+            this.ClientSize = new System.Drawing.Size(999, 585);
             this.Controls.Add(this.txtNam);
             this.Controls.Add(this.txtThang);
             this.Controls.Add(this.txtMaNV);
