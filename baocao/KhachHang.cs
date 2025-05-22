@@ -37,20 +37,24 @@ namespace baocao
         }
         private void loadDataToGridView()
         {
-
-            string sql = "Select * from KhachHang";
+            string sql = "SELECT * FROM KhachHang";
             DataTable dt = function.LoadDataToTable(sql);
             dataGridViewKhachhang.DataSource = dt;
+
+            // Đặt tiêu đề và tự động co giãn cột cho vừa khung
             if (dataGridViewKhachhang.Columns.Count >= 4)
             {
-                dataGridViewKhachhang.Columns[0].HeaderText = "Mã khách hàng ";
-                dataGridViewKhachhang.Columns[1].HeaderText = "Tên khách hàng ";
+                dataGridViewKhachhang.Columns[0].HeaderText = "Mã khách hàng";
+                dataGridViewKhachhang.Columns[1].HeaderText = "Tên khách hàng";
                 dataGridViewKhachhang.Columns[2].HeaderText = "Địa chỉ";
                 dataGridViewKhachhang.Columns[3].HeaderText = "Điện thoại";
-
             }
 
+            // Tự động co giãn cột cho vừa khung DataGridView
+            dataGridViewKhachhang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             dataGridViewKhachhang.AllowUserToAddRows = false;
+            dataGridViewKhachhang.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
         private void clear()
         {
@@ -365,6 +369,16 @@ finally
             {
                 MessageBox.Show("Lỗi tìm kiếm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnThoat_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
