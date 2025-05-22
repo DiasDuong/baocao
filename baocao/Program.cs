@@ -25,7 +25,7 @@ namespace baocao
             //Application.Run(new doimatkhau("admin"));
 
             
-            Application.Run(new dangky());
+            Application.Run(new Formgiaodienchinh());
             
 
 
