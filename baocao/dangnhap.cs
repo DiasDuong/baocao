@@ -42,7 +42,7 @@ namespace baocao
 
                 // Ẩn form đăng nhập và mở form Trang chủ
                 this.Hide();
-                Frmtrangchu trangchu = new Frmtrangchu();
+                Form1 trangchu = new Form1();
                 trangchu.FormClosed += (s, args) => this.Close(); // Khi form trang chủ đóng thì thoát luôn app
                 trangchu.Show();
             }
