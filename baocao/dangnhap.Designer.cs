@@ -43,9 +43,9 @@
             // 
             // btndn
             // 
-            this.btndn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btndn.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btndn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndn.Location = new System.Drawing.Point(289, 333);
+            this.btndn.Location = new System.Drawing.Point(391, 365);
             this.btndn.Name = "btndn";
             this.btndn.Size = new System.Drawing.Size(138, 47);
             this.btndn.TabIndex = 0;
@@ -56,10 +56,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(264, 60);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(385, 97);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 38);
+            this.label1.Size = new System.Drawing.Size(162, 32);
             this.label1.TabIndex = 1;
             this.label1.Text = "Đăng nhập";
             // 
@@ -67,7 +68,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(227, 201);
+            this.label2.Location = new System.Drawing.Point(326, 242);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 25);
             this.label2.TabIndex = 2;
@@ -77,7 +78,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(175, 136);
+            this.label3.Location = new System.Drawing.Point(274, 172);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(156, 25);
             this.label3.TabIndex = 3;
@@ -87,7 +88,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(88, 271);
+            this.label4.Location = new System.Drawing.Point(133, 442);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(288, 25);
             this.label4.TabIndex = 4;
@@ -97,7 +98,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(516, 271);
+            this.label5.Location = new System.Drawing.Point(575, 442);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 25);
             this.label5.TabIndex = 5;
@@ -105,14 +106,14 @@
             // 
             // txttendn
             // 
-            this.txttendn.Location = new System.Drawing.Point(366, 140);
+            this.txttendn.Location = new System.Drawing.Point(484, 176);
             this.txttendn.Name = "txttendn";
             this.txttendn.Size = new System.Drawing.Size(160, 22);
             this.txttendn.TabIndex = 6;
             // 
             // txtmk
             // 
-            this.txtmk.Location = new System.Drawing.Point(366, 201);
+            this.txtmk.Location = new System.Drawing.Point(484, 246);
             this.txtmk.Name = "txtmk";
             this.txtmk.Size = new System.Drawing.Size(160, 22);
             this.txtmk.TabIndex = 7;
@@ -121,7 +122,8 @@
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(398, 271);
+            this.linkLabel1.LinkColor = System.Drawing.Color.DodgerBlue;
+            this.linkLabel1.Location = new System.Drawing.Point(445, 442);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(89, 25);
             this.linkLabel1.TabIndex = 8;
@@ -133,7 +135,8 @@
             // 
             this.linkquenmk.AutoSize = true;
             this.linkquenmk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkquenmk.Location = new System.Drawing.Point(380, 397);
+            this.linkquenmk.LinkColor = System.Drawing.Color.DodgerBlue;
+            this.linkquenmk.Location = new System.Drawing.Point(460, 304);
             this.linkquenmk.Name = "linkquenmk";
             this.linkquenmk.Size = new System.Drawing.Size(146, 25);
             this.linkquenmk.TabIndex = 9;
@@ -145,7 +148,8 @@
             // 
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(185, 397);
+            this.linkLabel2.LinkColor = System.Drawing.Color.DodgerBlue;
+            this.linkLabel2.Location = new System.Drawing.Point(290, 304);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(131, 25);
             this.linkLabel2.TabIndex = 10;
@@ -157,7 +161,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1003, 594);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkquenmk);
             this.Controls.Add(this.linkLabel1);

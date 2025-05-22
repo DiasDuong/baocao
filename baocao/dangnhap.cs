@@ -36,13 +36,11 @@ namespace baocao
             if (result > 0)
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // Mở form đổi mật khẩu
-                //doimatkhau formDMK = new doimatkhau(txttendn.Text.Trim());
-                //formDMK.ShowDialog();
+                
 
                 // Ẩn form đăng nhập và mở form Trang chủ
                 this.Hide();
-                Frmtrangchu trangchu = new Frmtrangchu();
+                Form1 trangchu = new Form1();
                 trangchu.FormClosed += (s, args) => this.Close(); // Khi form trang chủ đóng thì thoát luôn app
                 trangchu.Show();
             }

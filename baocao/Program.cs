@@ -19,7 +19,7 @@ namespace baocao
 
 
             
-            Application.Run(new Banhang());
+            Application.Run(new dangky());
             
 
 
