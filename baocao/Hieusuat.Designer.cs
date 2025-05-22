@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.gpbThoigian = new System.Windows.Forms.GroupBox();
             this.dtpKT = new System.Windows.Forms.DateTimePicker();
@@ -68,7 +68,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(38, 368);
+            this.label1.Location = new System.Drawing.Point(12, 274);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(231, 16);
             this.label1.TabIndex = 0;
@@ -89,9 +89,9 @@
             this.gpbThoigian.Controls.Add(this.btnHienthi);
             this.gpbThoigian.Controls.Add(this.cboThoigian);
             this.gpbThoigian.Controls.Add(this.label3);
-            this.gpbThoigian.Location = new System.Drawing.Point(41, 55);
+            this.gpbThoigian.Location = new System.Drawing.Point(12, 44);
             this.gpbThoigian.Name = "gpbThoigian";
-            this.gpbThoigian.Size = new System.Drawing.Size(888, 108);
+            this.gpbThoigian.Size = new System.Drawing.Size(684, 100);
             this.gpbThoigian.TabIndex = 1;
             this.gpbThoigian.TabStop = false;
             this.gpbThoigian.Text = "Chọn thời gian";
@@ -99,7 +99,7 @@
             // dtpKT
             // 
             this.dtpKT.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpKT.Location = new System.Drawing.Point(340, 70);
+            this.dtpKT.Location = new System.Drawing.Point(274, 66);
             this.dtpKT.Name = "dtpKT";
             this.dtpKT.Size = new System.Drawing.Size(142, 22);
             this.dtpKT.TabIndex = 17;
@@ -109,7 +109,7 @@
             // 
             this.dtpBD.CustomFormat = "";
             this.dtpBD.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpBD.Location = new System.Drawing.Point(340, 15);
+            this.dtpBD.Location = new System.Drawing.Point(274, 23);
             this.dtpBD.Name = "dtpBD";
             this.dtpBD.Size = new System.Drawing.Size(142, 22);
             this.dtpBD.TabIndex = 16;
@@ -117,7 +117,7 @@
             // lblNam2
             // 
             this.lblNam2.AutoSize = true;
-            this.lblNam2.Location = new System.Drawing.Point(508, 75);
+            this.lblNam2.Location = new System.Drawing.Point(422, 70);
             this.lblNam2.Name = "lblNam2";
             this.lblNam2.Size = new System.Drawing.Size(47, 16);
             this.lblNam2.TabIndex = 15;
@@ -126,7 +126,7 @@
             // lblNam1
             // 
             this.lblNam1.AutoSize = true;
-            this.lblNam1.Location = new System.Drawing.Point(508, 15);
+            this.lblNam1.Location = new System.Drawing.Point(422, 23);
             this.lblNam1.Name = "lblNam1";
             this.lblNam1.Size = new System.Drawing.Size(47, 16);
             this.lblNam1.TabIndex = 14;
@@ -135,7 +135,7 @@
             // cboNamKT
             // 
             this.cboNamKT.FormattingEnabled = true;
-            this.cboNamKT.Location = new System.Drawing.Point(561, 70);
+            this.cboNamKT.Location = new System.Drawing.Point(475, 70);
             this.cboNamKT.Name = "cboNamKT";
             this.cboNamKT.Size = new System.Drawing.Size(98, 24);
             this.cboNamKT.TabIndex = 13;
@@ -143,7 +143,7 @@
             // cboKT
             // 
             this.cboKT.FormattingEnabled = true;
-            this.cboKT.Location = new System.Drawing.Point(340, 68);
+            this.cboKT.Location = new System.Drawing.Point(274, 63);
             this.cboKT.Name = "cboKT";
             this.cboKT.Size = new System.Drawing.Size(143, 24);
             this.cboKT.TabIndex = 12;
@@ -151,7 +151,7 @@
             // lblKT
             // 
             this.lblKT.AutoSize = true;
-            this.lblKT.Location = new System.Drawing.Point(301, 71);
+            this.lblKT.Location = new System.Drawing.Point(235, 70);
             this.lblKT.Name = "lblKT";
             this.lblKT.Size = new System.Drawing.Size(38, 16);
             this.lblKT.TabIndex = 10;
@@ -160,7 +160,7 @@
             // cboNamBD
             // 
             this.cboNamBD.FormattingEnabled = true;
-            this.cboNamBD.Location = new System.Drawing.Point(561, 15);
+            this.cboNamBD.Location = new System.Drawing.Point(475, 20);
             this.cboNamBD.Name = "cboNamBD";
             this.cboNamBD.Size = new System.Drawing.Size(98, 24);
             this.cboNamBD.TabIndex = 9;
@@ -168,7 +168,7 @@
             // cboBD
             // 
             this.cboBD.FormattingEnabled = true;
-            this.cboBD.Location = new System.Drawing.Point(340, 12);
+            this.cboBD.Location = new System.Drawing.Point(274, 20);
             this.cboBD.Name = "cboBD";
             this.cboBD.Size = new System.Drawing.Size(143, 24);
             this.cboBD.TabIndex = 8;
@@ -176,7 +176,7 @@
             // lblBD
             // 
             this.lblBD.AutoSize = true;
-            this.lblBD.Location = new System.Drawing.Point(301, 15);
+            this.lblBD.Location = new System.Drawing.Point(235, 23);
             this.lblBD.Name = "lblBD";
             this.lblBD.Size = new System.Drawing.Size(33, 16);
             this.lblBD.TabIndex = 6;
@@ -185,9 +185,9 @@
             // btnHienthi
             // 
             this.btnHienthi.BackColor = System.Drawing.Color.Silver;
-            this.btnHienthi.Location = new System.Drawing.Point(690, 31);
+            this.btnHienthi.Location = new System.Drawing.Point(579, 32);
             this.btnHienthi.Name = "btnHienthi";
-            this.btnHienthi.Size = new System.Drawing.Size(121, 56);
+            this.btnHienthi.Size = new System.Drawing.Size(85, 35);
             this.btnHienthi.TabIndex = 5;
             this.btnHienthi.Text = "Hiển thị";
             this.btnHienthi.UseVisualStyleBackColor = false;
@@ -198,7 +198,7 @@
             this.cboThoigian.FormattingEnabled = true;
             this.cboThoigian.Location = new System.Drawing.Point(122, 48);
             this.cboThoigian.Name = "cboThoigian";
-            this.cboThoigian.Size = new System.Drawing.Size(166, 24);
+            this.cboThoigian.Size = new System.Drawing.Size(108, 24);
             this.cboThoigian.TabIndex = 4;
             this.cboThoigian.SelectedIndexChanged += new System.EventHandler(this.cboThoigian_SelectedIndexChanged);
             // 
@@ -214,29 +214,29 @@
             // dgridXephang
             // 
             this.dgridXephang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgridXephang.Location = new System.Drawing.Point(12, 387);
+            this.dgridXephang.Location = new System.Drawing.Point(12, 169);
             this.dgridXephang.Name = "dgridXephang";
             this.dgridXephang.RowHeadersWidth = 51;
             this.dgridXephang.RowTemplate.Height = 24;
-            this.dgridXephang.Size = new System.Drawing.Size(632, 121);
+            this.dgridXephang.Size = new System.Drawing.Size(427, 89);
             this.dgridXephang.TabIndex = 4;
             // 
             // dgridBaocao
             // 
             this.dgridBaocao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgridBaocao.Location = new System.Drawing.Point(12, 187);
+            this.dgridBaocao.Location = new System.Drawing.Point(15, 293);
             this.dgridBaocao.Name = "dgridBaocao";
             this.dgridBaocao.RowHeadersWidth = 51;
             this.dgridBaocao.RowTemplate.Height = 24;
-            this.dgridBaocao.Size = new System.Drawing.Size(632, 121);
+            this.dgridBaocao.Size = new System.Drawing.Size(427, 92);
             this.dgridBaocao.TabIndex = 5;
             // 
             // btnLammoi
             // 
             this.btnLammoi.BackColor = System.Drawing.Color.Silver;
-            this.btnLammoi.Location = new System.Drawing.Point(12, 546);
+            this.btnLammoi.Location = new System.Drawing.Point(12, 392);
             this.btnLammoi.Name = "btnLammoi";
-            this.btnLammoi.Size = new System.Drawing.Size(131, 36);
+            this.btnLammoi.Size = new System.Drawing.Size(116, 27);
             this.btnLammoi.TabIndex = 6;
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.UseVisualStyleBackColor = false;
@@ -245,9 +245,9 @@
             // btnXuatexcel
             // 
             this.btnXuatexcel.BackColor = System.Drawing.Color.Silver;
-            this.btnXuatexcel.Location = new System.Drawing.Point(198, 546);
+            this.btnXuatexcel.Location = new System.Drawing.Point(144, 392);
             this.btnXuatexcel.Name = "btnXuatexcel";
-            this.btnXuatexcel.Size = new System.Drawing.Size(131, 36);
+            this.btnXuatexcel.Size = new System.Drawing.Size(116, 27);
             this.btnXuatexcel.TabIndex = 7;
             this.btnXuatexcel.Text = "In báo cáo";
             this.btnXuatexcel.UseVisualStyleBackColor = false;
@@ -256,9 +256,9 @@
             // btnDong
             // 
             this.btnDong.BackColor = System.Drawing.Color.Silver;
-            this.btnDong.Location = new System.Drawing.Point(406, 546);
+            this.btnDong.Location = new System.Drawing.Point(275, 392);
             this.btnDong.Name = "btnDong";
-            this.btnDong.Size = new System.Drawing.Size(131, 36);
+            this.btnDong.Size = new System.Drawing.Size(116, 27);
             this.btnDong.TabIndex = 8;
             this.btnDong.Text = "Thoát";
             this.btnDong.UseVisualStyleBackColor = false;
@@ -266,33 +266,33 @@
             // 
             // chart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
-            this.chart.Location = new System.Drawing.Point(671, 169);
+            chartArea5.Name = "ChartArea1";
+            this.chart.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chart.Legends.Add(legend5);
+            this.chart.Location = new System.Drawing.Point(448, 169);
             this.chart.Name = "chart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart.Series.Add(series1);
-            this.chart.Size = new System.Drawing.Size(258, 170);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chart.Series.Add(series5);
+            this.chart.Size = new System.Drawing.Size(219, 100);
             this.chart.TabIndex = 9;
             this.chart.Text = "Tổng số đơn hàng đã bán";
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(671, 368);
+            chartArea6.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart1.Legends.Add(legend6);
+            this.chart1.Location = new System.Drawing.Point(448, 293);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(258, 155);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chart1.Series.Add(series6);
+            this.chart1.Size = new System.Drawing.Size(219, 97);
             this.chart1.TabIndex = 10;
             this.chart1.Text = "Tổng số doanh thu";
             // 
@@ -302,7 +302,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
-            this.label4.Location = new System.Drawing.Point(311, 20);
+            this.label4.Location = new System.Drawing.Point(255, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(317, 32);
             this.label4.TabIndex = 11;
@@ -312,7 +312,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 594);
+            this.ClientSize = new System.Drawing.Size(759, 431);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.chart);
