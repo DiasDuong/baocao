@@ -62,7 +62,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
-            this.label4.Location = new System.Drawing.Point(353, 29);
+            this.label4.Location = new System.Drawing.Point(274, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(306, 32);
             this.label4.TabIndex = 12;
@@ -71,7 +71,7 @@
             // dgridSanpham
             // 
             this.dgridSanpham.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgridSanpham.Location = new System.Drawing.Point(56, 255);
+            this.dgridSanpham.Location = new System.Drawing.Point(79, 255);
             this.dgridSanpham.Name = "dgridSanpham";
             this.dgridSanpham.RowHeadersWidth = 51;
             this.dgridSanpham.RowTemplate.Height = 24;
@@ -82,7 +82,7 @@
             // 
             this.btnTim.BackColor = System.Drawing.Color.Silver;
             this.btnTim.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTim.Location = new System.Drawing.Point(121, 407);
+            this.btnTim.Location = new System.Drawing.Point(79, 407);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(150, 36);
             this.btnTim.TabIndex = 14;
@@ -94,7 +94,7 @@
             // 
             this.btnHienthi.BackColor = System.Drawing.Color.Silver;
             this.btnHienthi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btnHienthi.Location = new System.Drawing.Point(359, 407);
+            this.btnHienthi.Location = new System.Drawing.Point(379, 407);
             this.btnHienthi.Name = "btnHienthi";
             this.btnHienthi.Size = new System.Drawing.Size(150, 36);
             this.btnHienthi.TabIndex = 15;
@@ -106,7 +106,7 @@
             // 
             this.btnThoat.BackColor = System.Drawing.Color.Silver;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.btnThoat.Location = new System.Drawing.Point(630, 407);
+            this.btnThoat.Location = new System.Drawing.Point(667, 407);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(150, 36);
             this.btnThoat.TabIndex = 16;
@@ -134,9 +134,9 @@
             this.grpThongtin.Controls.Add(this.label2);
             this.grpThongtin.Controls.Add(this.label1);
             this.grpThongtin.Controls.Add(this.txtMasanpham);
-            this.grpThongtin.Location = new System.Drawing.Point(12, 81);
+            this.grpThongtin.Location = new System.Drawing.Point(47, 81);
             this.grpThongtin.Name = "grpThongtin";
-            this.grpThongtin.Size = new System.Drawing.Size(864, 168);
+            this.grpThongtin.Size = new System.Drawing.Size(845, 168);
             this.grpThongtin.TabIndex = 17;
             this.grpThongtin.TabStop = false;
             this.grpThongtin.Text = "Thông tin tìm kiếm";
