@@ -56,6 +56,7 @@
             this.groupBox1.Controls.Add(this.mskNgay);
             this.groupBox1.Controls.Add(this.rdoKhoang);
             this.groupBox1.Controls.Add(this.rdoNgay);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(59, 62);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(586, 122);
@@ -68,7 +69,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(396, 84);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 16);
+            this.label3.Size = new System.Drawing.Size(31, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Đến";
             // 
@@ -95,7 +96,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(202, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 16);
+            this.label1.Size = new System.Drawing.Size(23, 16);
             this.label1.TabIndex = 3;
             this.label1.Text = "Từ";
             // 
@@ -111,9 +112,10 @@
             // rdoKhoang
             // 
             this.rdoKhoang.AutoSize = true;
+            this.rdoKhoang.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoKhoang.Location = new System.Drawing.Point(74, 83);
             this.rdoKhoang.Name = "rdoKhoang";
-            this.rdoKhoang.Size = new System.Drawing.Size(112, 20);
+            this.rdoKhoang.Size = new System.Drawing.Size(102, 20);
             this.rdoKhoang.TabIndex = 1;
             this.rdoKhoang.TabStop = true;
             this.rdoKhoang.Text = "Theo Tháng";
@@ -123,9 +125,10 @@
             // rdoNgay
             // 
             this.rdoNgay.AutoSize = true;
+            this.rdoNgay.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoNgay.Location = new System.Drawing.Point(74, 38);
             this.rdoNgay.Name = "rdoNgay";
-            this.rdoNgay.Size = new System.Drawing.Size(105, 20);
+            this.rdoNgay.Size = new System.Drawing.Size(96, 20);
             this.rdoNgay.TabIndex = 0;
             this.rdoNgay.TabStop = true;
             this.rdoNgay.Text = "Theo Ngày";
