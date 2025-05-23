@@ -729,6 +729,10 @@ namespace baocao
             txtSoluong.Text = "";
             txtGiamgia.Text = "0";
             txtThanhtien.Text = "0";
+            txtTennhanvien.Text = "";
+            txtTenkhach.Text = "";
+            txtDiachi.Text = "";
+            txtDienthoai.Text = "";
         }
         private void ResetValuesHang()
         {

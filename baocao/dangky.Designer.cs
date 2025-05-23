@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dangky));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,15 +41,18 @@
             this.txttendn = new System.Windows.Forms.TextBox();
             this.txtmk = new System.Windows.Forms.TextBox();
             this.txtnhaplaimk = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(275, 24);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(664, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 46);
+            this.label1.Size = new System.Drawing.Size(145, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "Đăng ký";
             // 
@@ -56,7 +60,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(229, 87);
+            this.label2.Location = new System.Drawing.Point(574, 135);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 29);
             this.label2.TabIndex = 1;
@@ -66,7 +70,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(128, 135);
+            this.label3.Location = new System.Drawing.Point(473, 182);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(181, 29);
             this.label3.TabIndex = 2;
@@ -76,7 +80,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(194, 190);
+            this.label4.Location = new System.Drawing.Point(539, 241);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 29);
             this.label4.TabIndex = 3;
@@ -86,7 +90,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(99, 229);
+            this.label5.Location = new System.Drawing.Point(447, 298);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(210, 29);
             this.label5.TabIndex = 4;
@@ -96,17 +100,18 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(139, 285);
+            this.label6.Location = new System.Drawing.Point(475, 449);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(577, 29);
+            this.label6.Size = new System.Drawing.Size(463, 29);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Nếu đã có tài khoản, hãy                      tại đây                 ";
+            this.label6.Text = "Nếu đã có tài khoản vui lòng đăng nhập     ";
             // 
             // btndangky
             // 
-            this.btndangky.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btndangky.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btndangky.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndangky.Location = new System.Drawing.Point(283, 347);
+            this.btndangky.Location = new System.Drawing.Point(659, 358);
+            this.btndangky.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btndangky.Name = "btndangky";
             this.btndangky.Size = new System.Drawing.Size(165, 46);
             this.btndangky.TabIndex = 6;
@@ -117,48 +122,65 @@
             // linkdangnhap
             // 
             this.linkdangnhap.AutoSize = true;
-            this.linkdangnhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkdangnhap.Location = new System.Drawing.Point(409, 288);
+            this.linkdangnhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkdangnhap.LinkColor = System.Drawing.Color.DodgerBlue;
+            this.linkdangnhap.Location = new System.Drawing.Point(908, 449);
             this.linkdangnhap.Name = "linkdangnhap";
-            this.linkdangnhap.Size = new System.Drawing.Size(118, 26);
+            this.linkdangnhap.Size = new System.Drawing.Size(89, 26);
             this.linkdangnhap.TabIndex = 7;
             this.linkdangnhap.TabStop = true;
-            this.linkdangnhap.Text = "Đăng nhập";
+            this.linkdangnhap.Text = "Tại đây";
             this.linkdangnhap.Click += new System.EventHandler(this.linkdangnhap_Click);
             // 
             // txtmail
             // 
-            this.txtmail.Location = new System.Drawing.Point(386, 87);
+            this.txtmail.Location = new System.Drawing.Point(711, 135);
+            this.txtmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtmail.Name = "txtmail";
             this.txtmail.Size = new System.Drawing.Size(221, 26);
             this.txtmail.TabIndex = 8;
             // 
             // txttendn
             // 
-            this.txttendn.Location = new System.Drawing.Point(386, 139);
+            this.txttendn.Location = new System.Drawing.Point(711, 186);
+            this.txttendn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txttendn.Name = "txttendn";
             this.txttendn.Size = new System.Drawing.Size(221, 26);
             this.txttendn.TabIndex = 9;
             // 
             // txtmk
             // 
-            this.txtmk.Location = new System.Drawing.Point(386, 190);
+            this.txtmk.Location = new System.Drawing.Point(711, 244);
+            this.txtmk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtmk.Name = "txtmk";
             this.txtmk.Size = new System.Drawing.Size(221, 26);
             this.txtmk.TabIndex = 10;
             // 
             // txtnhaplaimk
             // 
-            this.txtnhaplaimk.Location = new System.Drawing.Point(386, 229);
+            this.txtnhaplaimk.Location = new System.Drawing.Point(711, 298);
+            this.txtnhaplaimk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnhaplaimk.Name = "txtnhaplaimk";
             this.txtnhaplaimk.Size = new System.Drawing.Size(221, 26);
             this.txtnhaplaimk.TabIndex = 11;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(-9, 37);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(436, 482);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
             // 
             // dangky
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1085, 585);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtnhaplaimk);
             this.Controls.Add(this.txtmk);
             this.Controls.Add(this.txttendn);
@@ -171,9 +193,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "dangky";
             this.Text = "dangky";
             this.Load += new System.EventHandler(this.dangky_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,5 +217,6 @@
         private System.Windows.Forms.TextBox txttendn;
         private System.Windows.Forms.TextBox txtmk;
         private System.Windows.Forms.TextBox txtnhaplaimk;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

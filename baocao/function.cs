@@ -16,7 +16,9 @@ namespace baocao
         public static string ConnectionString =
 
 
+
 "Data Source=DESKTOP-36UK9PH\\LOCALHOST;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+
 
 
         public static void Connect()

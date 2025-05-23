@@ -77,13 +77,12 @@
     <Compile Include="doimatkhau.Designer.cs">
       <DependentUpon>doimatkhau.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Formgiaodienchinh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Formgiaodienchinh.Designer.cs">
+      <DependentUpon>Formgiaodienchinh.cs</DependentUpon>
     </Compile>
-   
     <Compile Include="Frmquanlyhoadonban.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,8 +149,8 @@
     <EmbeddedResource Include="Banhang.resx">
       <DependentUpon>Banhang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Formgiaodienchinh.resx">
+      <DependentUpon>Formgiaodienchinh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dangky.resx">
       <DependentUpon>dangky.cs</DependentUpon>
