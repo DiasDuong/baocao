@@ -30,7 +30,7 @@ namespace baocao
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblHoadonnhap = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtNgaynhap = new System.Windows.Forms.TextBox();
             this.txtSoHD = new System.Windows.Forms.TextBox();
@@ -73,7 +73,7 @@ namespace baocao
             this.label10 = new System.Windows.Forms.Label();
             this.btnTimkiem = new System.Windows.Forms.Button();
             this.cboSoHD = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
+            this.lblSohoadon = new System.Windows.Forms.Label();
             this.lblTongtien = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.txtTongtien = new System.Windows.Forms.TextBox();
@@ -84,17 +84,17 @@ namespace baocao
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // lblHoadonnhap
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(393, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(279, 37);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "HÓA ĐƠN NHẬP";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblHoadonnhap.AutoSize = true;
+            this.lblHoadonnhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoadonnhap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
+            this.lblHoadonnhap.Location = new System.Drawing.Point(393, 9);
+            this.lblHoadonnhap.Name = "lblHoadonnhap";
+            this.lblHoadonnhap.Size = new System.Drawing.Size(279, 37);
+            this.lblHoadonnhap.TabIndex = 1;
+            this.lblHoadonnhap.Text = "HÓA ĐƠN NHẬP";
+            this.lblHoadonnhap.Click += new System.EventHandler(this.label1_Click);
             // 
             // groupBox1
             // 
@@ -501,14 +501,15 @@ namespace baocao
             this.cboSoHD.TabIndex = 25;
             this.cboSoHD.DropDown += new System.EventHandler(this.cboSoHD_DropDown);
             // 
-            // label20
+            // lblSohoadon
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(201, 556);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(91, 20);
-            this.label20.TabIndex = 24;
-            this.label20.Text = "Số hóa đơn";
+            this.lblSohoadon.AutoSize = true;
+            this.lblSohoadon.Location = new System.Drawing.Point(201, 556);
+            this.lblSohoadon.Name = "lblSohoadon";
+            this.lblSohoadon.Size = new System.Drawing.Size(91, 20);
+            this.lblSohoadon.TabIndex = 24;
+            this.lblSohoadon.Text = "Số hóa đơn";
+            this.lblSohoadon.Click += new System.EventHandler(this.label20_Click);
             // 
             // lblTongtien
             // 
@@ -545,7 +546,7 @@ namespace baocao
             this.Controls.Add(this.lblTongtien);
             this.Controls.Add(this.btnTimkiem);
             this.Controls.Add(this.cboSoHD);
-            this.Controls.Add(this.label20);
+            this.Controls.Add(this.lblSohoadon);
             this.Controls.Add(this.btnIn);
             this.Controls.Add(this.btnDong);
             this.Controls.Add(this.btnXoa);
@@ -556,7 +557,7 @@ namespace baocao
             this.Controls.Add(this.dataGridViewHDN);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblHoadonnhap);
             this.Name = "HoaDonNhap";
             this.Text = "HoaDonNhap";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HoaDonNhap_FormClosing);
@@ -578,7 +579,7 @@ namespace baocao
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblHoadonnhap;
         private System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.TextBox txtSoHD;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -620,7 +621,7 @@ namespace baocao
         private System.Windows.Forms.TextBox txtGiamgia;
         private System.Windows.Forms.Button btnTimkiem;
         private System.Windows.Forms.ComboBox cboSoHD;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lblSohoadon;
         private System.Windows.Forms.Label lblTongtien;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtTongtien;

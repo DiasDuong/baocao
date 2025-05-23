@@ -995,6 +995,11 @@ MessageBoxButtons.OK, MessageBoxIcon.Warning);
         {
 
         }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
