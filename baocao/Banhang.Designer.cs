@@ -46,7 +46,7 @@
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(76, 196);
+            this.dataGridView.Location = new System.Drawing.Point(41, 217);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
@@ -56,11 +56,11 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(526, 196);
+            this.dataGridView1.Location = new System.Drawing.Point(479, 217);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(276, 194);
+            this.dataGridView1.Size = new System.Drawing.Size(397, 194);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -68,7 +68,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(191, 177);
+            this.label1.Location = new System.Drawing.Point(148, 177);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 16);
             this.label1.TabIndex = 2;
@@ -78,7 +78,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(535, 177);
+            this.label2.Location = new System.Drawing.Point(564, 177);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(223, 16);
             this.label2.TabIndex = 3;
@@ -88,7 +88,7 @@
             // 
             this.btnIn.BackColor = System.Drawing.Color.Silver;
             this.btnIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIn.Location = new System.Drawing.Point(261, 409);
+            this.btnIn.Location = new System.Drawing.Point(254, 430);
             this.btnIn.Name = "btnIn";
             this.btnIn.Size = new System.Drawing.Size(150, 26);
             this.btnIn.TabIndex = 4;
@@ -100,7 +100,7 @@
             // 
             this.btnThoat.BackColor = System.Drawing.Color.Silver;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(510, 409);
+            this.btnThoat.Location = new System.Drawing.Point(510, 430);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(150, 26);
             this.btnThoat.TabIndex = 5;
