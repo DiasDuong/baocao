@@ -155,6 +155,7 @@ namespace baocao
             txtdoanhthu.Enabled = true;
             rdoNgay.Checked = false;
             rdoKhoang.Checked = false;
+            dataGridView.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular);
         }
 
         private void btnXem_Click_1(object sender, EventArgs e)
