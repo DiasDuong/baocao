@@ -71,7 +71,7 @@
             // dgridSanpham
             // 
             this.dgridSanpham.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgridSanpham.Location = new System.Drawing.Point(44, 255);
+            this.dgridSanpham.Location = new System.Drawing.Point(56, 255);
             this.dgridSanpham.Name = "dgridSanpham";
             this.dgridSanpham.RowHeadersWidth = 51;
             this.dgridSanpham.RowTemplate.Height = 24;
@@ -82,7 +82,7 @@
             // 
             this.btnTim.BackColor = System.Drawing.Color.Silver;
             this.btnTim.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTim.Location = new System.Drawing.Point(56, 407);
+            this.btnTim.Location = new System.Drawing.Point(121, 407);
             this.btnTim.Name = "btnTim";
             this.btnTim.Size = new System.Drawing.Size(150, 36);
             this.btnTim.TabIndex = 14;
@@ -94,7 +94,7 @@
             // 
             this.btnHienthi.BackColor = System.Drawing.Color.Silver;
             this.btnHienthi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHienthi.Location = new System.Drawing.Point(271, 407);
+            this.btnHienthi.Location = new System.Drawing.Point(359, 407);
             this.btnHienthi.Name = "btnHienthi";
             this.btnHienthi.Size = new System.Drawing.Size(150, 36);
             this.btnHienthi.TabIndex = 15;
@@ -106,7 +106,7 @@
             // 
             this.btnThoat.BackColor = System.Drawing.Color.Silver;
             this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(487, 407);
+            this.btnThoat.Location = new System.Drawing.Point(630, 407);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(150, 36);
             this.btnThoat.TabIndex = 16;
