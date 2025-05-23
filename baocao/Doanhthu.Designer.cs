@@ -161,6 +161,7 @@
             // btnXem
             // 
             this.btnXem.BackColor = System.Drawing.Color.Silver;
+            this.btnXem.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXem.Location = new System.Drawing.Point(59, 377);
             this.btnXem.Name = "btnXem";
             this.btnXem.Size = new System.Drawing.Size(116, 27);
@@ -172,7 +173,7 @@
             // btnThoat
             // 
             this.btnThoat.BackColor = System.Drawing.Color.Silver;
-            this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.Location = new System.Drawing.Point(529, 377);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(116, 27);
@@ -184,7 +185,7 @@
             // btnIn
             // 
             this.btnIn.BackColor = System.Drawing.Color.Silver;
-            this.btnIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnIn.Location = new System.Drawing.Point(292, 377);
             this.btnIn.Name = "btnIn";
