@@ -349,7 +349,11 @@
             this.pictop.Location = new System.Drawing.Point(0, -5);
             this.pictop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictop.Name = "pictop";
+
             this.pictop.Size = new System.Drawing.Size(1077, 192);
+
+           
+
             this.pictop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictop.TabIndex = 0;
             this.pictop.TabStop = false;
