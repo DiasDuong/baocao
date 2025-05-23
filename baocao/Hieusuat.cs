@@ -1063,5 +1063,15 @@ namespace baocao
         {
 
         }
+
+        private void dgridXephang_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dgridXephang.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular);
+        }
+
+        private void dgridBaocao_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dgridBaocao.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular);
+        }
     }
 }
