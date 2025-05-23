@@ -39,12 +39,12 @@
             this.btnTimkiem = new System.Windows.Forms.Button();
             this.btnTimlai = new System.Windows.Forms.Button();
             this.btnDong = new System.Windows.Forms.Button();
-            this.txtSoHDN = new System.Windows.Forms.TextBox();
             this.txtMaNCC = new System.Windows.Forms.TextBox();
             this.txtTongtien = new System.Windows.Forms.TextBox();
             this.txtMaNV = new System.Windows.Forms.TextBox();
             this.txtThang = new System.Windows.Forms.TextBox();
             this.txtNam = new System.Windows.Forms.TextBox();
+            this.cboSoHDN = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimkiemHDN)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,13 +155,6 @@
             this.btnDong.UseVisualStyleBackColor = true;
             this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
             // 
-            // txtSoHDN
-            // 
-            this.txtSoHDN.Location = new System.Drawing.Point(266, 82);
-            this.txtSoHDN.Name = "txtSoHDN";
-            this.txtSoHDN.Size = new System.Drawing.Size(161, 26);
-            this.txtSoHDN.TabIndex = 17;
-            // 
             // txtMaNCC
             // 
             this.txtMaNCC.Location = new System.Drawing.Point(722, 93);
@@ -197,17 +190,25 @@
             this.txtNam.Size = new System.Drawing.Size(89, 26);
             this.txtNam.TabIndex = 22;
             // 
+            // cboSoHDN
+            // 
+            this.cboSoHDN.FormattingEnabled = true;
+            this.cboSoHDN.Location = new System.Drawing.Point(272, 79);
+            this.cboSoHDN.Name = "cboSoHDN";
+            this.cboSoHDN.Size = new System.Drawing.Size(155, 28);
+            this.cboSoHDN.TabIndex = 23;
+            // 
             // TimkiemHDN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 585);
+            this.Controls.Add(this.cboSoHDN);
             this.Controls.Add(this.txtNam);
             this.Controls.Add(this.txtThang);
             this.Controls.Add(this.txtMaNV);
             this.Controls.Add(this.txtTongtien);
             this.Controls.Add(this.txtMaNCC);
-            this.Controls.Add(this.txtSoHDN);
             this.Controls.Add(this.btnDong);
             this.Controls.Add(this.btnTimlai);
             this.Controls.Add(this.btnTimkiem);
@@ -241,11 +242,11 @@
         private System.Windows.Forms.Button btnTimkiem;
         private System.Windows.Forms.Button btnTimlai;
         private System.Windows.Forms.Button btnDong;
-        private System.Windows.Forms.TextBox txtSoHDN;
         private System.Windows.Forms.TextBox txtMaNCC;
         private System.Windows.Forms.TextBox txtTongtien;
         private System.Windows.Forms.TextBox txtMaNV;
         private System.Windows.Forms.TextBox txtThang;
         private System.Windows.Forms.TextBox txtNam;
+        private System.Windows.Forms.ComboBox cboSoHDN;
     }
 }
