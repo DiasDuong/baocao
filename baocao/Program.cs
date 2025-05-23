@@ -20,12 +20,12 @@ namespace baocao
 
 
             //Application.Run(new quenmatkhau());
-            //Application.Run(new dangky());
+            Application.Run(new dangnhap());
            
             //Application.Run(new doimatkhau("admin"));
 
             
-            Application.Run(new Formgiaodienchinh());
+            //Application.Run(new Formgiaodienchinh());
             
 
 
