@@ -78,6 +78,26 @@ namespace baocao
             doimatkhau doiMK = new doimatkhau();
             doiMK.ShowDialog();
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void anhien_CheckedChanged(object sender, EventArgs e)
+        {
+            txtmk.UseSystemPasswordChar = !anhien1.Checked;
+        }
+
+        private void anhien_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }
 
