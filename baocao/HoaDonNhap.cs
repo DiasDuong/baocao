@@ -25,6 +25,11 @@ namespace baocao
 
      
             txtGiamgia.KeyDown += new KeyEventHandler(txtGiamgia_KeyDown);
+
+            // Thêm các sự kiện TextChanged để tự động tính thành tiền
+            txtSoluong.TextChanged += new EventHandler(txtSoluong_TextChanged);
+            txtDongianhap.TextChanged += new EventHandler(txtDongianhap_TextChanged);
+            txtGiamgia.TextChanged += new EventHandler(txtGiamgia_TextChanged);
         }
 
         private void HoaDonNhap_Load(object sender, EventArgs e)
@@ -571,28 +576,50 @@ SoHDN + "'";
 
         private void CalculateThanhTien()
         {
-            double sl, dg, gg, tt;
-            if (string.IsNullOrWhiteSpace(txtSoluong.Text) ||
-                string.IsNullOrWhiteSpace(txtDongianhap.Text) ||
-                string.IsNullOrWhiteSpace(txtGiamgia.Text))
+            try
             {
-                txtThanhtien.Text = "";
-                return;
-            }
+                double sl = 0, dg = 0, gg = 0, tt = 0;
 
-            if (double.TryParse(txtSoluong.Text, out sl) &&
-                double.TryParse(txtDongianhap.Text, out dg) &&
-                double.TryParse(txtGiamgia.Text, out gg))
-            {
-                if (gg < 0) gg = 0;
-                if (gg > 100) gg = 100;
+                // Kiểm tra và chuyển đổi số lượng
+                if (!string.IsNullOrWhiteSpace(txtSoluong.Text))
+                {
+                    if (!double.TryParse(txtSoluong.Text, out sl))
+                    {
+                        txtThanhtien.Text = "0";
+                        return;
+                    }
+                }
 
+                // Kiểm tra và chuyển đổi đơn giá
+                if (!string.IsNullOrWhiteSpace(txtDongianhap.Text))
+                {
+                    if (!double.TryParse(txtDongianhap.Text, out dg))
+                    {
+                        txtThanhtien.Text = "0";
+                        return;
+                    }
+                }
+
+                // Kiểm tra và chuyển đổi giảm giá
+                if (!string.IsNullOrWhiteSpace(txtGiamgia.Text))
+                {
+                    if (!double.TryParse(txtGiamgia.Text, out gg))
+                    {
+                        txtThanhtien.Text = "0";
+                        return;
+                    }
+                }
+
+                // Tính thành tiền
                 tt = sl * dg * (100 - gg) / 100;
+                
+                // Hiển thị thành tiền với định dạng số
                 txtThanhtien.Text = tt.ToString("N0");
             }
-            else
+            catch (Exception ex)
             {
-                txtThanhtien.Text = "";
+                MessageBox.Show("Lỗi khi tính thành tiền: " + ex.Message);
+                txtThanhtien.Text = "0";
             }
         }
 
