@@ -17,7 +17,7 @@ namespace baocao
 
 
 
-"Data Source=DESKTOP-RGQ18EV\\SQLEXPRESS;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+"Data Source=DESKTOP-S0TIEV7;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
 
 
 
