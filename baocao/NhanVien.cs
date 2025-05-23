@@ -35,6 +35,9 @@ namespace baocao
             cboTimkiem.Items.Add("Mã nhân viên");
             cboTimkiem.Items.Add("Tên nhân viên");
             cboTimkiem.SelectedIndex = 0;
+            btnXoa.Enabled = false;
+            btnSua.Enabled = false;
+            btnLuu.Enabled = false;
         }
         private void LoadCongViecToComboBox()
         {
@@ -99,6 +102,9 @@ namespace baocao
             txtDiachi.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
             comboMaCV.SelectedValue = dataGridView.CurrentRow.Cells[6].Value.ToString();
             txtMaNhanvien.ReadOnly = true;
+            btnXoa.Enabled = true;
+            btnSua.Enabled = true;
+
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -244,7 +250,13 @@ txtMaNhanvien.Enabled = false;
             string ma = txtMaNhanvien.Text.Trim();
             string ten = txtTennhanvien.Text.Trim();
             string dienthoai = mskdienthoai.Text.Trim();
-            string ngaysinh = mskngaysinh.Text.Trim();
+            DateTime parsedDate;
+            if (!DateTime.TryParseExact(mskngaysinh.Text.Trim(), "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out parsedDate))
+            {
+                MessageBox.Show("Ngày sinh không đúng định dạng dd/MM/yyyy!");
+                return;
+            }
+            string ngaysinhSQL = parsedDate.ToString("yyyy-MM-dd");
             string diachi = txtDiachi.Text.Trim();
             string MaCV = comboMaCV.SelectedValue.ToString();
             string gioiTinh = radionam.Checked ? "Nam" : "Nữ";
@@ -255,8 +267,8 @@ txtMaNhanvien.Enabled = false;
                 MessageBox.Show("Nhập tên nhân viên !");
                 return;
             }
-          
-            string sql = $"UPDATE NhanVien SET TenNV = N'{ten}', GioiTinh = N'{gioiTinh}', NgaySinh = '{ngaysinh}', DienThoai = '{dienthoai}', DiaChi = N'{diachi}', MaCV = '{MaCV}' WHERE MaNV = '{ma}'";
+            string sql = $"UPDATE NhanVien SET TenNV = N'{ten}', GioiTinh = N'{gioiTinh}', NgaySinh = '{ngaysinhSQL}', DienThoai = '{dienthoai}', DiaChi = N'{diachi}', MaCV = '{MaCV}' WHERE MaNV = '{ma}'";
+
 
             SqlCommand cmd = new SqlCommand(sql, function.conn);
             try
