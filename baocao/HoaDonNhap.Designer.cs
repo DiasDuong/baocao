@@ -280,7 +280,7 @@ namespace baocao
             // 
             // btnIn
             // 
-            this.btnIn.Location = new System.Drawing.Point(681, 513);
+            this.btnIn.Location = new System.Drawing.Point(683, 522);
             this.btnIn.Name = "btnIn";
             this.btnIn.Size = new System.Drawing.Size(134, 32);
             this.btnIn.TabIndex = 23;
@@ -290,7 +290,7 @@ namespace baocao
             // 
             // btnDong
             // 
-            this.btnDong.Location = new System.Drawing.Point(823, 513);
+            this.btnDong.Location = new System.Drawing.Point(841, 522);
             this.btnDong.Name = "btnDong";
             this.btnDong.Size = new System.Drawing.Size(108, 32);
             this.btnDong.TabIndex = 22;
@@ -300,7 +300,7 @@ namespace baocao
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(524, 513);
+            this.btnXoa.Location = new System.Drawing.Point(521, 522);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(134, 32);
             this.btnXoa.TabIndex = 21;
@@ -310,7 +310,7 @@ namespace baocao
             // 
             // btnBoqua
             // 
-            this.btnBoqua.Location = new System.Drawing.Point(368, 513);
+            this.btnBoqua.Location = new System.Drawing.Point(370, 522);
             this.btnBoqua.Name = "btnBoqua";
             this.btnBoqua.Size = new System.Drawing.Size(134, 32);
             this.btnBoqua.TabIndex = 20;
@@ -320,7 +320,7 @@ namespace baocao
             // 
             // btnLuu
             // 
-            this.btnLuu.Location = new System.Drawing.Point(196, 513);
+            this.btnLuu.Location = new System.Drawing.Point(205, 522);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(134, 32);
             this.btnLuu.TabIndex = 19;
@@ -330,7 +330,7 @@ namespace baocao
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(35, 513);
+            this.btnThem.Location = new System.Drawing.Point(35, 522);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(134, 32);
             this.btnThem.TabIndex = 18;
@@ -341,7 +341,7 @@ namespace baocao
             // lblbangchu
             // 
             this.lblbangchu.AutoSize = true;
-            this.lblbangchu.Location = new System.Drawing.Point(517, 493);
+            this.lblbangchu.Location = new System.Drawing.Point(517, 499);
             this.lblbangchu.Name = "lblbangchu";
             this.lblbangchu.Size = new System.Drawing.Size(155, 20);
             this.lblbangchu.TabIndex = 17;
@@ -397,7 +397,7 @@ namespace baocao
             // 
             // txtThanhtien
             // 
-            this.txtThanhtien.Location = new System.Drawing.Point(764, 64);
+            this.txtThanhtien.Location = new System.Drawing.Point(764, 58);
             this.txtThanhtien.Name = "txtThanhtien";
             this.txtThanhtien.Size = new System.Drawing.Size(124, 26);
             this.txtThanhtien.TabIndex = 11;
@@ -484,7 +484,7 @@ namespace baocao
             // 
             // btnTimkiem
             // 
-            this.btnTimkiem.Location = new System.Drawing.Point(588, 549);
+            this.btnTimkiem.Location = new System.Drawing.Point(597, 560);
             this.btnTimkiem.Name = "btnTimkiem";
             this.btnTimkiem.Size = new System.Drawing.Size(134, 35);
             this.btnTimkiem.TabIndex = 26;
@@ -495,7 +495,7 @@ namespace baocao
             // cboSoHD
             // 
             this.cboSoHD.FormattingEnabled = true;
-            this.cboSoHD.Location = new System.Drawing.Point(328, 553);
+            this.cboSoHD.Location = new System.Drawing.Point(345, 563);
             this.cboSoHD.Name = "cboSoHD";
             this.cboSoHD.Size = new System.Drawing.Size(214, 28);
             this.cboSoHD.TabIndex = 25;
@@ -504,7 +504,7 @@ namespace baocao
             // lblSohoadon
             // 
             this.lblSohoadon.AutoSize = true;
-            this.lblSohoadon.Location = new System.Drawing.Point(201, 556);
+            this.lblSohoadon.Location = new System.Drawing.Point(201, 566);
             this.lblSohoadon.Name = "lblSohoadon";
             this.lblSohoadon.Size = new System.Drawing.Size(91, 20);
             this.lblSohoadon.TabIndex = 24;
@@ -514,7 +514,7 @@ namespace baocao
             // lblTongtien
             // 
             this.lblTongtien.AutoSize = true;
-            this.lblTongtien.Location = new System.Drawing.Point(517, 460);
+            this.lblTongtien.Location = new System.Drawing.Point(517, 466);
             this.lblTongtien.Name = "lblTongtien";
             this.lblTongtien.Size = new System.Drawing.Size(79, 20);
             this.lblTongtien.TabIndex = 27;
@@ -523,7 +523,7 @@ namespace baocao
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(36, 460);
+            this.label17.Location = new System.Drawing.Point(41, 472);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(214, 20);
             this.label17.TabIndex = 28;
@@ -531,7 +531,7 @@ namespace baocao
             // 
             // txtTongtien
             // 
-            this.txtTongtien.Location = new System.Drawing.Point(676, 460);
+            this.txtTongtien.Location = new System.Drawing.Point(683, 466);
             this.txtTongtien.Name = "txtTongtien";
             this.txtTongtien.Size = new System.Drawing.Size(139, 26);
             this.txtTongtien.TabIndex = 14;
@@ -540,7 +540,7 @@ namespace baocao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(999, 585);
+            this.ClientSize = new System.Drawing.Size(999, 594);
             this.Controls.Add(this.txtTongtien);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.lblTongtien);
