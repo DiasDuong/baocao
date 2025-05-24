@@ -155,11 +155,12 @@ namespace baocao
             txtdoanhthu.Enabled = true;
             rdoNgay.Checked = false;
             rdoKhoang.Checked = false;
+            dataGridView.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular);
         }
 
         private void btnXem_Click_1(object sender, EventArgs e)
         {
-            string connString = "Data Source=DESKTOP-IK88KCU;Initial Catalog=Qlcuahangquanao;Integrated Security=True;Encrypt=False";
+            string connString = "Data Source=DESKTOP-S0TIEV7;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
             string sql = "";
 
             if (rdoNgay.Checked)
