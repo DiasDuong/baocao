@@ -276,17 +276,63 @@ MessageBoxIcon.Warning);
             }
 
 
-            // 3. Kiểm tra sản phẩm đã có trong chi tiết chưa
-            sql = "SELECT MaQuanAo FROM ChiTietHDNhap WHERE SoHDN = N'" + txtSoHD.Text + "' AND MaQuanAo = N'" + cboMaquanao.SelectedValue + "'";
+            sql = "SELECT * FROM ChiTietHDNhap WHERE SoHDN = N'" + txtSoHD.Text + "' AND MaQuanAo = N'" + cboMaquanao.SelectedValue + "'";
             if (function.IsKeyExists(sql))
             {
-                MessageBox.Show("Sản phẩm này đã có trong hóa đơn, vui lòng chọn sản phẩm khác", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ResetValuesHang();
-                cboMaquanao.Focus();
-                return;
-            }
+                DialogResult result = MessageBox.Show("Sản phẩm này đã có trong hóa đơn.\nBạn có muốn cập nhật số lượng không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                if (result == DialogResult.Yes)
+                {
+                    // Lấy số lượng cũ
+                    sql = "SELECT SoLuong FROM ChiTietHDNhap WHERE SoHDN = N'" + txtSoHD.Text + "' AND MaQuanAo = N'" + cboMaquanao.SelectedValue + "'";
+                    double soLuongCu = Convert.ToDouble(function.GetFieldValue(sql));
+
+                    double soLuongMoi = soLuongCu + Convert.ToDouble(txtSoluong.Text);
+                    double donGia = Convert.ToDouble(txtDongianhap.Text);
+                    double giamGia = Convert.ToDouble(txtGiamgia.Text);
+                    double thanhTienMoi = soLuongMoi * donGia * (100 - giamGia) / 100;
+
+                    // Cập nhật lại số lượng và thành tiền trong bảng ChiTietHDNhap
+                    sql = "UPDATE ChiTietHDNhap SET SoLuong = " + soLuongMoi +
+                          ", ThanhTien = " + thanhTienMoi +
+                          " WHERE SoHDN = N'" + txtSoHD.Text + "' AND MaQuanAo = N'" + cboMaquanao.SelectedValue + "'";
+                    function.RunSQL(sql);
+
+                    // Cập nhật lại tồn kho
+                    sql = "SELECT SoLuong FROM SanPham WHERE MaQuanAo = N'" + cboMaquanao.SelectedValue + "'";
+                     slCu = Convert.ToDouble(function.GetFieldValue(sql));
+                     slMoi = slCu + Convert.ToDouble(txtSoluong.Text); // chỉ cộng phần mới thêm
+                    sql = "UPDATE SanPham SET SoLuong = " + slMoi + " WHERE MaQuanAo = N'" + cboMaquanao.SelectedValue + "'";
+                    function.RunSQL(sql);
+
+                    // Cập nhật tổng tiền
+                    sql = "SELECT TongTien FROM HoaDonNhap WHERE SoHDN = N'" + txtSoHD.Text + "'";
+                     tong = Convert.ToDouble(function.GetFieldValue(sql));
+                    double thanhTienThem = Convert.ToDouble(txtSoluong.Text) * donGia * (100 - giamGia) / 100;
+                    tongMoi = tong + thanhTienThem;
+
+                    sql = "UPDATE HoaDonNhap SET TongTien = " + tongMoi + " WHERE SoHDN = N'" + txtSoHD.Text + "'";
+                    function.RunSQL(sql);
+
+                    txtTongtien.Text = tongMoi.ToString("N0");
+                    lblbangchu.Text = "Bằng chữ: " + function.ChuyenSoSangChu(((long)tongMoi).ToString());
+
+                    Load_DataGridViewHDN();
+                    ResetValuesHang();
+                    btnXoa.Enabled = true;
+                    btnThem.Enabled = true;
+                    btnIn.Enabled = true;
+
+                    return;
+                }
+                else
+                {
+                    // Không cập nhật, chỉ reset và thoát
+                    ResetValuesHang();
+                    cboMaquanao.Focus();
+                    return;
+                }
+            }
             // 4. Lưu chi tiết hóa đơn nhập
             double SoLuong = Convert.ToDouble(txtSoluong.Text);
             double DonGiaNhap = Convert.ToDouble(txtDongianhap.Text);
@@ -997,6 +1043,11 @@ MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
