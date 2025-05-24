@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Net;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace baocao
@@ -20,7 +16,6 @@ namespace baocao
 
         private void dangky_Load(object sender, EventArgs e)
         {
-            
         }
 
         private void btndangky_Click(object sender, EventArgs e)
@@ -33,7 +28,6 @@ namespace baocao
                 return;
             }
 
-            // ✅ Kiểm tra định dạng email
             string email = txtmail.Text.Trim();
             if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
@@ -90,6 +84,9 @@ namespace baocao
             function.RunSQL(sqlInsert);
             MessageBox.Show("Đăng ký tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            // Gửi email xác nhận
+            SendConfirmationEmail(txtmail.Text.Trim(), txttendn.Text.Trim());
+
             txttendn.Text = "";
             txtmail.Text = "";
             txtmk.Text = "";
@@ -97,14 +94,38 @@ namespace baocao
             this.Close();
         }
 
+        private void SendConfirmationEmail(string toEmail, string username)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("huyenjuly2508@gmail.com"); // 📌 Thay bằng email của bạn
+                mail.To.Add(toEmail);
+                mail.Subject = "Xác nhận đăng ký thành công";
+                mail.Body = $"Chào {username},\n\nBạn đã đăng ký tài khoản thành công tại Borcelle Fashion Store.\n\nXin cảm ơn!";
+                mail.IsBodyHtml = false;
+
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+                smtp.Credentials = new NetworkCredential("huyenjuly2508@gmail.com", "okho btkr zdde ywsy"); // 📌 Mật khẩu ứng dụng
+                smtp.EnableSsl = true;
+
+                smtp.Send(mail);
+                MessageBox.Show("Email xác nhận đã được gửi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (SmtpException ex)
+            {
+                MessageBox.Show("Lỗi gửi email: " + ex.Message, "Lỗi Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khác khi gửi email: " + ex.Message, "Lỗi Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void linkdangnhap_Click(object sender, EventArgs e)
         {
-            // Mở form đăng nhập
-            dangnhap loginForm = new dangnhap(); // Tên form đăng nhập
-            loginForm.Show(); // Hoặc dùng ShowDialog() nếu muốn form đăng nhập là modal
-
-            // Đóng form đăng ký
-           // this.Close();
+            dangnhap loginForm = new dangnhap();
+            loginForm.Show();
         }
     }
 }

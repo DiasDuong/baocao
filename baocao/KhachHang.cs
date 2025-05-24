@@ -34,6 +34,9 @@ namespace baocao
             cboTimkiem.Items.Add("Mã khách hàng");
             cboTimkiem.Items.Add("Tên khách hàng ");
             cboTimkiem.SelectedIndex = 0;
+            btnXoa.Enabled = false;
+            btnSua.Enabled = false;
+            btnLuu.Enabled = false;
         }
         private void loadDataToGridView()
         {
@@ -76,6 +79,8 @@ namespace baocao
             txtDiachi.Text = dataGridViewKhachhang.CurrentRow.Cells[2].Value.ToString();
             mskDienthoai.Text = dataGridViewKhachhang.CurrentRow.Cells[3].Value.ToString();   // DienThoai
             txtMakhachhang.ReadOnly = true;
+            btnXoa.Enabled = true;
+            btnSua.Enabled = true;
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
@@ -373,7 +378,12 @@ finally
 
         private void btnThoat_Click_1(object sender, EventArgs e)
         {
-
+            DialogResult kq;
+            kq = MessageBox.Show("Bạn có muốn thoát không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void label6_Click(object sender, EventArgs e)

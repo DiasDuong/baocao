@@ -160,7 +160,9 @@ namespace baocao
 
         private void btnXem_Click_1(object sender, EventArgs e)
         {
+
             string connString = "Data Source=DESKTOP-36UK9PH\\LOCALHOST;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+
             string sql = "";
 
             if (rdoNgay.Checked)

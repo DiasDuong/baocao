@@ -44,7 +44,7 @@
             this.btnLuu = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnBoqua = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblTimkiem = new System.Windows.Forms.Label();
             this.cboTimkiem = new System.Windows.Forms.ComboBox();
             this.txtTimkiem = new System.Windows.Forms.TextBox();
             this.btnTimkiem = new System.Windows.Forms.Button();
@@ -198,16 +198,16 @@
             this.btnBoqua.UseVisualStyleBackColor = true;
             this.btnBoqua.Click += new System.EventHandler(this.btnBoqua_Click);
             // 
-            // label6
+            // lblTimkiem
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(139, 504);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 25);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Tìm kiếm :";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+            this.lblTimkiem.AutoSize = true;
+            this.lblTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimkiem.Location = new System.Drawing.Point(139, 504);
+            this.lblTimkiem.Name = "lblTimkiem";
+            this.lblTimkiem.Size = new System.Drawing.Size(102, 25);
+            this.lblTimkiem.TabIndex = 16;
+            this.lblTimkiem.Text = "Tìm kiếm :";
+            this.lblTimkiem.Click += new System.EventHandler(this.label6_Click);
             // 
             // cboTimkiem
             // 
@@ -242,7 +242,7 @@
             this.Controls.Add(this.btnTimkiem);
             this.Controls.Add(this.txtTimkiem);
             this.Controls.Add(this.cboTimkiem);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblTimkiem);
             this.Controls.Add(this.btnBoqua);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnLuu);
@@ -286,7 +286,7 @@
         private System.Windows.Forms.Button btnLuu;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Button btnBoqua;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblTimkiem;
         private System.Windows.Forms.ComboBox cboTimkiem;
         private System.Windows.Forms.TextBox txtTimkiem;
         private System.Windows.Forms.Button btnTimkiem;

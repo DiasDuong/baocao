@@ -20,25 +20,36 @@ namespace baocao
 
         private void TimkiemHDN_Load(object sender, EventArgs e)
         {
+            Load_cboSoHDN(); 
             ResetValues();
             dataGridViewTimkiemHDN.DataSource = null;
-            ResetValues();
 
+        }
+        private void Load_cboSoHDN()
+        {
+            string sql = "SELECT SoHDN FROM HoaDonNhap";
+            DataTable table = function.GetDataToTable(sql);
+            cboSoHDN.DataSource = table;
+            cboSoHDN.DisplayMember = "SoHDN";
+            cboSoHDN.ValueMember = "SoHDN";
+            cboSoHDN.SelectedIndex = -1;
         }
         private void ResetValues()
         {
             foreach (Control ctl in this.Controls)
             {
-                if (ctl is TextBox || ctl is ComboBox)
+                if (ctl is TextBox)
                     ctl.Text = "";
+                else if (ctl is ComboBox)
+                    ((ComboBox)ctl).SelectedIndex = -1;
             }
-            txtSoHDN.Focus();
+            cboSoHDN.Focus(); // thay vì txtSoHDN
         }
 
         private void btnTimkiem_Click(object sender, EventArgs e)
         {
             string sql;
-            if ((txtSoHDN.Text == "") && (txtThang.Text == "") && (txtNam.Text == "") &&
+            if ((cboSoHDN.SelectedIndex == -1) && (txtThang.Text == "") && (txtNam.Text == "") &&
                 (txtMaNV.Text == "") && (txtMaNCC.Text == "") &&
                 (txtTongtien.Text == ""))
             {
@@ -48,8 +59,8 @@ namespace baocao
             }
 
             sql = "SELECT * FROM HoaDonNhap WHERE 1=1";
-            if (txtSoHDN.Text != "")
-                sql += " AND SoHDN = N'" + txtSoHDN.Text + "'";
+            if (cboSoHDN.SelectedIndex != -1)
+                sql += " AND SoHDN = N'" + cboSoHDN.SelectedValue.ToString() + "'";
             if (txtThang.Text != "")
                 sql += " AND MONTH(Ngayban) =" + txtThang.Text;
             if (txtNam.Text != "")
@@ -72,7 +83,6 @@ namespace baocao
             {
                 Load_dataGridViewTimkiemHDN();
             }
-
         }
         private void Load_dataGridViewTimkiemHDN()
         {
