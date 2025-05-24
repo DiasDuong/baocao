@@ -17,7 +17,7 @@ namespace baocao
 
 
 
-"Data Source=DESKTOP-S0TIEV7;Initial Catalog=qlcuahangquanao;Integrated Security=True;Encrypt=False";
+"Data Source=DESKTOP-6PT6RNN;Initial Catalog=quanaonet;Integrated Security=True;Encrypt=False";
 
 
 
