@@ -36,13 +36,11 @@ namespace baocao
             if (result > 0)
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // Mở form đổi mật khẩu
-                //doimatkhau formDMK = new doimatkhau(txttendn.Text.Trim());
-                //formDMK.ShowDialog();
+                
 
                 // Ẩn form đăng nhập và mở form Trang chủ
                 this.Hide();
-                Frmtrangchu trangchu = new Frmtrangchu();
+                Formgiaodienchinh trangchu = new Formgiaodienchinh();
                 trangchu.FormClosed += (s, args) => this.Close(); // Khi form trang chủ đóng thì thoát luôn app
                 trangchu.Show();
             }
@@ -79,6 +77,26 @@ namespace baocao
         {
             doimatkhau doiMK = new doimatkhau();
             doiMK.ShowDialog();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void anhien_CheckedChanged(object sender, EventArgs e)
+        {
+            txtmk.UseSystemPasswordChar = !anhien1.Checked;
+        }
+
+        private void anhien_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
         }
     }
 }
