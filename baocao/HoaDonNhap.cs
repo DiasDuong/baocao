@@ -23,7 +23,6 @@ namespace baocao
             InitializeComponent();
             this.KeyPreview = true;
 
-     
             txtGiamgia.KeyDown += new KeyEventHandler(txtGiamgia_KeyDown);
 
             // Thêm các sự kiện TextChanged để tự động tính thành tiền

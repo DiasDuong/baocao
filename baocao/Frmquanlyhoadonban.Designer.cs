@@ -46,6 +46,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.btnDong = new System.Windows.Forms.Button();
             this.btnInhoadon = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
@@ -71,7 +72,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.cboMaHDBan = new System.Windows.Forms.ComboBox();
             this.btnTimkiem = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewChitiet)).BeginInit();
@@ -267,6 +267,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin các mặt hàng";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(22, 268);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(174, 20);
+            this.label16.TabIndex = 32;
+            this.label16.Text = "Kích đúp 1 dòng để xóa";
+            // 
             // btnDong
             // 
             this.btnDong.Location = new System.Drawing.Point(653, 315);
@@ -353,6 +362,7 @@
             this.DataGridViewChitiet.Size = new System.Drawing.Size(859, 156);
             this.DataGridViewChitiet.TabIndex = 23;
             this.DataGridViewChitiet.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewChitiet_CellContentClick);
+            this.DataGridViewChitiet.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewChitiet_CellDoubleClick);
             // 
             // cboMahang
             // 
@@ -493,15 +503,6 @@
             this.btnTimkiem.Text = "Tìm kiếm";
             this.btnTimkiem.UseVisualStyleBackColor = true;
             this.btnTimkiem.Click += new System.EventHandler(this.btnTimkiem_Click);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(22, 268);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(174, 20);
-            this.label16.TabIndex = 32;
-            this.label16.Text = "Kích đúp 1 dòng để xóa";
             // 
             // Frmquanlyhoadonban
             // 

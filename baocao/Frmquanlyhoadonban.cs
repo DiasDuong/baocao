@@ -1049,5 +1049,25 @@ MessageBoxButtons.OK, MessageBoxIcon.Warning);
         {
 
         }
+
+        private void DataGridViewChitiet_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ChiTietHDBan == null || ChiTietHDBan.Rows.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (e.RowIndex >= 0 && DataGridViewChitiet.CurrentRow != null)
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string mahang = DataGridViewChitiet.CurrentRow.Cells["MaQuanAo"].Value.ToString();
+                    double Thanhtien = Convert.ToDouble(DataGridViewChitiet.CurrentRow.Cells["ThanhTien"].Value.ToString());
+                    DelHang(txtMaHDBan.Text, mahang);
+                    DelUpdateTongtien(txtMaHDBan.Text, Thanhtien);
+                    Load_DataGridViewChitiet();
+                }
+            }
+        }
     }
 }
