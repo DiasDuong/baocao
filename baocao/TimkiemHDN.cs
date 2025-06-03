@@ -34,6 +34,7 @@ namespace baocao
             cboSoHDN.ValueMember = "SoHDN";
             cboSoHDN.SelectedIndex = -1;
         }
+
         private void ResetValues()
         {
             foreach (Control ctl in this.Controls)
@@ -49,9 +50,10 @@ namespace baocao
         private void btnTimkiem_Click(object sender, EventArgs e)
         {
             string sql;
-            if ((cboSoHDN.SelectedIndex == -1) && (txtThang.Text == "") && (txtNam.Text == "") &&
-                (txtMaNV.Text == "") && (txtMaNCC.Text == "") &&
-                (txtTongtien.Text == ""))
+            if ((cboSoHDN.SelectedIndex == -1) && string.IsNullOrWhiteSpace(txtNgayNhap.Text) &&
+    string.IsNullOrWhiteSpace(txtMaNV.Text) && string.IsNullOrWhiteSpace(txtMaNCC.Text) &&
+    string.IsNullOrWhiteSpace(txtTongtien.Text))
+
             {
                 MessageBox.Show("Hãy nhập một điều kiện tìm kiếm!!!", "Yêu cầu ...",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -61,14 +63,25 @@ namespace baocao
             sql = "SELECT * FROM HoaDonNhap WHERE 1=1";
             if (cboSoHDN.SelectedIndex != -1)
                 sql += " AND SoHDN = N'" + cboSoHDN.SelectedValue.ToString() + "'";
-            if (txtThang.Text != "")
-                sql += " AND MONTH(Ngayban) =" + txtThang.Text;
-            if (txtNam.Text != "")
-                sql += " AND YEAR(Ngayban) =" + txtNam.Text;
-            if (txtMaNV.Text != "")
-                sql += " AND Manhanvien Like N'%" + txtMaNV.Text + "%'";
-            if (txtMaNCC.Text != "")
-                sql += " AND Manhacungcap Like N'%" + txtMaNCC.Text + "%'";
+            if (!string.IsNullOrWhiteSpace(txtNgayNhap.Text))
+            {
+                DateTime ngayNhap;
+                if (DateTime.TryParse(txtNgayNhap.Text, out ngayNhap))
+                {
+                    sql += " AND CONVERT(date, Ngayban, 103) = '" + ngayNhap.ToString("yyyy-MM-dd") + "'";
+                }
+                else
+                {
+                    MessageBox.Show("Ngày nhập không hợp lệ! Định dạng đúng: dd/MM/yyyy", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtNgayNhap.Focus();
+                    return;
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtMaNV.Text))
+                sql += " AND Manhanvien = N'" + txtMaNV.Text.Trim() + "'";
+            if (!string.IsNullOrWhiteSpace(txtMaNCC.Text))
+                sql += " AND Manhacungcap = N'" + txtMaNCC.Text.Trim() + "'";
             if (txtTongtien.Text != "")
                 sql += " AND Tongtien <=" + txtTongtien.Text;
 
@@ -111,8 +124,50 @@ namespace baocao
             dataGridViewTimkiemHDN.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewTimkiemHDN.AllowUserToAddRows = false;
             dataGridViewTimkiemHDN.EditMode = DataGridViewEditMode.EditProgrammatically;
-        
+            HienThiChiTietTuDongDauTien();
+
         }
+        private void HienThiChiTietTuDongDauTien()
+        {
+            if (HoaDonNhap != null && HoaDonNhap.Rows.Count > 0)
+            {
+                DataRow row = HoaDonNhap.Rows[0];
+
+                // Hiển thị Số HDN
+                cboSoHDN.SelectedValue = row["SoHDN"].ToString();
+
+                // Hiển thị Mã NV
+                // Hiển thị Mã NV
+                txtMaNV.Text = row["MaNV"].ToString();
+
+                // Hiển thị Mã NCC
+                txtMaNCC.Text = row["MaNCC"].ToString();
+
+
+                // Hiển thị Ngày nhập (giả sử cột là Ngayban hoặc Ngaynhap)
+                string colNgay = row.Table.Columns.Contains("NgayNhap") ? "NgayNhap" : "Ngayban";
+                if (row.Table.Columns.Contains(colNgay) && row[colNgay] != DBNull.Value)
+                    txtNgayNhap.Text = Convert.ToDateTime(row[colNgay]).ToString("dd/MM/yyyy");
+                else
+                    txtNgayNhap.Text = "";
+
+
+
+                // Hiển thị Tổng tiền nếu có
+                if (row.Table.Columns.Contains("Tongtien"))
+                    txtTongtien.Text = row["Tongtien"].ToString();
+            }
+            else
+            {
+                // Nếu không có dữ liệu, reset các control
+                cboSoHDN.SelectedIndex = -1;
+                txtMaNV.Text = "";
+                txtMaNCC.Text = "";
+                txtNgayNhap.Text = "";
+                txtTongtien.Text = "";
+            }
+        }
+
 
         private void dataGridViewTimkiemHDN_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -150,6 +205,11 @@ namespace baocao
         private void btnDong_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

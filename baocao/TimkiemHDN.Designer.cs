@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -39,12 +38,11 @@
             this.btnTimkiem = new System.Windows.Forms.Button();
             this.btnTimlai = new System.Windows.Forms.Button();
             this.btnDong = new System.Windows.Forms.Button();
-            this.txtMaNCC = new System.Windows.Forms.TextBox();
             this.txtTongtien = new System.Windows.Forms.TextBox();
-            this.txtMaNV = new System.Windows.Forms.TextBox();
-            this.txtThang = new System.Windows.Forms.TextBox();
-            this.txtNam = new System.Windows.Forms.TextBox();
+            this.txtNgayNhap = new System.Windows.Forms.TextBox();
             this.cboSoHDN = new System.Windows.Forms.ComboBox();
+            this.txtMaNCC = new System.Windows.Forms.TextBox();
+            this.txtMaNV = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimkiemHDN)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,15 +65,6 @@
             this.label2.Size = new System.Drawing.Size(91, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Số hóa đơn";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(268, 130);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Năm";
             // 
             // label4
             // 
@@ -109,9 +98,10 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(113, 130);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 20);
+            this.label7.Size = new System.Drawing.Size(85, 20);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Tháng";
+            this.label7.Text = "Ngày nhập";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // dataGridViewTimkiemHDN
             // 
@@ -155,13 +145,6 @@
             this.btnDong.UseVisualStyleBackColor = true;
             this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
             // 
-            // txtMaNCC
-            // 
-            this.txtMaNCC.Location = new System.Drawing.Point(722, 93);
-            this.txtMaNCC.Name = "txtMaNCC";
-            this.txtMaNCC.Size = new System.Drawing.Size(143, 26);
-            this.txtMaNCC.TabIndex = 18;
-            // 
             // txtTongtien
             // 
             this.txtTongtien.Location = new System.Drawing.Point(722, 142);
@@ -169,26 +152,12 @@
             this.txtTongtien.Size = new System.Drawing.Size(143, 26);
             this.txtTongtien.TabIndex = 19;
             // 
-            // txtMaNV
+            // txtNgayNhap
             // 
-            this.txtMaNV.Location = new System.Drawing.Point(272, 185);
-            this.txtMaNV.Name = "txtMaNV";
-            this.txtMaNV.Size = new System.Drawing.Size(155, 26);
-            this.txtMaNV.TabIndex = 20;
-            // 
-            // txtThang
-            // 
-            this.txtThang.Location = new System.Drawing.Point(185, 127);
-            this.txtThang.Name = "txtThang";
-            this.txtThang.Size = new System.Drawing.Size(66, 26);
-            this.txtThang.TabIndex = 21;
-            // 
-            // txtNam
-            // 
-            this.txtNam.Location = new System.Drawing.Point(338, 127);
-            this.txtNam.Name = "txtNam";
-            this.txtNam.Size = new System.Drawing.Size(89, 26);
-            this.txtNam.TabIndex = 22;
+            this.txtNgayNhap.Location = new System.Drawing.Point(272, 130);
+            this.txtNgayNhap.Name = "txtNgayNhap";
+            this.txtNgayNhap.Size = new System.Drawing.Size(155, 26);
+            this.txtNgayNhap.TabIndex = 21;
             // 
             // cboSoHDN
             // 
@@ -198,17 +167,30 @@
             this.cboSoHDN.Size = new System.Drawing.Size(155, 28);
             this.cboSoHDN.TabIndex = 23;
             // 
+            // txtMaNCC
+            // 
+            this.txtMaNCC.Location = new System.Drawing.Point(722, 82);
+            this.txtMaNCC.Name = "txtMaNCC";
+            this.txtMaNCC.Size = new System.Drawing.Size(143, 26);
+            this.txtMaNCC.TabIndex = 26;
+            // 
+            // txtMaNV
+            // 
+            this.txtMaNV.Location = new System.Drawing.Point(272, 188);
+            this.txtMaNV.Name = "txtMaNV";
+            this.txtMaNV.Size = new System.Drawing.Size(155, 26);
+            this.txtMaNV.TabIndex = 27;
+            // 
             // TimkiemHDN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 585);
-            this.Controls.Add(this.cboSoHDN);
-            this.Controls.Add(this.txtNam);
-            this.Controls.Add(this.txtThang);
             this.Controls.Add(this.txtMaNV);
-            this.Controls.Add(this.txtTongtien);
             this.Controls.Add(this.txtMaNCC);
+            this.Controls.Add(this.cboSoHDN);
+            this.Controls.Add(this.txtNgayNhap);
+            this.Controls.Add(this.txtTongtien);
             this.Controls.Add(this.btnDong);
             this.Controls.Add(this.btnTimlai);
             this.Controls.Add(this.btnTimkiem);
@@ -217,7 +199,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "TimkiemHDN";
@@ -233,7 +214,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -242,11 +222,10 @@
         private System.Windows.Forms.Button btnTimkiem;
         private System.Windows.Forms.Button btnTimlai;
         private System.Windows.Forms.Button btnDong;
-        private System.Windows.Forms.TextBox txtMaNCC;
         private System.Windows.Forms.TextBox txtTongtien;
-        private System.Windows.Forms.TextBox txtMaNV;
-        private System.Windows.Forms.TextBox txtThang;
-        private System.Windows.Forms.TextBox txtNam;
+        private System.Windows.Forms.TextBox txtNgayNhap;
         private System.Windows.Forms.ComboBox cboSoHDN;
+        private System.Windows.Forms.TextBox txtMaNCC;
+        private System.Windows.Forms.TextBox txtMaNV;
     }
 }

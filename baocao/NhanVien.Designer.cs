@@ -53,7 +53,6 @@
             this.txtDiachi = new System.Windows.Forms.TextBox();
             this.lalTimtheo = new System.Windows.Forms.Label();
             this.cboTimkiem = new System.Windows.Forms.ComboBox();
-            this.txtTimkiem = new System.Windows.Forms.TextBox();
             this.btnTimkiem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -277,24 +276,17 @@
             this.lalTimtheo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lalTimtheo.Location = new System.Drawing.Point(104, 520);
             this.lalTimtheo.Name = "lalTimtheo";
-            this.lalTimtheo.Size = new System.Drawing.Size(94, 25);
+            this.lalTimtheo.Size = new System.Drawing.Size(253, 25);
             this.lalTimtheo.TabIndex = 24;
-            this.lalTimtheo.Text = "Tìm theo:";
+            this.lalTimtheo.Text = "Tìm theo theo mã nhân viên";
             // 
             // cboTimkiem
             // 
             this.cboTimkiem.FormattingEnabled = true;
-            this.cboTimkiem.Location = new System.Drawing.Point(252, 521);
+            this.cboTimkiem.Location = new System.Drawing.Point(436, 520);
             this.cboTimkiem.Name = "cboTimkiem";
             this.cboTimkiem.Size = new System.Drawing.Size(152, 28);
             this.cboTimkiem.TabIndex = 25;
-            // 
-            // txtTimkiem
-            // 
-            this.txtTimkiem.Location = new System.Drawing.Point(485, 521);
-            this.txtTimkiem.Name = "txtTimkiem";
-            this.txtTimkiem.Size = new System.Drawing.Size(142, 26);
-            this.txtTimkiem.TabIndex = 26;
             // 
             // btnTimkiem
             // 
@@ -312,7 +304,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 585);
             this.Controls.Add(this.btnTimkiem);
-            this.Controls.Add(this.txtTimkiem);
             this.Controls.Add(this.cboTimkiem);
             this.Controls.Add(this.lalTimtheo);
             this.Controls.Add(this.txtDiachi);
@@ -374,7 +365,6 @@
         private System.Windows.Forms.TextBox txtDiachi;
         private System.Windows.Forms.Label lalTimtheo;
         private System.Windows.Forms.ComboBox cboTimkiem;
-        private System.Windows.Forms.TextBox txtTimkiem;
         private System.Windows.Forms.Button btnTimkiem;
     }
 }
