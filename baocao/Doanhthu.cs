@@ -259,6 +259,11 @@ namespace baocao
                               // Hoặc Application.Exit(); để thoát toàn ứng dụng  
             }
         }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 
 }
