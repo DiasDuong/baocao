@@ -29,71 +29,57 @@ namespace baocao
             dataGridView.Rows.Clear();
             dataGridView.Columns.Clear();
         }
-        private void ExportExcel(string path)
+        private void ExportExcelPreview()
         {
             try
             {
-                // Tạo một đối tượng Excel mới  
                 Excel.Application application = new Excel.Application();
-                application.Application.Workbooks.Add(Type.Missing);
+                application.Workbooks.Add(Type.Missing);
 
-                // Đặt tiêu đề cho bảng tính  
                 Excel.Worksheet worksheet = (Excel.Worksheet)application.ActiveSheet;
                 worksheet.Name = "Báo Cáo Doanh Thu";
 
-                // Tính tổng doanh thu  
                 decimal totalRevenue = 0;
-
                 for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
-                    //  doanh thu là cột thứ 4 (index 3)  
                     totalRevenue += Convert.ToDecimal(dataGridView.Rows[i].Cells[3].Value);
                 }
 
-                // Thêm tiêu đề cho báo cáo  
                 worksheet.Cells[1, 1] = "BÁO CÁO DOANH THU";
                 worksheet.Cells[2, 1] = "Ngày lập báo cáo: " + DateTime.Now.ToString("dd/MM/yyyy");
                 worksheet.Cells[3, 1] = "Tổng doanh thu: " + totalRevenue.ToString("C0");
 
-                // Định dạng cho tiêu đề  
                 Excel.Range titleRange = worksheet.Range["A1:C1"];
                 titleRange.Merge();
                 titleRange.Font.Size = 16;
                 titleRange.Font.Bold = true;
                 titleRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
-                // Đặt tiêu đề cột  
                 for (int i = 0; i < dataGridView.Columns.Count; i++)
                 {
-                    worksheet.Cells[5, i + 1] = dataGridView.Columns[i].HeaderText; // Bắt đầu từ dòng 5  
-                    worksheet.Cells[5, i + 1].Font.Bold = true; // Làm đậm tiêu đề  
-                    worksheet.Cells[5, i + 1].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray); // Đổi màu nền  
+                    worksheet.Cells[5, i + 1] = dataGridView.Columns[i].HeaderText;
+                    worksheet.Cells[5, i + 1].Font.Bold = true;
+                    worksheet.Cells[5, i + 1].Interior.Color = ColorTranslator.ToOle(Color.LightGray);
                 }
 
-                // Thêm dữ liệu từ DataGridView vào Excel  
                 for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
                     for (int j = 0; j < dataGridView.Columns.Count; j++)
                     {
-                        worksheet.Cells[i + 6, j + 1] = dataGridView.Rows[i].Cells[j].Value; // Bắt đầu từ dòng 6  
+                        worksheet.Cells[i + 6, j + 1] = dataGridView.Rows[i].Cells[j].Value;
                     }
                 }
 
-                // Định dạng cho cột doanh thu  
-                Excel.Range revenueRange = worksheet.Range["D6:D" + (dataGridView.Rows.Count + 5)]; // Thay D bằng cột của thông tin doanh thu  
-                revenueRange.NumberFormat = "#,##0"; // Định dạng số  
-
-                // Tự động điều chỉnh kích thước cột  
+                Excel.Range revenueRange = worksheet.Range["D6:D" + (dataGridView.Rows.Count + 5)];
+                revenueRange.NumberFormat = "#,##0";
                 application.Columns.AutoFit();
 
-                // Lưu tệp Excel  
-                application.ActiveWorkbook.SaveCopyAs(path);
-                application.ActiveWorkbook.Saved = true;
-                application.Quit();
+                // Không lưu, chỉ hiển thị Excel để xem
+                application.Visible = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Có lỗi xảy ra trong quá trình xuất file: " + ex.Message);
+                MessageBox.Show("Lỗi khi tạo báo cáo: " + ex.Message);
             }
         }
    
@@ -108,32 +94,7 @@ namespace baocao
 
         private void btnIn_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Xuất báo cáo doanh thu ra Excel";
-            saveFileDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
-            saveFileDialog.FileName = "BaocaoDoanhThu_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx"; // tự đặt tên file mới
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    ExportExcel(saveFileDialog.FileName); // xuất file
-                    MessageBox.Show("Xuất file thành công!");
-
-                    // Mở file Excel sau khi xuất
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
-                    {
-                        FileName = saveFileDialog.FileName,
-                        UseShellExecute = true
-                    });
-                }
-                catch
-                {
-                    MessageBox.Show("Xuất file thất bại!");
-                }
-            }
-
-
+          ExportExcelPreview();
 
         }
 
