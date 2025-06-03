@@ -16,19 +16,26 @@ namespace baocao
 
         private void dangky_Load(object sender, EventArgs e)
         {
+            txtmk.PasswordChar = '●';
+            txtnhaplaimk.PasswordChar = '●';
         }
 
         private void btndangky_Click(object sender, EventArgs e)
         {
-            // Kiểm tra tính hợp lệ của dữ liệu
-            if (txtmail.Text == "")
+            // Lấy dữ liệu từ form
+            string email = txtmail.Text.Trim();
+            string tenDangNhap = txttendn.Text.Trim();
+            string matKhau = txtmk.Text.Trim();
+            string nhapLaiMatKhau = txtnhaplaimk.Text.Trim();
+
+            // ==== Kiểm tra hợp lệ ====
+            if (email == "")
             {
                 MessageBox.Show("Vui lòng nhập địa chỉ email!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtmail.Focus();
                 return;
             }
 
-            string email = txtmail.Text.Trim();
             if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
                 MessageBox.Show("Email không đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -36,62 +43,78 @@ namespace baocao
                 return;
             }
 
-            if (txttendn.Text == "")
+            if (tenDangNhap == "")
             {
                 MessageBox.Show("Vui lòng nhập tên đăng nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txttendn.Focus();
                 return;
             }
 
-            if (txtmk.Text == "")
+            if (matKhau == "")
             {
                 MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtmk.Focus();
                 return;
             }
 
-            if (txtnhaplaimk.Text == "")
+            if (nhapLaiMatKhau == "")
             {
                 MessageBox.Show("Vui lòng nhập lại mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtnhaplaimk.Focus();
                 return;
             }
 
-            if (txtmk.Text != txtnhaplaimk.Text)
+            if (matKhau != nhapLaiMatKhau)
             {
                 MessageBox.Show("Mật khẩu không khớp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtnhaplaimk.Text = "";
+                txtnhaplaimk.Clear();
                 txtnhaplaimk.Focus();
                 return;
             }
 
             function.Connect();
 
-            // Kiểm tra tên đăng nhập đã tồn tại
-            string sqlCheckExist = "SELECT COUNT(*) FROM TaiKhoan WHERE TaiKhoan = N'" + txttendn.Text + "'";
-            int count = Convert.ToInt32(function.GetFieldValues(sqlCheckExist));
-            if (count > 0)
+            // ==== Kiểm tra trùng email (PRIMARY KEY) ====
+            string sqlCheckEmail = $"SELECT COUNT(*) FROM TaiKhoan WHERE Email = N'{email}'";
+            int emailCount = Convert.ToInt32(function.GetFieldValues(sqlCheckEmail));
+            if (emailCount > 0)
             {
-                MessageBox.Show("Tên đăng nhập đã tồn tại. Vui lòng chọn tên đăng nhập khác!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txttendn.Text = "";
+                MessageBox.Show("Email này đã được sử dụng. Vui lòng nhập email khác!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtmail.Focus();
+                return;
+            }
+
+            // ==== Kiểm tra trùng tên đăng nhập ====
+            string sqlCheckUser = $"SELECT COUNT(*) FROM TaiKhoan WHERE TaiKhoan = N'{tenDangNhap}'";
+            int userCount = Convert.ToInt32(function.GetFieldValues(sqlCheckUser));
+            if (userCount > 0)
+            {
+                MessageBox.Show("Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txttendn.Focus();
                 return;
             }
 
-            // Thêm tài khoản vào database
-            string sqlInsert = "INSERT INTO TaiKhoan (Email, TaiKhoan, Pass) VALUES " +
-                               "(N'" + txtmail.Text + "', N'" + txttendn.Text + "', N'" + txtmk.Text + "')";
-            function.RunSQL(sqlInsert);
-            MessageBox.Show("Đăng ký tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // ==== Thêm tài khoản vào CSDL ====
+            string sqlInsert = $"INSERT INTO TaiKhoan (Email, TaiKhoan, Pass) VALUES (N'{email}', N'{tenDangNhap}', N'{matKhau}')";
+            try
+            {
+                function.RunSQL(sqlInsert);
+                MessageBox.Show("Đăng ký tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Gửi email xác nhận
-            SendConfirmationEmail(txtmail.Text.Trim(), txttendn.Text.Trim());
+                // ==== Gửi email xác nhận ====
+                SendConfirmationEmail(email, tenDangNhap);
 
-            txttendn.Text = "";
-            txtmail.Text = "";
-            txtmk.Text = "";
-            txtnhaplaimk.Text = "";
-            this.Close();
+                // Reset form
+                txtmail.Clear();
+                txttendn.Clear();
+                txtmk.Clear();
+                txtnhaplaimk.Clear();
+ // hoặc mở form đăng nhập
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm tài khoản: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SendConfirmationEmail(string toEmail, string username)
@@ -99,14 +122,14 @@ namespace baocao
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("huyenjuly2508@gmail.com"); // 📌 Thay bằng email của bạn
+                mail.From = new MailAddress("huyenjuly2508@gmail.com");
                 mail.To.Add(toEmail);
                 mail.Subject = "Xác nhận đăng ký thành công";
                 mail.Body = $"Chào {username},\n\nBạn đã đăng ký tài khoản thành công tại Borcelle Fashion Store.\n\nXin cảm ơn!";
                 mail.IsBodyHtml = false;
 
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-                smtp.Credentials = new NetworkCredential("huyenjuly2508@gmail.com", "okho btkr zdde ywsy"); // 📌 Mật khẩu ứng dụng
+                smtp.Credentials = new NetworkCredential("huyenjuly2508@gmail.com", "okho btkr zdde ywsy"); // Mật khẩu ứng dụng Gmail
                 smtp.EnableSsl = true;
 
                 smtp.Send(mail);
@@ -126,6 +149,13 @@ namespace baocao
         {
             dangnhap loginForm = new dangnhap();
             loginForm.Show();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isChecked = checkBox1.Checked;
+            txtmk.PasswordChar = isChecked ? '\0' : '●';
+            txtnhaplaimk.PasswordChar = isChecked ? '\0' : '●';
         }
     }
 }
