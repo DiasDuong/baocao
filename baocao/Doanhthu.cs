@@ -109,21 +109,32 @@ namespace baocao
         private void btnIn_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Export Excel";
-            saveFileDialog.Filter = "Excel (*.xlsx)|*.xlsx|Excel 2003 (*.xlsx)|*.xls";
+            saveFileDialog.Title = "Xuất báo cáo doanh thu ra Excel";
+            saveFileDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx";
+            saveFileDialog.FileName = "BaocaoDoanhThu_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx"; // tự đặt tên file mới
+
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    ExportExcel(saveFileDialog.FileName);
+                    ExportExcel(saveFileDialog.FileName); // xuất file
                     MessageBox.Show("Xuất file thành công!");
-                }
 
+                    // Mở file Excel sau khi xuất
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = saveFileDialog.FileName,
+                        UseShellExecute = true
+                    });
+                }
                 catch
                 {
                     MessageBox.Show("Xuất file thất bại!");
                 }
             }
+
+
+
         }
 
         private void rdoKhoang_CheckedChanged_1(object sender, EventArgs e)
