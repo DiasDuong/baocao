@@ -81,6 +81,11 @@ JOIN NoiSanXuat ON SanPham.MaNSX = NoiSanXuat.MaNSX;";
         {
             function.Connect();
             Load_dgridSanpham();
+
+            function.FillCombo("SELECT MaQuanAo, TenQuanAo FROM SanPham", cboMasanpham, "TenQuanAo", "MaQuanAo");
+            cboMasanpham.SelectedIndex = -1; // mặc định chưa chọn
+
+            
             function.FillCombo("SELECT MaLoai, TenLoai FROM TheLoai", cboMaloai, "MaLoai", "TenLoai");
             function.FillCombo("SELECT MaCo, TenCo FROM Co", cboMaco, "MaCo", "TenCo");
             function.FillCombo("SELECT MaChatLieu, TenChatLieu FROM ChatLieu", cboMachatlieu, "MaChatLieu", "TenChatLieu");
@@ -95,12 +100,14 @@ JOIN NoiSanXuat ON SanPham.MaNSX = NoiSanXuat.MaNSX;";
             cboMadoituong.SelectedIndex = -1;
             cboMamua.SelectedIndex = -1;
             cboMaNSX.SelectedIndex = -1;
+
             ResetValues();
         }
         private void ResetValues()
         {
-            txtMasanpham.Text = "";
+            cboMasanpham.Text = "";
             txtTensanpham.Text = "";
+            cboMasanpham.SelectedIndex = -1;
             cboMaloai.Text = "";
             cboMaco.Text = "";
             cboMachatlieu.Text = "";
@@ -108,6 +115,7 @@ JOIN NoiSanXuat ON SanPham.MaNSX = NoiSanXuat.MaNSX;";
             cboMadoituong.Text = "";
             cboMamua.Text = "";
             cboMaNSX.Text = "";
+
             cboMaloai.SelectedIndex = -1;
             cboMaco.SelectedIndex = -1;
             cboMachatlieu.SelectedIndex = -1;
@@ -120,53 +128,57 @@ JOIN NoiSanXuat ON SanPham.MaNSX = NoiSanXuat.MaNSX;";
         private void btnTim_Click(object sender, EventArgs e)
         {
             string sql;
-            if ((txtMasanpham.Text == "") && (txtTensanpham.Text == "") && (cboMaloai.Text == "")
+            if ((cboMasanpham.Text == "") && (txtTensanpham.Text == "") && (cboMaloai.Text == "")
                 && (cboMaco.Text == "")
                 && (cboMachatlieu.Text == "")
                 && (cboMamau.Text == "")
                 && (cboMadoituong.Text == "")
                 && (cboMamua.Text == "")
-                && (cboMaNSX.Text == "")
-                )
+                && (cboMaNSX.Text == ""))
             {
                 MessageBox.Show("Hãy nhập một điều kiện tìm kiếm!!!", "Yêu cầu ...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             sql = @"SELECT SanPham.MaQuanAo, SanPham.TenQuanAo, TheLoai.TenLoai, Co.TenCo, 
                   ChatLieu.TenChatLieu, Mau.TenMau, DoiTuong.TenDoiTuong, Mua.TenMua, NoiSanXuat.TenNSX,
                   SanPham.SoLuong, SanPham.DonGiaBan, SanPham.DonGiaNhap
-                   FROM SanPham
-                   JOIN TheLoai ON SanPham.MaLoai = TheLoai.MaLoai
-                   JOIN Co ON SanPham.MaCo = Co.MaCo
-                   JOIN ChatLieu ON SanPham.MaChatLieu = ChatLieu.MaChatLieu
-                   JOIN Mau ON SanPham.MaMau = Mau.MaMau
-                   JOIN DoiTuong ON SanPham.MaDoiTuong = DoiTuong.MaDoiTuong
-                   JOIN Mua ON SanPham.MaMua = Mua.MaMua
-                   JOIN NoiSanXuat ON SanPham.MaNSX = NoiSanXuat.MaNSX WHERE 1=1";
-            if (txtMasanpham.Text != "")
-                sql = sql + " AND SanPham.MaQuanAo Like N'%" + txtMasanpham.Text + "%'";
+            FROM SanPham
+            JOIN TheLoai ON SanPham.MaLoai = TheLoai.MaLoai
+            JOIN Co ON SanPham.MaCo = Co.MaCo
+            JOIN ChatLieu ON SanPham.MaChatLieu = ChatLieu.MaChatLieu
+            JOIN Mau ON SanPham.MaMau = Mau.MaMau
+            JOIN DoiTuong ON SanPham.MaDoiTuong = DoiTuong.MaDoiTuong
+            JOIN Mua ON SanPham.MaMua = Mua.MaMua
+            JOIN NoiSanXuat ON SanPham.MaNSX = NoiSanXuat.MaNSX
+            WHERE 1=1";
+
+            // Sửa điều kiện tìm theo mã thành dùng cboMasanpham.SelectedItem (hoặc .Text):
+            if (cboMasanpham.Text != "")
+                sql += " AND SanPham.MaQuanAo Like N'%" + cboMasanpham.Text + "%'";
+
             if (txtTensanpham.Text != "")
-                sql = sql + " AND SanPham.TenQuanAo Like N'%" + txtTensanpham.Text + "%'";
+                sql += " AND SanPham.TenQuanAo Like N'%" + txtTensanpham.Text + "%'";
             if (cboMaloai.Text != "")
-                sql = sql + " AND TheLoai.MaLoai Like N'%" + cboMaloai.SelectedValue + "%'";
+                sql += " AND TheLoai.MaLoai Like N'%" + cboMaloai.SelectedValue + "%'";
             if (cboMaco.Text != "")
-                sql = sql + " AND Co.MaCo Like N'%" + cboMaco.SelectedValue + "%'";
+                sql += " AND Co.MaCo Like N'%" + cboMaco.SelectedValue + "%'";
             if (cboMachatlieu.Text != "")
-                sql = sql + " AND ChatLieu.MaChatLieu Like N'%" + cboMachatlieu.SelectedValue + "%'";
+                sql += " AND ChatLieu.MaChatLieu Like N'%" + cboMachatlieu.SelectedValue + "%'";
             if (cboMamau.Text != "")
-                sql = sql + " AND Mau.MaMau Like N'%" + cboMamau.SelectedValue + "%'";
+                sql += " AND Mau.MaMau Like N'%" + cboMamau.SelectedValue + "%'";
             if (cboMadoituong.Text != "")
-                sql = sql + " AND DoiTuong.MaDoiTuong Like N'%" + cboMadoituong.SelectedValue + "%'";
+                sql += " AND DoiTuong.MaDoiTuong Like N'%" + cboMadoituong.SelectedValue + "%'";
             if (cboMamua.Text != "")
-                sql = sql + " AND Mua.MaMua Like N'%" + cboMamua.SelectedValue + "%'";
+                sql += " AND Mua.MaMua Like N'%" + cboMamua.SelectedValue + "%'";
             if (cboMaNSX.Text != "")
-                sql = sql + " AND NoiSanXuat.MaNSX Like N'%" + cboMaNSX.SelectedValue + "%'";
+                sql += " AND NoiSanXuat.MaNSX Like N'%" + cboMaNSX.SelectedValue + "%'";
 
             tblSP = function.GetDataToTable(sql);
             if (tblSP.Rows.Count == 0)
                 MessageBox.Show("Không có bản ghi thỏa mãn điều kiện!!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
-                MessageBox.Show("Có " + tblSP.Rows.Count + " bản ghi thỏa mãn điều kiện!!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Có " + tblSP.Rows.Count + " bản ghi thỏa mãn điều kiện!!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             dgridSanpham.DataSource = tblSP;
             ResetValues();
@@ -176,6 +188,19 @@ JOIN NoiSanXuat ON SanPham.MaNSX = NoiSanXuat.MaNSX;";
         {
             Load_dgridSanpham();
             ResetValues();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboMasanpham.SelectedItem != null)
+            {
+                // cboMasanpham.SelectedValue sẽ trả về TenQuanAo (theo cách FillCombo bạn khai báo)
+                txtTensanpham.Text = cboMasanpham.SelectedValue.ToString();
+            }
+            else
+            {
+                txtTensanpham.Text = "";
+            }
         }
     }
 }

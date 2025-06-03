@@ -34,6 +34,7 @@
             this.btnHienthi = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.grpThongtin = new System.Windows.Forms.GroupBox();
+            this.cboMasanpham = new System.Windows.Forms.ComboBox();
             this.cboMamua = new System.Windows.Forms.ComboBox();
             this.cboMadoituong = new System.Windows.Forms.ComboBox();
             this.cboMaNSX = new System.Windows.Forms.ComboBox();
@@ -51,7 +52,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMasanpham = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgridSanpham)).BeginInit();
             this.grpThongtin.SuspendLayout();
             this.SuspendLayout();
@@ -116,6 +116,7 @@
             // 
             // grpThongtin
             // 
+            this.grpThongtin.Controls.Add(this.cboMasanpham);
             this.grpThongtin.Controls.Add(this.cboMamua);
             this.grpThongtin.Controls.Add(this.cboMadoituong);
             this.grpThongtin.Controls.Add(this.cboMaNSX);
@@ -133,13 +134,21 @@
             this.grpThongtin.Controls.Add(this.label3);
             this.grpThongtin.Controls.Add(this.label2);
             this.grpThongtin.Controls.Add(this.label1);
-            this.grpThongtin.Controls.Add(this.txtMasanpham);
             this.grpThongtin.Location = new System.Drawing.Point(47, 81);
             this.grpThongtin.Name = "grpThongtin";
             this.grpThongtin.Size = new System.Drawing.Size(845, 168);
             this.grpThongtin.TabIndex = 17;
             this.grpThongtin.TabStop = false;
             this.grpThongtin.Text = "Thông tin tìm kiếm";
+            // 
+            // cboMasanpham
+            // 
+            this.cboMasanpham.FormattingEnabled = true;
+            this.cboMasanpham.Location = new System.Drawing.Point(106, 34);
+            this.cboMasanpham.Name = "cboMasanpham";
+            this.cboMasanpham.Size = new System.Drawing.Size(153, 24);
+            this.cboMasanpham.TabIndex = 18;
+            this.cboMasanpham.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // cboMamua
             // 
@@ -294,13 +303,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Mã quần áo";
             // 
-            // txtMasanpham
-            // 
-            this.txtMasanpham.Location = new System.Drawing.Point(106, 35);
-            this.txtMasanpham.Name = "txtMasanpham";
-            this.txtMasanpham.Size = new System.Drawing.Size(153, 22);
-            this.txtMasanpham.TabIndex = 0;
-            // 
             // Tksanpham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -331,7 +333,6 @@
         private System.Windows.Forms.Button btnHienthi;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.GroupBox grpThongtin;
-        private System.Windows.Forms.TextBox txtMasanpham;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblTen;
         private System.Windows.Forms.Label label8;
@@ -349,5 +350,6 @@
         private System.Windows.Forms.ComboBox cboMamua;
         private System.Windows.Forms.ComboBox cboMadoituong;
         private System.Windows.Forms.ComboBox cboMaNSX;
+        private System.Windows.Forms.ComboBox cboMasanpham;
     }
 }

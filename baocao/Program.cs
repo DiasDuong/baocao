@@ -20,7 +20,7 @@ namespace baocao
 
 
             //Application.Run(new quenmatkhau());
-            Application.Run(new dangnhap());
+            Application.Run(new Formgiaodienchinh());
            
             //Application.Run(new doimatkhau());
 
