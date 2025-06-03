@@ -46,7 +46,6 @@
             this.btnBoqua = new System.Windows.Forms.Button();
             this.lblTimkiem = new System.Windows.Forms.Label();
             this.cboTimkiem = new System.Windows.Forms.ComboBox();
-            this.txtTimkiem = new System.Windows.Forms.TextBox();
             this.btnTimkiem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKhachhang)).BeginInit();
             this.SuspendLayout();
@@ -204,25 +203,18 @@
             this.lblTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTimkiem.Location = new System.Drawing.Point(139, 504);
             this.lblTimkiem.Name = "lblTimkiem";
-            this.lblTimkiem.Size = new System.Drawing.Size(102, 25);
+            this.lblTimkiem.Size = new System.Drawing.Size(279, 25);
             this.lblTimkiem.TabIndex = 16;
-            this.lblTimkiem.Text = "Tìm kiếm :";
+            this.lblTimkiem.Text = "Tìm kiếm theo mã khách hàng:";
             this.lblTimkiem.Click += new System.EventHandler(this.label6_Click);
             // 
             // cboTimkiem
             // 
             this.cboTimkiem.FormattingEnabled = true;
-            this.cboTimkiem.Location = new System.Drawing.Point(315, 505);
+            this.cboTimkiem.Location = new System.Drawing.Point(466, 501);
             this.cboTimkiem.Name = "cboTimkiem";
             this.cboTimkiem.Size = new System.Drawing.Size(142, 28);
             this.cboTimkiem.TabIndex = 17;
-            // 
-            // txtTimkiem
-            // 
-            this.txtTimkiem.Location = new System.Drawing.Point(512, 508);
-            this.txtTimkiem.Name = "txtTimkiem";
-            this.txtTimkiem.Size = new System.Drawing.Size(153, 26);
-            this.txtTimkiem.TabIndex = 18;
             // 
             // btnTimkiem
             // 
@@ -240,7 +232,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 585);
             this.Controls.Add(this.btnTimkiem);
-            this.Controls.Add(this.txtTimkiem);
             this.Controls.Add(this.cboTimkiem);
             this.Controls.Add(this.lblTimkiem);
             this.Controls.Add(this.btnBoqua);
@@ -288,7 +279,6 @@
         private System.Windows.Forms.Button btnBoqua;
         private System.Windows.Forms.Label lblTimkiem;
         private System.Windows.Forms.ComboBox cboTimkiem;
-        private System.Windows.Forms.TextBox txtTimkiem;
         private System.Windows.Forms.Button btnTimkiem;
     }
 }

@@ -32,12 +32,21 @@ namespace baocao
             {
                 MessageBox.Show(ex.Message);
             }
-            cboTimkiem.Items.Add("Mã nhân viên");
-            cboTimkiem.Items.Add("Tên nhân viên");
-            cboTimkiem.SelectedIndex = 0;
+
+            // Nạp mã nhân viên vào ComboBox tìm kiếm
+            string sql = "SELECT MaNV FROM NhanVien";
+            DataTable dt = function.LoadDataToTable(sql);
+            cboTimkiem.DataSource = dt;
+            cboTimkiem.DisplayMember = "MaNV";
+            cboTimkiem.ValueMember = "MaNV";
+            cboTimkiem.SelectedIndex = -1;
+
             btnXoa.Enabled = false;
             btnSua.Enabled = false;
             btnLuu.Enabled = false;
+            mskdienthoai.Mask = "(000)000-0000";
+
+
         }
         private void LoadCongViecToComboBox()
         {
@@ -154,13 +163,17 @@ namespace baocao
                 txtDiachi.Focus();
                 return;
             }
-            if (mskdienthoai.Text == "(   )     -")
+            // Loại bỏ ký tự không phải số và kiểm tra độ dài
+            string soDienThoai = new string(mskdienthoai.Text.Where(char.IsDigit).ToArray());
+            if (soDienThoai.Length != 10)
             {
-                MessageBox.Show("Bạn phải nhập điện thoại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Số điện thoại phải nhập đúng 10 số!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 mskdienthoai.Focus();
                 return;
             }
-             string sql = "SELECT MaNV FROM NhanVien WHERE MaNV=N'" + txtMaNhanvien.Text.Trim() + "'";
+
+
+            string sql = "SELECT MaNV FROM NhanVien WHERE MaNV=N'" + txtMaNhanvien.Text.Trim() + "'";
             if (function.CheckKey(sql))
             {
                 MessageBox.Show("Mã nhân viên này đã có, bạn phải nhập mã khác", "Thông báo",MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -369,33 +382,17 @@ txtMaNhanvien.Enabled = false;
         {
             if (cboTimkiem.SelectedIndex == -1)
             {
-                MessageBox.Show("Vui lòng chọn kiểu tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn mã nhân viên cần tìm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string searchType = cboTimkiem.SelectedItem.ToString();
-            string searchText = txtTimkiem.Text.Trim();
+            string maNV = cboTimkiem.SelectedValue.ToString();
 
-            if (string.IsNullOrEmpty(searchText))
-            {
-                MessageBox.Show("Vui lòng nhập từ khóa tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            string query = "";
-            if (searchType == "Mã nhân viên")
-            {
-                query = "SELECT * FROM NhanVien WHERE MaNV = @SearchText";
-            }
-            else if (searchType == "Tên nhân viên")
-            {
-                query = "SELECT * FROM NhanVien WHERE TenNV LIKE @SearchText";
-                searchText = "%" + searchText + "%"; 
-            }
+            string query = "SELECT * FROM NhanVien WHERE MaNV = @MaNV";
 
             try
             {
-                string sqlQuery = query.Replace("@SearchText", "'" + searchText + "'");
+                string sqlQuery = query.Replace("@MaNV", "'" + maNV + "'");
                 DataTable dt = function.GetDataToTable(sqlQuery);
 
                 if (dt != null && dt.Rows.Count > 0)
@@ -412,5 +409,20 @@ txtMaNhanvien.Enabled = false;
                 MessageBox.Show("Lỗi tìm kiếm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void mskdienthoai_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Chỉ cho nhập số
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            // Không cho nhập quá 10 số
+            string digits = new string(mskdienthoai.Text.Where(char.IsDigit).ToArray());
+            if (digits.Length >= 10 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

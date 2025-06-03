@@ -24,19 +24,24 @@ namespace baocao
             {
                 loadDataToGridView();
                 txtMakhachhang.ReadOnly = true;
-
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            cboTimkiem.Items.Add("Mã khách hàng");
-            cboTimkiem.Items.Add("Tên khách hàng ");
-            cboTimkiem.SelectedIndex = 0;
+
+            // Nạp mã khách hàng vào ComboBox tìm kiếm
+            string sql = "SELECT MaKhach FROM KhachHang";
+            DataTable dt = function.LoadDataToTable(sql);
+            cboTimkiem.DataSource = dt;
+            cboTimkiem.DisplayMember = "MaKhach";
+            cboTimkiem.ValueMember = "MaKhach";
+            cboTimkiem.SelectedIndex = -1;
             btnXoa.Enabled = false;
             btnSua.Enabled = false;
             btnLuu.Enabled = false;
+            mskDienthoai.Mask = "(000)000-0000"; // Chỉ cho nhập đúng 10 số
+
         }
         private void loadDataToGridView()
         {
@@ -103,13 +108,20 @@ namespace baocao
                 txtDiachi.Focus();
                 return;
             }
-            if (mskDienthoai.Text == "(   )     -")
+            if (!KiemTraSoDienThoai(mskDienthoai.Text, 10))
             {
-                MessageBox.Show("Bạn phải nhập điện thoại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Số điện thoại phải nhập đúng 10 số!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 mskDienthoai.Focus();
                 return;
             }
-      
+            if (MaKhachHangDaTonTai(txtMakhachhang.Text.Trim()))
+            {
+                MessageBox.Show("Mã khách hàng đã tồn tại. Vui lòng nhập mã khác!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtMakhachhang.Focus();
+                return;
+            }
+
+
 
             string sql = "INSERT INTO KhachHang(MaKhach, TenKhach, DiaChi, DienThoai) " +
             "VALUES ('" + txtMakhachhang.Text + "', N'" + txtTenkhachhang.Text + "', N'" + txtDiachi.Text + "', '" + mskDienthoai.Text + "')";
@@ -332,33 +344,17 @@ finally
         {
             if (cboTimkiem.SelectedIndex == -1)
             {
-                MessageBox.Show("Vui lòng chọn kiểu tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn mã khách hàng cần tìm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string searchType = cboTimkiem.SelectedItem.ToString();
-            string searchText = txtTimkiem.Text.Trim();
+            string maKhach = cboTimkiem.SelectedValue.ToString();
 
-            if (string.IsNullOrEmpty(searchText))
-            {
-                MessageBox.Show("Vui lòng nhập từ khóa tìm kiếm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            string query = "";
-            if (searchType == "Mã khách hàng")
-            {
-                query = "SELECT * FROM KhachHang WHERE MaKhach = @SearchText";
-            }
-            else if (searchType == "Tên khách hàng ")
-            {
-                query = "SELECT * FROM KhachHang WHERE TenKhach LIKE @SearchText";
-                searchText = "%" + searchText + "%";
-            }
+            string query = "SELECT * FROM KhachHang WHERE MaKhach = @MaKhach";
 
             try
             {
-                string sqlQuery = query.Replace("@SearchText", "'" + searchText + "'");
+                string sqlQuery = query.Replace("@MaKhach", "'" + maKhach + "'");
                 DataTable dt = function.GetDataToTable(sqlQuery);
 
                 if (dt != null && dt.Rows.Count > 0)
@@ -390,6 +386,26 @@ finally
         {
 
         }
+        private bool KiemTraSoDienThoai(string input, int soLuongSo)
+        {
+            // Loại bỏ các ký tự không phải số
+            string chiSo = new string(input.Where(char.IsDigit).ToArray());
+            return chiSo.Length == soLuongSo;
+        }
+        private bool MaKhachHangDaTonTai(string maKhach)
+        {
+            string sql = "SELECT COUNT(*) FROM KhachHang WHERE MaKhach = @MaKhach";
+            using (SqlCommand cmd = new SqlCommand(sql, function.conn))
+            {
+                cmd.Parameters.AddWithValue("@MaKhach", maKhach);
+                if (function.conn.State == ConnectionState.Closed)
+                    function.conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+                function.conn.Close();
+                return count > 0;
+            }
+        }
+
     }
 }
 
